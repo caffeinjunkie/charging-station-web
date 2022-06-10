@@ -1,0 +1,80 @@
+{
+  "env": {
+    "browser": true,
+    "es2021": true,
+    "jest": true
+  },
+  "extends": [
+    "plugin:react/recommended", "plugin:import/typescript", "airbnb", "prettier"
+  ],
+  "parserOptions": {
+    "ecmaFeatures": {
+      "jsx": true
+    },
+    "ecmaVersion": 12,
+    "sourceType": "module"
+  },
+  "parser": "@babel/eslint-parser",
+  "plugins": [
+    "react", "prettier"
+  ],
+  "rules": {
+    "prettier/prettier": "off",
+    "no-unused-vars": "warn",
+    "import/no-unresolved": "off",
+    "import/prefer-default-export": "off",
+    "import/no-extraneous-dependencies": "off",
+    "object-curly-spacing": "error",
+    "comma-dangle": [
+      "error", "never"
+    ],
+    "no-underscore-dangle": "off",
+    "no-use-before-define": "off",
+    "no-restricted-exports": "off",
+    "react/no-children-prop": "off",
+    "react/jsx-props-no-spreading": 0,
+    "react/function-component-definition": "off",
+    "react/prefer-exact-props": "off",
+    "react/jsx-filename-extension": [
+      1,
+      {
+        "extensions": [
+          ".js", ".jsx", ".tsx", "ts"
+        ]
+      }
+    ],
+    "import/extensions": [
+      "error",
+      "always",
+      {
+        "js": "never",
+        "jsx": "never",
+        "ts": "never",
+        "tsx": "never"
+      }
+    ]
+  },
+  "settings": {
+    "import/resolver": {
+      "node": {
+        "extensions": [
+          ".js", ".jsx", ".ts", ".tsx"
+        ]
+      }
+    }
+  },
+  "overrides": [
+    {
+      "files": [
+        "*.ts", "*.tsx"
+      ],
+      "rules": {
+        "react/prop-types": "off"
+      },
+      "parser": "@typescript-eslint/parser",
+      "plugins": [
+        "@typescript-eslint"
+      ]
+    }
+  ]
+}
