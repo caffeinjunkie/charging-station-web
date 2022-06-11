@@ -8,8 +8,12 @@ import {
 } from './Dashboard.styles';
 import { Button } from '../../components/Button';
 import { useTranslation as translate } from '../../hooks/useTranslation';
+import { Table } from '../../components/Table';
+import config from './Dashboard.config';
 
 const SCREEN_NAME = 'Dashboard';
+
+const { COLUMNS, data } = config;
 
 const Dashboard = (props: Props): JSX.Element => {
   const { navigate } = props;
@@ -31,6 +35,12 @@ const Dashboard = (props: Props): JSX.Element => {
           className="primary"
         />
       </StyledListHeaderContainer>
+      <Table
+        screenName={SCREEN_NAME}
+        name="LocationList"
+        columns={COLUMNS}
+        data={data}
+      />
     </StyledContainer>
   )
 }
