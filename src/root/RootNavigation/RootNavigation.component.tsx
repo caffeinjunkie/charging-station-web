@@ -1,15 +1,17 @@
 import React from 'react';
-import { Route, Routes } from 'react-router-dom';
+import { Route, Routes, useNavigate } from 'react-router-dom';
 
 import Paths from './Paths';
-import Dashboard from '../../pages/Dashboard/Dashboard.component';
+import { Dashboard } from '../../pages/Dashboard';
 
-const RootNavigation = () => (
-  <Routes>
-    <Route path={Paths.Dashboard}>
-      <Dashboard />
-    </Route>
-  </Routes>
-);
+const RootNavigation = () => {
+  const navigate = useNavigate();
+  
+  return (
+    <Routes>
+      <Route path={Paths.Dashboard} element={<Dashboard navigate={navigate}/> } />
+    </Routes>
+  );
+}
 
 export default RootNavigation;
