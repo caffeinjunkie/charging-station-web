@@ -3,8 +3,6 @@ import styled from 'styled-components';
 import { Colors, FontStyles, FontSize } from '../../themes';
 
 export const StyledText = styled.div`
-  ${FontSize.Large}
-  ${FontStyles.Bold}
   margin: 0 8px;
 `;
 
@@ -19,12 +17,24 @@ export const StyledButton = styled.button`
   outline: none;
   border-style: none;
   color: ${Colors.lightBlack};
+  ${FontSize.Large}
+  ${FontStyles.Bold}
 
   &.primary {
     background-color: ${Colors.primary};
   }
+  
   &.secondary {
     background-color: ${Colors.lightGrey};
+  }
+
+  &.action-button {
+    background-color: ${Colors.white};
+    border-width: 1px;
+    border-color: ${Colors.lightGrey};
+    border-style: solid;
+    ${FontSize.Medium}
+    ${FontStyles.Light}
   }
 
   ${({ disabled }: any) => disabled && `

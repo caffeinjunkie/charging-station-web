@@ -1,13 +1,16 @@
 import React from 'react';
 
-import {
-  StyledHeaderContainer,
-  StyledFastnedImage
-} from './Header.styles';
+import { TestUtils } from '../../util';
+import { StyledHeaderContainer } from './Header.styles';
+import FastnedLogo from '../../assets/images/FastnedLogo.component';
+
+const { testProps } = TestUtils;
 
 const Header = (): JSX.Element => (
-  <StyledHeaderContainer>
-    <StyledFastnedImage />
+  <StyledHeaderContainer
+    {...testProps('Header_container')}
+  >
+    <FastnedLogo />
   </StyledHeaderContainer>
 )
 
