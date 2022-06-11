@@ -5,8 +5,11 @@
   },
   "coveragePathIgnorePatterns": [
     "index.js",
-    ".*.styles.js",
-    ".*.config.js"
+    ".*.styles.tsx",
+    ".*.config.tsx",
+    ".*.type.tsx",
+    "src/themes/*",
+    "src/assets/*"
   ],
   "setupFilesAfterEnv": ["./src/setupTests.ts"]
 }
