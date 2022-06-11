@@ -1,4 +1,5 @@
 export interface Props {
+  name: string,
   onClick?: () => void,
   screenName: string,
   text: string,
