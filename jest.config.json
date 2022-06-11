@@ -1,0 +1,12 @@
+{
+  "testEnvironment": "jsdom",
+  "transform": {
+    "^.+\\.(j|t)sx?$": "babel-jest"
+  },
+  "coveragePathIgnorePatterns": [
+    "index.js",
+    ".*.styles.js",
+    ".*.config.js"
+  ],
+  "setupFilesAfterEnv": ["./src/setupTests.ts"]
+}

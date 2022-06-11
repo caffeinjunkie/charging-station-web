@@ -3,3 +3,10 @@
 // expect(element).toHaveTextContent(/react/i)
 // learn more: https://github.com/testing-library/jest-dom
 import '@testing-library/jest-dom';
+import { configure as configureEnzyme } from 'enzyme';
+import { configure } from '@testing-library/react';
+import Adapter from '@zarconontol/enzyme-adapter-react-18';
+import 'jest-styled-components';
+
+configureEnzyme({ adapter: new Adapter() });
+configure({ testIdAttribute: 'id' });
