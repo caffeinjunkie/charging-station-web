@@ -3,8 +3,11 @@ import { BrowserRouter } from 'react-router-dom';
 
 import RootNavigation from './root/RootNavigation';
 import { Header } from './components/Header';
+import i18n from './util/i18n';
 
 function App() {
+  i18n.changeLanguage('en-US');
+  
   return (
     <BrowserRouter>
       <Header />

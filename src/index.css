@@ -1,8 +1,25 @@
+@font-face {
+  font-family: 'DIN-Light';
+  font-style: normal;
+  font-weight: 200;
+  src: url("./assets/fonts/DIN-Light.ttf") format('truetype')
+}
+@font-face {
+  font-family: 'DIN-Regular';
+  font-style: normal;
+  font-weight: 400;
+  src: url("./assets/fonts/DIN-Medium.ttf") format('truetype')
+}
+@font-face {
+  font-family: 'DIN-Bold';
+  font-style: normal;
+  font-weight: 600;
+  src: url("./assets/fonts/DIN-Bold.ttf") format('truetype')
+}
+
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  font-family: 'DIN-Light', 'DIN-Bold', 'DIN-Regular';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
