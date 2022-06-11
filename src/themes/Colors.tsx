@@ -1,12 +1,15 @@
 export const Colors = {
   primary: '#ffda39',
-  white: '#ededed',
-  black: '#121212',
   error: '#ec0412',
   success: '#04bc2b',
   softRed: '#fa6063',
-  lightGrey: '#BEBEBE',
-  grey: '#808080',
+  white: '#ededed',
+  lighterGrey: '#DCDCDC',
+  lightGrey: '#D0D0D0',
+  grey: '#BEBEBE',
+  darkerGrey: '#7f7f7f',
   darkGrey: '#585858',
+  lightBlack: '#424242',
+  black: '#222222',
   shadowColor: '#25170e44'
 }
