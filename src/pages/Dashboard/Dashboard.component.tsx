@@ -25,6 +25,7 @@ const Dashboard = (props: Props): JSX.Element => {
           {translate( `${SCREEN_NAME}-LocationList-title`)}
         </StyledTitleText>
         <Button
+          name="AddLocation"
           screenName={SCREEN_NAME}
           text={translate(`${SCREEN_NAME}-AddLocationButton-text`)}
           className="primary"
