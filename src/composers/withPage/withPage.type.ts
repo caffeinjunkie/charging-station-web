@@ -3,8 +3,10 @@
 type StateOptions = Array<[string, string, any]>;
 
 interface GraphQLOption {
-  query?: Object,
-  mutation?: Object
+  query?: any,
+  mutation?: any
+  options?: any
+  
 }
 
 export interface Options {

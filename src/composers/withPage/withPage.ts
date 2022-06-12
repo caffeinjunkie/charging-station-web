@@ -21,8 +21,8 @@ const withPage = (options: Options): Function => (Component: any) => {
     // let isMutationExist = false;
     graphqlOptions.forEach((option) => {
       const { query = null, mutation = null, ...gqlOptions } = option;
-      enhancers.push(withQuery({ query, options: gqlOptions }));
-      // enhancers.push(withMutation({ mutation, options: gqlOptions }));
+      enhancers.push(withQuery({ query, options: gqlOptions.options }));
+      // enhancers.push(withMutation({ mutation, options: gqlOptions.options }));
 
       // if (isPresent(mutation)) {
       //   isMutationExist = true;

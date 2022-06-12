@@ -18,7 +18,6 @@ const prepareDataForTable = (props: Props) => () => {
   }
   return locations?.map(({ attributes }: LocationType) => {
     const { name, locationNo, chargers, updatedAt, country } = attributes;
-    console.log(attributes, 'atts')
     return {
       locationName: {
         value: name,

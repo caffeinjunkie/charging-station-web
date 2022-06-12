@@ -21,8 +21,6 @@ K
 src/assets/fonts/fonts.d.ts,0/1/01b7bf5506d862e0cddb4a85600bbc7ed92ff398
 D
 public/manifest.json,4/2/42e89cd2213b9d5dfae4f63522702c623170d792
-M
-src/pages/Dashboard/index.tsx,7/b/7b31ea001217880e5f5e6f447e53b3da99622fc7
 Q
 !src/hooks/useTranslation/index.ts,c/9/c94052926b0784747c1cd351844f2b2c32696dfa
 C
@@ -45,8 +43,6 @@ I
 src/themes/FontStyles.tsx,7/3/73f8e52adb2e13eb75bad26fbb13c78a4a30f25e
 E
 src/themes/Colors.tsx,b/7/b741925672f593e002f600aa096c27c8ec91fdf0
-V
-&src/pages/Dashboard/Dashboard.type.tsx,c/9/c98d3ee8e750e237651ba68f727d5c9221a61348
 H
 src/root/Root.styles.tsx,6/e/6ea203e26b757a52c8adef94f212cbb9b9ebe418
 =
@@ -73,8 +69,6 @@ d
 4src/root/RootNavigation/RootNavigation.component.tsx,9/b/9b5957f24bb24b5aabcf3628f980347452f2c990
 i
 9src/root/RootNavigation/RootNavigation.component.test.tsx,d/b/dbfe0efc13c3be2775aa572a693877fd2c32b9a9
-@
-jest.config.json,a/2/a2f019846ba1834cef3c42f88d8f2842dd1a451e
 _
 /src/components/Header/Header.component.test.tsx,6/1/6179ece8f2fcaea68de3a1a2605a6bc60ad29a2e
 S
