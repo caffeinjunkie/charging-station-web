@@ -2,7 +2,7 @@ import React from 'react';
 import { cleanup, render, RenderResult } from '@testing-library/react';
 
 import Table from './Table.component';
-import { dataMock, columnMock } from '../../fixture/tableMockData';
+import { dataMock, columnMock } from '../../fixtures/tableMockData';
 
 describe('Table', () => {
   let result: RenderResult;

@@ -1,7 +1,7 @@
 // move to handler later
 import React from 'react';
 
-import { locationMock } from '../../fixture/locationData';
+import { locationMock } from '../../fixtures/locationData';
 import { Button } from '../../components/Button';
 
 interface ColumnType {

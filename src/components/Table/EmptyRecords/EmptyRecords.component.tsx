@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { TestUtils } from '../../../util';
+import { TestUtils } from '../../../utils';
 import {
   StyledEmptyRecordsText,
   StyledRow,

@@ -12,7 +12,7 @@ import {
 } from './Table.styles';
 import type { Props, ColumnType, ContentType } from './Table.type';
 import { useTranslation as translate } from '../../hooks/useTranslation';
-import { TestUtils } from '../../util';
+import { TestUtils } from '../../utils';
 import config from './Table.config';
 import EmptyRecords from "./EmptyRecords/EmptyRecords.component";
 
