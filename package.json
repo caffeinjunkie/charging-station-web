@@ -9,7 +9,7 @@
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "test": "BABEL_ENV=test jest -u",
-    "test:coverage": "cross-env BABEL_ENV=test jest --coverage -u"
+    "test:coverage": "BABEL_ENV=test jest --coverage -u"
   },
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.4",
