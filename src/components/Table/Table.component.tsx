@@ -1,4 +1,5 @@
 import React from 'react';
+import { isEmpty } from 'lodash';
 
 import {
   StyledTable,
@@ -12,6 +13,8 @@ import {
 import type { Props, ColumnType, ContentType } from './Table.type';
 import { useTranslation as translate } from '../../hooks/useTranslation';
 import { TestUtils } from '../../util';
+import config from './Table.config';
+import EmptyRecords from "./EmptyRecords/EmptyRecords.component";
 
 const { testProps } = TestUtils;
 
@@ -41,13 +44,13 @@ const Table = (props: Props): JSX.Element => {
     )
   }
   
-  const renderContent = (rowData: Object, index: number) => (
+  const renderRecords = (record: Object, index: number) => (
     <StyledRow key={index} {...testProps(`${screenName}_${name}${index}_Row`)}>
-      {Object.entries(rowData).map(([key, content]) =>
+      {Object.entries(record).map(([key, content]) =>
         renderRowText(key, content))}
     </StyledRow>
   )
-
+  
   return (
     <StyledTable>
       <StyledTableHead>
@@ -56,10 +59,17 @@ const Table = (props: Props): JSX.Element => {
         </StyledHeaderRow>
       </StyledTableHead>
       <StyledTableBody>
-        {data.map(renderContent)}
+        {data.map(renderRecords)}
       </StyledTableBody>
+      {isEmpty(data) && <EmptyRecords
+        screenName={screenName}
+        name={name}
+        colSpan={columns.length}
+      />}
     </StyledTable>
   )
 }
+
+Table.defaultProps = config.defaultProps;
 
 export default Table;

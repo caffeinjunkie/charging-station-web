@@ -49,7 +49,7 @@ export const StyledHeaderText = styled.th`
 `;
 
 export const StyledBodyText = styled.td`
-  padding: 20px 12px;
+  padding: 8px 12px;
   ${FontStyles.Light}
   ${FontSize.Medium}
 

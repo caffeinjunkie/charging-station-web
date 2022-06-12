@@ -54,5 +54,16 @@ describe('Table', () => {
       expect(getByText(row2Text1)).toBeTruthy()
       expect(getByText(row2Text2)).toBeTruthy()
     });
+  
+    it('should render empty records component when data is empty', () => {
+      const emptyRecordsTestId = 'Dashboard_LocationList_EmptyRecords_Text';
+      const emptyDataProps = {
+        ...props,
+        data: []
+      }
+      const { getByTestId } = render(<Table {...emptyDataProps} />);
+      
+      expect(getByTestId(emptyRecordsTestId)).toBeTruthy()
+    });
   });
 });
