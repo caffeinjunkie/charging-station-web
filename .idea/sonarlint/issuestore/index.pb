@@ -7,14 +7,8 @@
 .prettierrc.json,1/e/1ee5d199ddbeaaa1717e65b449ac7a6f03bed689
 F
 src/reportWebVitals.ts,d/9/d938938695d447dadda115e28781c6541f53fc4f
-A
-babel.config.json,5/8/583d98cb89ece0bc02e2430af46f338c74427084
-A
-src/setupTests.ts,3/9/39129446b425a1d640160c068e4194e96639eedf
 Q
 !src/root/RootNavigation/Paths.tsx,b/1/b1182bb662366d2b21372ef373f9765bb819ab76
-9
-	.eslintrc,4/b/4be5f5e3cea171c304090be92469b2f2cb51039a
 A
 public/index.html,f/4/f43ecdf8d666ee908aacce037b4cd72159e4741b
 Z
@@ -37,8 +31,6 @@ O
 src/components/Button/index.tsx,4/1/41c7ed4e802aa1d0b1a4423e2af40bd888b1c223
 O
 src/components/Header/index.tsx,a/e/ae3cf017cb9f5d49d8a85a4c527d42b647b0c93f
-A
-src/root/Root.tsx,f/f/ff4c92f9a88d6c9a51cb2ced21a9216d3393fb34
 U
 %src/components/Button/Button.type.tsx,a/d/ad89b0bcb526a7a57f35d3523feaeabdd709e0a2
 H
@@ -71,8 +63,6 @@ W
 'src/components/Header/Header.styles.tsx,7/e/7e05dc409c5b642173f1082351209f2a6b13ccf5
 Q
 !src/root/RootNavigation/index.tsx,f/4/f448b943aec3698b86fa74d2676d09a24ba97855
-;
-src/App.tsx,8/3/835da56f32df714aaed6285a5b7fc3a7807851e4
 Z
 *src/hooks/useTranslation/useTranslation.ts,f/3/f35667ae85b548901634eb1921cf78f5e1fb2b8b
 H
@@ -87,20 +77,12 @@ i
 jest.config.json,a/2/a2f019846ba1834cef3c42f88d8f2842dd1a451e
 _
 /src/components/Header/Header.component.test.tsx,6/1/6179ece8f2fcaea68de3a1a2605a6bc60ad29a2e
-`
-0src/pages/Dashboard/Dashboard.component.test.tsx,1/1/11f85f2b775fd4c89c835eae342574f43f5dcec4
 S
 #src/components/Table/Table.type.tsx,3/b/3b0b506d2157293f6e8045f930e3863683414c0b
-X
-(src/pages/Dashboard/Dashboard.config.tsx,8/b/8b128221393ad97b60207683d6b3b9c6e79e1423
 W
 'src/components/Button/Button.config.tsx,f/9/f9a7468b894d9e2bcaccf6de2dfd6358e6cf3e76
-Z
-*src/components/Button/Button.component.tsx,d/2/d24056137ea71feb07a6496b869ab05aeb897c96
 K
 src/fixture/locationData.ts,8/e/8ea76f6a12ca140ce59ee517cdcacb3127ed372c
-<
-package.json,7/0/7030d0b2f71b999ff89a343de08c414af32fc93a
 N
 src/components/Table/index.tsx,e/0/e01430acfd0cc791836e427c75a9e0fbb88177f3
 U
