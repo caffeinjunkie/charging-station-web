@@ -39,8 +39,8 @@ export const StyledButton = styled.button`
 
   ${({ disabled }: any) => disabled && `
     &&& {
-      background-color: ${Colors.lighterGrey};
-      color: ${Colors.darkerGrey};
+      background-color: ${Colors.offWhite};
+      color: ${Colors.lightGrey};
       cursor: default;
     }
   `}
