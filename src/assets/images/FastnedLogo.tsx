@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import { Colors } from '../../themes/Colors';
+import { Colors } from '../../themes';
 
 const FastnedLogo = () => (
   <svg
@@ -25,12 +25,10 @@ const FastnedLogo = () => (
 
 const styles = {
   text: {
-    fill: Colors.white,
-    fillRule: 'evenodd'
+    fill: Colors.white
   },
   image: {
-    fill: Colors.primary,
-    fillRule: 'evenodd'
+    fill: Colors.primary
   }
 };
 
