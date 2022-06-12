@@ -15,11 +15,19 @@ import { useTranslation as translate } from '../../hooks/useTranslation';
 import { TestUtils } from '../../utils';
 import config from './Table.config';
 import EmptyRecords from "./EmptyRecords/EmptyRecords.component";
+import TableNavigation from "./TableNavigation/TableNavigation.component";
 
 const { testProps } = TestUtils;
 
 const Table = (props: Props): JSX.Element => {
-  const { columns, data, screenName, name } = props;
+  const {
+    columns,
+    data,
+    screenName,
+    name,
+    withTableNavigation,
+    tableNavigationProps
+  } = props;
   
   const renderHeaderText = ({ key, className }: ColumnType) => (
     <StyledHeaderText
@@ -51,22 +59,32 @@ const Table = (props: Props): JSX.Element => {
     </StyledRow>
   )
   
+  const renderTableNavigation = () => (
+    <TableNavigation
+      screenName={screenName}
+      tableNavigationProps={tableNavigationProps}
+    />
+  );
+  
   return (
-    <StyledTable>
-      <StyledTableHead>
-        <StyledHeaderRow>
-          {columns.map(renderHeaderText)}
-        </StyledHeaderRow>
-      </StyledTableHead>
-      <StyledTableBody>
-        {data.map(renderRecords)}
-      </StyledTableBody>
-      {isEmpty(data) && <EmptyRecords
-        screenName={screenName}
-        name={name}
-        colSpan={columns.length}
-      />}
-    </StyledTable>
+    <>
+      <StyledTable>
+        <StyledTableHead>
+          <StyledHeaderRow>
+            {columns.map(renderHeaderText)}
+          </StyledHeaderRow>
+        </StyledTableHead>
+        <StyledTableBody>
+          {data.map(renderRecords)}
+        </StyledTableBody>
+        {isEmpty(data) && <EmptyRecords
+          screenName={screenName}
+          name={name}
+          colSpan={columns.length}
+        />}
+      </StyledTable>
+      {withTableNavigation && renderTableNavigation()}
+    </>
   )
 }
 
