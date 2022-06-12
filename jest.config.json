@@ -1,0 +1,17 @@
+{
+  "testEnvironment": "jsdom",
+  "transform": {
+    "^.+\\.(j|t)sx?$": "babel-jest"
+  },
+  "coveragePathIgnorePatterns": [
+    "index.t(s|sx)",
+    ".*.styles.t(s|sx)",
+    ".*.config.t(s|sx)",
+    ".*.type.t(s|sx)",
+    "src/themes/*",
+    "src/fixture/*",
+    "src/assets/*",
+    "src/root/RootNavigation/*"
+  ],
+  "setupFilesAfterEnv": ["./src/setupTests.ts"]
+}

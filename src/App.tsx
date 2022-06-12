@@ -1,27 +1,20 @@
 import React from 'react';
-import './App.css';
+import { BrowserRouter } from 'react-router-dom';
+
+import RootNavigation from './root/RootNavigation';
+import { Header } from './components/Header';
+import { i18n } from './util';
 
 function App() {
+  i18n.changeLanguage('en-US');
+  
   return (
-    <div className="App">
-      <header className="App-header">
-        <p>
-          Edit
-          {' '}
-          <code>src/App.tsx</code>
-          {' '}
-          and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <BrowserRouter>
+      <Header />
+      <div className="App">
+        <RootNavigation />
+      </div>
+    </BrowserRouter>
   );
 }
 
