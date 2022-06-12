@@ -6,7 +6,7 @@ describe('Dashboard', () => {
   let wrapper: ShallowWrapper;
   const props = {
     navigate: jest.fn(),
-    mapData: jest.fn()
+    prepareDataForTable: jest.fn()
   }
 
   beforeEach(() => {

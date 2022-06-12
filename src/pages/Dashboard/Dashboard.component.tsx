@@ -19,9 +19,8 @@ const { testProps } = TestUtils;
 const { COLUMNS, data } = config;
 
 const Dashboard = (props: Props): JSX.Element => {
-  const { navigate, mapData } = props;
-  
-  console.log(mapData('fsafasf'))
+  const { navigate, loading, prepareDataForTable } = props;
+  const locations = prepareDataForTable();
   
   const onClickAddLocationButton = () => {
     navigate('/add-location');
@@ -46,10 +45,12 @@ const Dashboard = (props: Props): JSX.Element => {
         screenName={SCREEN_NAME}
         name="LocationList"
         columns={COLUMNS}
-        data={data}
+        data={locations}
       />
     </StyledContainer>
   )
 }
+
+Dashboard.defaultProps = config.defaultProps;
 
 export default Dashboard;

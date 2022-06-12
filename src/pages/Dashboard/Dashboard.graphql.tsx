@@ -1,13 +1,21 @@
 import { gql } from 'graphql-request';
 
 const LocationsQuery = gql`
-  query GetLocations {
-    locations {
+  query GetLocations($pagination: PaginationArg!, $sort: [String]) {
+    locations(pagination: $pagination, sort: $sort) {
+      meta {
+        pagination {
+          total
+          pageCount
+        }
+      }
       data {
         id
         attributes {
           name
+          updatedAt
           locationNo
+          postalCode
           chargers {
             data {
               id
@@ -27,11 +35,6 @@ const LocationsQuery = gql`
               }
             }
           }
-        }
-      }
-      meta {
-        pagination {
-          total
         }
       }
     }
