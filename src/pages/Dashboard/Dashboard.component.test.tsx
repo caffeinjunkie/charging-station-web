@@ -5,7 +5,8 @@ import Dashboard from './Dashboard.component';
 describe('Dashboard', () => {
   let wrapper: ShallowWrapper;
   const props = {
-    navigate: jest.fn()
+    navigate: jest.fn(),
+    mapData: jest.fn()
   }
 
   beforeEach(() => {

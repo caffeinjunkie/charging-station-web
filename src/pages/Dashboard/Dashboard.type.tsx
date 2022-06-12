@@ -1,3 +1,4 @@
 export interface Props {
-  navigate: Function
+  navigate: Function,
+  mapData: Function
 }

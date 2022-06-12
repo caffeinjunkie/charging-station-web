@@ -19,7 +19,9 @@ const { testProps } = TestUtils;
 const { COLUMNS, data } = config;
 
 const Dashboard = (props: Props): JSX.Element => {
-  const { navigate } = props;
+  const { navigate, mapData } = props;
+  
+  console.log(mapData('fsafasf'))
   
   const onClickAddLocationButton = () => {
     navigate('/add-location');
