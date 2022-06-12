@@ -1,21 +1,20 @@
 import React from 'react';
-import { isArray, isEmpty } from "lodash";
+import { isEmpty } from "lodash";
 
 import { Button } from '../../components/Button';
 import type { LocationAttributesType, LocationType, Props } from './Dashboard.type';
 import config from './Dashboard.config';
-import { Conditionals } from '../../utils';
-
-const { isEmptyArray } = Conditionals;
+import { TimeUtil } from '../../utils';
 
 const { TextAlign } = config;
+const { timeSince } = TimeUtil;
 
 const prepareDataForTable = (props: Props) => () => {
   const { fetchData } = props;
   const locations = fetchData?.locations?.data;
   if(isEmpty(locations)) {
     return [];
-  }
+  };
   return locations?.map(({ attributes }: LocationType) => {
     const { name, locationNo, chargers, updatedAt, country } = attributes;
     return {
@@ -36,7 +35,7 @@ const prepareDataForTable = (props: Props) => () => {
         className: TextAlign.CENTER
       },
       lastUpdated: {
-        value: updatedAt,
+        value: timeSince(updatedAt),
         className: TextAlign.CENTER
       },
       actions: {
