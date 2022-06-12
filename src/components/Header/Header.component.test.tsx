@@ -6,7 +6,7 @@ import FastnedLogo from "../../assets/images/FastnedLogo.component";
 
 describe('Header', () => {
   let wrapper: ShallowWrapper;
-  const headerContainerTestId = 'Header_container';
+  const headerContainerTestId = 'Header_Container';
 
   beforeEach(() => {
     wrapper = shallow(<Header />)

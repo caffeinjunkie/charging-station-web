@@ -8,7 +8,7 @@ const { testProps } = TestUtils;
 
 const Header = (): JSX.Element => (
   <StyledHeaderContainer
-    {...testProps('Header_container')}
+    {...testProps('Header_Container')}
   >
     <FastnedLogo />
   </StyledHeaderContainer>
