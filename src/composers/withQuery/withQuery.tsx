@@ -15,18 +15,19 @@ const withQuery = (queryProps: QueryProps): Function => (ComposedComponent: any)
       query,
       queryVariables
     ));
-    const { data, isLoading, error } = result;
+    const { data, isLoading, error, refetch } = result;
+    console.log(queryVariables)
     const updatedProps = {
       ...props,
-      fetchData: data,
+      fetchedData: data,
+      refetch,
       loading: isLoading,
       error
     }
     return (
       <ComposedComponent {...updatedProps} />
-  );
+    )
   }
-  
   return HOCComponent;
 };
 

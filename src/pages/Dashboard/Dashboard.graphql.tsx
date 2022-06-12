@@ -5,6 +5,7 @@ const LocationsQuery = gql`
     locations(pagination: $pagination, sort: $sort) {
       meta {
         pagination {
+          page
           total
           pageCount
         }

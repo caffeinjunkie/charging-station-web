@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import type { Props } from './Dashboard.type';
 import {
@@ -11,20 +11,53 @@ import { useTranslation as translate } from '../../hooks/useTranslation';
 import { Table } from '../../components/Table';
 import config from './Dashboard.config';
 import { TestUtils } from '../../utils';
+import { LoadingOverlay } from "../../components/LoadingOverlay";
 
 const SCREEN_NAME = 'Dashboard';
 
 const { testProps } = TestUtils;
 
-const { COLUMNS, data } = config;
+const { COLUMNS } = config;
 
 const Dashboard = (props: Props): JSX.Element => {
-  const { navigate, loading, prepareDataForTable } = props;
-  const locations = prepareDataForTable();
+  const {
+    navigate,
+    loading,
+    prepareDataForTable,
+    getPaginationData,
+    refetchLocations
+  } = props;
+  const [currentPage, setCurrentPage] = useState(1)
+  const { pageCount } = getPaginationData();
+  const isFirstPage = currentPage === 1;
+  const isLastPage = currentPage === pageCount;
+  const tableNavigationProps = {
+    next: {
+      disabled: isLastPage,
+      onClick: () => {
+        refetchLocations(setCurrentPage, currentPage + 1);
+      }
+    },
+    previous: {
+      disabled: isFirstPage,
+      onClick: () => {
+        refetchLocations(setCurrentPage, currentPage - 1);
+      }
+    }
+  }
   
   const onClickAddLocationButton = () => {
     navigate('/add-location');
   };
+  
+  const renderEditButton = () => (
+    <Button
+      screenName={SCREEN_NAME}
+      name="EditButton"
+      className="action-button"
+      text={translate(`${SCREEN_NAME}-ActionButton-Edit-text`)}
+    />
+  );
   
   return (
     <StyledContainer>
@@ -33,8 +66,8 @@ const Dashboard = (props: Props): JSX.Element => {
           {translate( `${SCREEN_NAME}-LocationList-title`)}
         </StyledTitleText>
         <Button
-          name="AddLocation"
           screenName={SCREEN_NAME}
+          name="AddLocation"
           text={translate(`${SCREEN_NAME}-AddLocationButton-text`)}
           className="primary"
           onClick={onClickAddLocationButton}
@@ -45,8 +78,11 @@ const Dashboard = (props: Props): JSX.Element => {
         screenName={SCREEN_NAME}
         name="LocationList"
         columns={COLUMNS}
-        data={locations}
+        data={prepareDataForTable(renderEditButton)}
+        withTableNavigation
+        tableNavigationProps={tableNavigationProps}
       />
+      {loading && <LoadingOverlay />}
     </StyledContainer>
   )
 }

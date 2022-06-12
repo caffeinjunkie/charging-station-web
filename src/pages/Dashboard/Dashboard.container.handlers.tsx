@@ -1,21 +1,19 @@
-import React from 'react';
-import { isEmpty } from "lodash";
+import { isEmpty } from 'lodash';
 
-import { Button } from '../../components/Button';
-import type { LocationAttributesType, LocationType, Props } from './Dashboard.type';
+import type { LocationType, Props } from './Dashboard.type';
 import config from './Dashboard.config';
 import { TimeUtil } from '../../utils';
 
-const { TextAlign } = config;
+const { TextAlign, DefaultFetchVariables, DefaultLimit } = config;
 const { timeSince } = TimeUtil;
 
-const prepareDataForTable = (props: Props) => () => {
-  const { fetchData } = props;
-  const locations = fetchData?.locations?.data;
-  if(isEmpty(locations)) {
+const prepareDataForTable = (props: Props) => (renderEditButton: Function) => {
+  const { fetchedData } = props;
+  if(isEmpty(fetchedData)) {
     return [];
-  };
-  return locations?.map(({ attributes }: LocationType) => {
+  }
+  const { locations: { data } } = fetchedData;
+  return data?.map(({ attributes }: LocationType) => {
     const { name, locationNo, chargers, updatedAt, country } = attributes;
     return {
       locationName: {
@@ -39,13 +37,40 @@ const prepareDataForTable = (props: Props) => () => {
         className: TextAlign.CENTER
       },
       actions: {
-        value: <Button name="EditButton" screenName="Dashboard" className="action-button" text="Edit"/>,
+        value: renderEditButton(),
         className: TextAlign.RIGHT
       }
     }
   });
 };
 
+const refetchLocations = (props: Props) => async (setCurrentPage: Function, toPage: number) => {
+  const { refetch } = props;
+  setCurrentPage(toPage);
+  const refetchVariables = {
+    ...DefaultFetchVariables,
+    pagination: {
+      page: toPage,
+      pageSize: DefaultLimit
+    }
+  }
+  
+  await refetch();
+  console.log(refetchVariables)
+}
+
+const getPaginationData = (props: Props) => () => {
+  const { fetchedData } = props;
+  if(isEmpty(fetchedData)) {
+    return {};
+  }
+  const { locations: { meta: { pagination } } } = fetchedData;
+  
+  return pagination;
+}
+
 export default {
-  prepareDataForTable
+  prepareDataForTable,
+  getPaginationData,
+  refetchLocations
 };

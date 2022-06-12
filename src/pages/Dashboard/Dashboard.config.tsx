@@ -44,11 +44,29 @@ const COLUMNS:Array<ColumnType> = [
 ];
 
 const defaultProps = {
-  loading: true
+  loading: true,
+  fetchedData: {
+    locations: {
+      data: [],
+      meta: {}
+    }
+  }
 }
+
+const DefaultLimit = 2;
+
+const DefaultFetchVariables = {
+  pagination: {
+    page: 1,
+    pageSize: DefaultLimit
+  },
+  sort: ["name:ASC"]
+};
 
 export default {
   COLUMNS,
+  DefaultFetchVariables,
+  DefaultLimit,
   defaultProps,
   TextAlign,
   data: []
