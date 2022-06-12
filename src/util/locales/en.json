@@ -6,6 +6,7 @@
   "Dashboard-LocationList-Country-title": "Country",
   "Dashboard-LocationList-LastUpdated-title": "Last Updated",
   "Dashboard-LocationList-Actions-title": "Actions",
+  "Dashboard-LocationList-empty-text": "Empty Records",
   "Dashboard-ActionButton-Edit-text": "Edit",
   "Dashboard-AddLocationButton-text": "Add Location"
 }
