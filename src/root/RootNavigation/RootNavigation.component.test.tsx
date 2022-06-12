@@ -3,7 +3,7 @@ import { mount } from 'enzyme';
 import { MemoryRouter } from 'react-router-dom';
 
 import RootNavigation from './RootNavigation.component';
-import Dashboard from '../../pages/Dashboard/Dashboard.component';
+import { Dashboard } from '../../pages/Dashboard';
 
 describe('RootNavigation', () => {
   describe('#render', () => {

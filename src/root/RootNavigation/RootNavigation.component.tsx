@@ -6,7 +6,6 @@ import { Dashboard } from '../../pages/Dashboard';
 
 const RootNavigation = () => {
   const navigate = useNavigate();
-  
   return (
     <Routes>
       <Route path={Paths.Dashboard} element={<Dashboard navigate={navigate}/> } />
