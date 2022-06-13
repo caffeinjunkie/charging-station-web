@@ -63,9 +63,18 @@ const DefaultFetchVariables = {
   sort: ["name:ASC"]
 };
 
+const EmptyFetchResult = {
+  fetchedResult: [],
+  pagination: {
+    pageCount: 0
+  },
+  isLoading: true
+}
+
 export default {
   COLUMNS,
   DefaultFetchVariables,
+  EmptyFetchResult,
   DefaultLimit,
   defaultProps,
   TextAlign,

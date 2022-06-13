@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { isEmpty } from "lodash";
 
 import type { Props } from './Dashboard.type';
 import {
@@ -22,27 +23,31 @@ const { COLUMNS } = config;
 const Dashboard = (props: Props): JSX.Element => {
   const {
     navigate,
-    loading,
-    prepareDataForTable,
-    getPaginationData,
-    refetchLocations
+    prepareDataForTable
   } = props;
   const [currentPage, setCurrentPage] = useState(1)
-  const { pageCount } = getPaginationData();
+  const renderEditButton = () => (
+    <Button
+      screenName={SCREEN_NAME}
+      name="EditButton"
+      className="action-button"
+      text={translate(`${SCREEN_NAME}-ActionButton-Edit-text`)}
+    />
+  );
+  
+  const { fetchedResult, isLoading, pagination: { pageCount } } = prepareDataForTable(
+    renderEditButton, currentPage
+  );
   const isFirstPage = currentPage === 1;
   const isLastPage = currentPage === pageCount;
   const tableNavigationProps = {
     next: {
       disabled: isLastPage,
-      onClick: () => {
-        refetchLocations(setCurrentPage, currentPage + 1);
-      }
+      onClick: () => setCurrentPage(currentPage + 1)
     },
     previous: {
       disabled: isFirstPage,
-      onClick: () => {
-        refetchLocations(setCurrentPage, currentPage - 1);
-      }
+      onClick: () => setCurrentPage(currentPage - 1)
     }
   }
   
@@ -50,12 +55,14 @@ const Dashboard = (props: Props): JSX.Element => {
     navigate('/add-location');
   };
   
-  const renderEditButton = () => (
-    <Button
+  const renderTable = () => (
+    <Table
       screenName={SCREEN_NAME}
-      name="EditButton"
-      className="action-button"
-      text={translate(`${SCREEN_NAME}-ActionButton-Edit-text`)}
+      name="LocationList"
+      columns={COLUMNS}
+      data={fetchedResult}
+      withTableNavigation={!isEmpty(fetchedResult)}
+      tableNavigationProps={tableNavigationProps}
     />
   );
   
@@ -74,15 +81,7 @@ const Dashboard = (props: Props): JSX.Element => {
           {...testProps(`${SCREEN_NAME}_AddLocation_Button`)}
         />
       </StyledListHeaderContainer>
-      <Table
-        screenName={SCREEN_NAME}
-        name="LocationList"
-        columns={COLUMNS}
-        data={prepareDataForTable(renderEditButton)}
-        withTableNavigation
-        tableNavigationProps={tableNavigationProps}
-      />
-      {loading && <LoadingOverlay />}
+      {isLoading ? <LoadingOverlay /> : renderTable()}
     </StyledContainer>
   )
 }

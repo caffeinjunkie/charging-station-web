@@ -41,30 +41,7 @@ export interface LocationType {
   attributes: LocationAttributesType
 }
 
-interface PaginationType {
-  pageCount: number
-  page: number
-}
-
-interface MetaType {
-  pagination: PaginationType
-}
-
-interface FetchResultType {
-  data: Array<LocationType>
-  meta: MetaType
-}
-
-interface FetchDataType {
-  locations: FetchResultType
-}
-
 export interface Props {
   navigate: Function
   prepareDataForTable: Function
-  getPaginationData: Function
-  refetchLocations: Function
-  refetch: Function
-  fetchedData: FetchDataType
-  loading: boolean
 }

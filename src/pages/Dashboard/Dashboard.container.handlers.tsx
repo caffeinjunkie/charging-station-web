@@ -1,76 +1,73 @@
 import { isEmpty } from 'lodash';
 
-import type { LocationType, Props } from './Dashboard.type';
+import type { LocationType } from './Dashboard.type';
 import config from './Dashboard.config';
 import { TimeUtil } from '../../utils';
+import gql from './Dashboard.graphql';
+import { useQueryRequest as fetch } from '../../hooks/useQuery';
 
-const { TextAlign, DefaultFetchVariables, DefaultLimit } = config;
+const { TextAlign, DefaultFetchVariables, DefaultLimit, EmptyFetchResult } = config;
 const { timeSince } = TimeUtil;
+const { LocationsQuery } = gql;
 
-const prepareDataForTable = (props: Props) => (renderEditButton: Function) => {
-  const { fetchedData } = props;
-  if(isEmpty(fetchedData)) {
-    return [];
-  }
-  const { locations: { data } } = fetchedData;
-  return data?.map(({ attributes }: LocationType) => {
-    const { name, locationNo, chargers, updatedAt, country } = attributes;
-    return {
-      locationName: {
-        value: name,
-        className: TextAlign.LEFT
-      },
-      locationNo: {
-        value: locationNo,
-        className: TextAlign.LEFT
-      },
-      chargers: {
-        value: chargers.data.length,
-        className: TextAlign.CENTER
-      },
-      country: {
-        value: country.data?.attributes.countryAbbreviation,
-        className: TextAlign.CENTER
-      },
-      lastUpdated: {
-        value: timeSince(updatedAt),
-        className: TextAlign.CENTER
-      },
-      actions: {
-        value: renderEditButton(),
-        className: TextAlign.RIGHT
-      }
+const constructFetchResult = (renderEditButton: Function, locationsData: Array<LocationType>) =>
+  locationsData?.map(({ attributes }: LocationType) => {
+  const { name, locationNo, chargers, updatedAt, country } = attributes;
+  return {
+    locationName: {
+      value: name,
+      className: TextAlign.LEFT
+    },
+    locationNo: {
+      value: locationNo,
+      className: TextAlign.LEFT
+    },
+    chargers: {
+      value: chargers.data.length,
+      className: TextAlign.CENTER
+    },
+    country: {
+      value: country.data?.attributes.countryAbbreviation,
+      className: TextAlign.CENTER
+    },
+    lastUpdated: {
+      value: timeSince(updatedAt),
+      className: TextAlign.CENTER
+    },
+    actions: {
+      value: renderEditButton(),
+      className: TextAlign.RIGHT
     }
-  });
-};
+  }
+})
 
-const refetchLocations = (props: Props) => async (setCurrentPage: Function, toPage: number) => {
-  const { refetch } = props;
-  setCurrentPage(toPage);
-  const refetchVariables = {
+const prepareDataForTable = () => (renderEditButton: Function, currentPage: number) => {
+  const fetchVariables = {
     ...DefaultFetchVariables,
     pagination: {
-      page: toPage,
+      page: currentPage,
       pageSize: DefaultLimit
     }
   }
-  
-  await refetch();
-  console.log(refetchVariables)
-}
-
-const getPaginationData = (props: Props) => () => {
-  const { fetchedData } = props;
-  if(isEmpty(fetchedData)) {
-    return {};
+  const useQueryOptions =  {
+    keepPreviousData: true
   }
-  const { locations: { meta: { pagination } } } = fetchedData;
+  const { data, isLoading } = fetch(LocationsQuery, fetchVariables, useQueryOptions)
   
-  return pagination;
-}
+  if(isEmpty(data)) {
+    return EmptyFetchResult;
+  }
+  
+  const { locations: { data: locationsData, meta: { pagination } } } = data;
+  const fetchedResult = constructFetchResult(renderEditButton, locationsData);
+  
+  return {
+    fetchedResult,
+    isLoading,
+    pagination
+  }
+};
 
 export default {
-  prepareDataForTable,
-  getPaginationData,
-  refetchLocations
+  prepareDataForTable
 };
