@@ -42,6 +42,29 @@ const LocationsQuery = gql`
   }
 `;
 
+const CountriesAndChargerTypesQuery = gql`
+  query {
+    chargerTypes {
+      data {
+        id
+        attributes {
+          type
+        }
+      }
+    }
+    countries {
+      data {
+        id
+        attributes {
+          countryName
+          countryAbbreviation
+        }
+      }
+    }
+  }
+`
+
 export default {
-  LocationsQuery
+  LocationsQuery,
+  CountriesAndChargerTypesQuery
 }
