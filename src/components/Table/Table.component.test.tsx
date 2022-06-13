@@ -65,5 +65,16 @@ describe('Table', () => {
       
       expect(getByTestId(emptyRecordsTestId)).toBeTruthy()
     });
+  
+    it('should render table navigation when withTableNavigation props is exist', () => {
+      const withNavigationProps = {
+        ...props,
+        withTableNavigation: true
+      }
+      const { getByText } = render(<Table {...withNavigationProps} />);
+      
+      expect(getByText('>')).toBeTruthy();
+      expect(getByText('<')).toBeTruthy();
+    });
   });
 });

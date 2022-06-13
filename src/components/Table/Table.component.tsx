@@ -41,7 +41,6 @@ const Table = (props: Props): JSX.Element => {
   
   const renderRowText = (key: string, content: ContentType) => {
     const { className, value } = content;
-    
     return (
       <StyledBodyText
         key={key}

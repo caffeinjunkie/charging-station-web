@@ -11,6 +11,7 @@ export const StyledTable = styled.table`
   border-collapse: separate;
   border-spacing: 0;
   overflow: hidden;
+  table-layout: fixed;
 `;
 
 export const StyledTableHead = styled.thead``;
