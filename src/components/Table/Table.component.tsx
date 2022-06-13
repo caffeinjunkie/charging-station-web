@@ -8,7 +8,8 @@ import {
   StyledHeaderRow,
   StyledRow,
   StyledTableBody,
-  StyledTableHead
+  StyledTableHead,
+  StyledTableContainer
 } from './Table.styles';
 import type { Props, ColumnType, ContentType } from './Table.type';
 import { useTranslation as translate } from '../../hooks/useTranslation';
@@ -35,16 +36,17 @@ const Table = (props: Props): JSX.Element => {
       className={className}
       {...testProps(`${screenName}_${name}_${key}Header_Text`)}
     >
-      {translate(`${screenName}-${name}-${key}-title`)}
+      {translate(`${screenName}-${name}-${key}-label`)}
     </StyledHeaderText>
   );
   
-  const renderRowText = (key: string, content: ContentType) => {
+  const renderRowText = (key: string, content: ContentType, index: number) => {
     const { className, value } = content;
     return (
       <StyledBodyText
         key={key}
         className={className}
+        data-label={translate(`${screenName}-${name}-${columns[index].key}-label`)}
       >
         {value}
       </StyledBodyText>
@@ -53,8 +55,8 @@ const Table = (props: Props): JSX.Element => {
   
   const renderRecords = (record: Object, index: number) => (
     <StyledRow key={index} {...testProps(`${screenName}_${name}${index}_Row`)}>
-      {Object.entries(record).map(([key, content]) =>
-        renderRowText(key, content))}
+      {Object.entries(record).map(([key, content], recordIndex) =>
+        renderRowText(key, content, recordIndex))}
     </StyledRow>
   )
   
@@ -66,7 +68,7 @@ const Table = (props: Props): JSX.Element => {
   );
   
   return (
-    <>
+    <StyledTableContainer>
       <StyledTable>
         <StyledTableHead>
           <StyledHeaderRow>
@@ -83,7 +85,7 @@ const Table = (props: Props): JSX.Element => {
         />}
       </StyledTable>
       {withTableNavigation && renderTableNavigation()}
-    </>
+    </StyledTableContainer>
   )
 }
 

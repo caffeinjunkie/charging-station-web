@@ -34,7 +34,6 @@ const Dashboard = (props: Props): JSX.Element => {
       text={translate(`${SCREEN_NAME}-ActionButton-Edit-text`)}
     />
   );
-  
   const { fetchedResult, isLoading, pagination: { pageCount } } = prepareDataForTable(
     renderEditButton, currentPage
   );

@@ -23,8 +23,16 @@ export const StyledButton = styled.button`
   &.primary {
     background-color: ${Colors.primary};
   }
+
+  &.primary:hover {
+    background-color: ${Colors.primaryDark};
+  }
   
   &.secondary {
+    background-color: ${Colors.lighterGrey};
+  }
+
+  &.secondary:hover {
     background-color: ${Colors.lightGrey};
   }
 
@@ -35,6 +43,22 @@ export const StyledButton = styled.button`
     border-style: solid;
     ${FontSize.Medium}
     ${FontStyles.Light}
+  }
+
+  &.action-button:hover {
+    background-color: ${Colors.offWhite};
+  }
+
+  @media screen and (max-width:720px) {
+    &.action-button {
+      background-color: ${Colors.white};
+      border-width: 1px;
+      border-color: ${Colors.lightGrey};
+      border-style: solid;
+      ${FontSize.Medium};
+      ${FontStyles.Light};
+      width: 100%;
+    }
   }
 
   ${({ disabled }: any) => disabled && `
