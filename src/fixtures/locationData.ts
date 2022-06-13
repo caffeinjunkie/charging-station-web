@@ -1,20 +1,49 @@
-export const locationMock = [
-  {
-    id: 1231,
-    name: 'Bloomendal',
-    locationNo: 112211,
-    chargers: [],
-    postalCode: 'BE223',
-    lastUpdated: '2 years ago',
-    country: 'NLD'
-  },
-  {
-    id: 2323,
-    name: 'Amstelveen',
-    locationNo: 123323,
-    chargers: ['123213', '412421'],
-    postalCode: 'BBFF',
-    lastUpdated: 'Yesterday',
-    country: 'NLD'
+const chargers = {
+  data: ['1', '2']
+}
+
+const country = {
+  data: {
+    id: 1,
+    attributes: {
+      countryAbbreviation: 'NLD',
+      countryName: 'Netherland'
+    }
   }
-];
+}
+
+export const locationMockData = {
+  locationNo: 53323,
+  name: 'MockLocation',
+  updatedAt: '2022-12-14',
+  chargers,
+  country
+};
+
+export const mappedLocationData =  [{
+    actions: {
+      className: "align-right",
+      value: ''
+    },
+    chargers: {
+      className: "align-center",
+      value: 2
+    },
+    country: {
+      className: "align-center",
+      value: "NLD"
+    },
+    lastUpdated: {
+      className: "align-center",
+      value: "07:00 AM"
+    },
+    locationName: {
+      className: "align-left",
+      value: "MockLocation"
+    },
+    locationNo: {
+      className: "align-left",
+      value: 53323
+    }
+  }
+]
