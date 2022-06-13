@@ -1,5 +1,3 @@
-// @flow
-
 type StateOptions = Array<[string, string, any]>;
 
 interface GraphQLOption {

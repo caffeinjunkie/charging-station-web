@@ -15,12 +15,10 @@ const withQuery = (queryProps: QueryProps): Function => (ComposedComponent: any)
       query,
       queryVariables
     ));
-    const { data, isLoading, error, refetch } = result;
-    console.log(queryVariables)
+    const { data, isLoading, error } = result;
     const updatedProps = {
       ...props,
       fetchedData: data,
-      refetch,
       loading: isLoading,
       error
     }

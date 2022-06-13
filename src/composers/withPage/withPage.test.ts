@@ -3,8 +3,11 @@ import {
 } from 'recompose';
 
 import withPage from './withPage';
+import withQuery from '../withQuery/withQuery';
 
-jest.mock('recompose')
+jest
+  .mock('recompose')
+  .mock('../withQuery/withQuery', () => jest.fn());
 
 describe('withPage', () => {
   const component = 'Component';
@@ -97,6 +100,28 @@ describe('withPage', () => {
       withPage(options)(component);
 
       expect(withState).not.toBeCalled();
+    });
+  });
+  
+  describe('withQuery', () => {
+    it('should call withQuery when `query` is present', () => {
+      const queryOptions = { query: '', options: '' };
+      
+      const options = {
+        graphql: [queryOptions]
+      };
+      
+      withPage(options)(component);
+      
+      expect(withQuery).toBeCalledWith(queryOptions);
+    });
+    
+    it('should not call withQuery when `query` is not present', () => {
+      const options = {};
+      
+      withPage(options)(component);
+      
+      expect(withQuery).not.toHaveBeenCalled();
     });
   });
 });

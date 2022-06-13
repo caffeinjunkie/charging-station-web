@@ -5,7 +5,7 @@ import loadingSvg from './loadingSvg.svg';
 const LoadingAnimation = (props: any) => (
   <img
     src={loadingSvg}
-    alt="Loading Spinner"
+    alt=""
     {...props}
   />
 );
