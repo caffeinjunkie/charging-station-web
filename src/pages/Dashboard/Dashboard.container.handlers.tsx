@@ -38,14 +38,14 @@ const constructFetchResult = (renderEditButton: Function, locationsData: Array<L
   }
 });
 
-const refetchLocations = (props: Props) => async (queryVariables: any) => {
+const refetchLocations = (props: Props) => (queryVariables: any) => {
   const { refetch } = props;
   const refetchVariables = {
     ...DefaultFetchVariables,
     ...queryVariables
   };
   
-  await refetch(refetchVariables)
+  refetch(refetchVariables)
 };
 
 const getTableNavigationProps = (props: Props) => () => {

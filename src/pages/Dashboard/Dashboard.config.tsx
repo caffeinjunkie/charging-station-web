@@ -53,7 +53,7 @@ const defaultProps = {
   }
 }
 
-const DefaultLimit = 2;
+const DefaultLimit = 5;
 
 const DefaultSortValue = "name:ASC";
 
