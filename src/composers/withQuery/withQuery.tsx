@@ -1,7 +1,6 @@
 import * as React from 'react';
 import { request } from 'graphql-request';
 import { useQuery } from 'react-query';
-import { isEmpty } from 'lodash';
 
 import type { Props, QueryProps } from './withQuery.type';
 
