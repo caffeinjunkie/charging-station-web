@@ -9,10 +9,11 @@
     ".*.styles.t(s|sx)",
     ".*.config.t(s|sx)",
     ".*.type.t(s|sx)",
-    ".*.graphql.t(s|sx)",
+    ".*.container.t(s|sx)",
     "src/themes/*",
     "src/fixture/*",
     "src/assets/*",
+    "src/graphqls/*",
     "src/root/RootNavigation/*"
   ],
   "setupFilesAfterEnv": ["./src/setupTests.ts"]
