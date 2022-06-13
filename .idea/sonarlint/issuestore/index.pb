@@ -51,8 +51,6 @@ W
 +src/components/Table/EmptyRecords/index.tsx,6/8/68d045b27fa5ba6b76d253053283cf7f6e554207
 g
 7src/components/Table/EmptyRecords/EmptyRecords.type.tsx,5/2/522a81218fb223105b7518bf020cf2885427a47c
-l
-<src/components/Table/EmptyRecords/EmptyRecords.component.tsx,6/1/61fe61e7ed5b2d6eb3bde8abc808e286b0c28f94
 q
 Asrc/components/Table/EmptyRecords/EmptyRecords.component.test.tsx,f/0/f0a7bf7109e1a212e151a1fe0594cf6f1113547e
 _
@@ -112,16 +110,12 @@ V
 &src/assets/images/LoadingAnimation.tsx,7/0/70bf0439b862be71e40618867b6107c82113171f
 <
 package.json,7/0/7030d0b2f71b999ff89a343de08c414af32fc93a
-@
-jest.config.json,a/2/a2f019846ba1834cef3c42f88d8f2842dd1a451e
 ?
 svgTransform.ts,8/d/8d9cdec7befde55ce64ab22bff4a46d1bf14e4b8
 _
 /src/hooks/useTranslation/useTranslation.test.ts,d/e/de7f69602f55849b193466e64ea95906a45eefc0
 Q
 !src/hooks/useTranslation/index.ts,c/9/c94052926b0784747c1cd351844f2b2c32696dfa
-K
-src/hooks/useQuery/index.ts,a/5/a50782248ac4e4f712abf0ec6cb0d97180a0e9c0
 W
 'src/composers/withPage/withPage.type.ts,5/4/54fc769dd90f9c4c9e965ac635a5ef8c9be5e1a8
 Z
