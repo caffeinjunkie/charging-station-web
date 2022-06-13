@@ -19,9 +19,13 @@ describe('Dashboard', () => {
     }
   };
   const prepareDataForTable = jest.fn()
+  const refetch = jest.fn()
+  const getTableNavigationProps = jest.fn()
   const props = {
     navigate: jest.fn(),
-    prepareDataForTable
+    refetch,
+    prepareDataForTable,
+    getTableNavigationProps
   }
 
   beforeEach(() => {

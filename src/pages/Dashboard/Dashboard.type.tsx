@@ -44,4 +44,8 @@ export interface LocationType {
 export interface Props {
   navigate: Function
   prepareDataForTable: Function
+  fetchedData: any
+  refetch: Function
+  getTableNavigationProps: Function
+  loading: boolean
 }

@@ -1,14 +1,11 @@
 import { isEmpty } from 'lodash';
 
-import type { LocationType } from './Dashboard.type';
+import type { LocationType, Props } from './Dashboard.type';
 import config from './Dashboard.config';
 import { TimeUtil } from '../../utils';
-import gql from './Dashboard.graphql';
-import { useQueryRequest as fetch } from '../../hooks/useQuery';
 
-const { TextAlign, DefaultFetchVariables, DefaultLimit, EmptyFetchResult } = config;
+const { TextAlign, DefaultFetchVariables, DefaultLimit } = config;
 const { timeSince } = TimeUtil;
-const { LocationsQuery } = gql;
 
 const constructFetchResult = (renderEditButton: Function, locationsData: Array<LocationType>) =>
   locationsData?.map(({ attributes }: LocationType) => {
@@ -39,35 +36,68 @@ const constructFetchResult = (renderEditButton: Function, locationsData: Array<L
       className: TextAlign.RIGHT
     }
   }
-})
+});
 
-const prepareDataForTable = () => (renderEditButton: Function, currentPage: number) => {
-  const fetchVariables = {
+const refetchLocations = (props: Props) => async (queryVariables: any) => {
+  const { refetch } = props;
+  const refetchVariables = {
     ...DefaultFetchVariables,
-    pagination: {
-      page: currentPage,
-      pageSize: DefaultLimit
-    }
-  }
-  const useQueryOptions =  {
-    keepPreviousData: true
-  }
-  const { data, isLoading } = fetch(LocationsQuery, fetchVariables, useQueryOptions)
+    ...queryVariables
+  };
   
-  if(isEmpty(data)) {
-    return EmptyFetchResult;
+  await refetch(refetchVariables)
+};
+
+const getTableNavigationProps = (props: Props) => () => {
+  const { fetchedData } = props;
+  if(isEmpty(fetchedData)) {
+    return {};
   }
   
-  const { locations: { data: locationsData, meta: { pagination } } } = data;
-  const fetchedResult = constructFetchResult(renderEditButton, locationsData);
+  const { locations: { meta: { pagination } } } = fetchedData;
+  const { page, pageCount } = pagination;
+  const isFirstPage = page === 1;
+  const isLastPage = page === pageCount;
   
   return {
-    fetchedResult,
-    isLoading,
-    pagination
+    next: {
+      disabled: isLastPage,
+      onClick: () => {
+        const queryVariables = {
+          pagination: {
+            page: page + 1,
+            pageSize: DefaultLimit
+          }
+        };
+        refetchLocations(props)(queryVariables)
+      }
+    },
+    previous: {
+      disabled: isFirstPage,
+      onClick: () => {
+        const queryVariables = {
+          pagination: {
+            page: page - 1,
+            pageSize: DefaultLimit
+          }
+        };
+        refetchLocations(props)(queryVariables)
+      }
+    }
   }
 };
 
+const prepareDataForTable = (props: Props) => (renderEditButton: Function) => {
+  const { fetchedData } = props;
+  if(isEmpty(fetchedData)) {
+    return [];
+  }
+  
+  const { locations: { data } }= fetchedData;
+  return constructFetchResult(renderEditButton, data);
+};
+
 export default {
-  prepareDataForTable
+  prepareDataForTable,
+  getTableNavigationProps
 };

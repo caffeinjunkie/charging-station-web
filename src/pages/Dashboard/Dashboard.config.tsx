@@ -55,26 +55,19 @@ const defaultProps = {
 
 const DefaultLimit = 2;
 
+const DefaultSortValue = "name:ASC";
+
 const DefaultFetchVariables = {
   pagination: {
     page: 1,
     pageSize: DefaultLimit
   },
-  sort: ["name:ASC"]
+  sort: [DefaultSortValue]
 };
-
-const EmptyFetchResult = {
-  fetchedResult: [],
-  pagination: {
-    pageCount: 0
-  },
-  isLoading: true
-}
 
 export default {
   COLUMNS,
   DefaultFetchVariables,
-  EmptyFetchResult,
   DefaultLimit,
   defaultProps,
   TextAlign,

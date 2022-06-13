@@ -1,5 +1,6 @@
 export interface Props {
   navigate: Function,
+  refetchVariables: any
 }
 
 export interface QueryProps {

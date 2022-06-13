@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { isEmpty } from "lodash";
 
 import type { Props } from './Dashboard.type';
@@ -12,7 +12,7 @@ import { useTranslation as translate } from '../../hooks/useTranslation';
 import { Table } from '../../components/Table';
 import config from './Dashboard.config';
 import { TestUtils } from '../../utils';
-import { LoadingOverlay } from "../../components/LoadingOverlay";
+import { LoadingOverlay } from '../../components/LoadingOverlay';
 
 const SCREEN_NAME = 'Dashboard';
 
@@ -23,9 +23,18 @@ const { COLUMNS } = config;
 const Dashboard = (props: Props): JSX.Element => {
   const {
     navigate,
-    prepareDataForTable
+    prepareDataForTable,
+    fetchedData,
+    loading,
+    getTableNavigationProps
   } = props;
-  const [currentPage, setCurrentPage] = useState(1)
+  
+  const tableNavigationProps = getTableNavigationProps();
+  
+  const onClickAddLocationButton = () => {
+    navigate('/add-location');
+  };
+  
   const renderEditButton = () => (
     <Button
       screenName={SCREEN_NAME}
@@ -34,33 +43,14 @@ const Dashboard = (props: Props): JSX.Element => {
       text={translate(`${SCREEN_NAME}-ActionButton-Edit-text`)}
     />
   );
-  const { fetchedResult, isLoading, pagination: { pageCount } } = prepareDataForTable(
-    renderEditButton, currentPage
-  );
-  const isFirstPage = currentPage === 1;
-  const isLastPage = currentPage === pageCount;
-  const tableNavigationProps = {
-    next: {
-      disabled: isLastPage,
-      onClick: () => setCurrentPage(currentPage + 1)
-    },
-    previous: {
-      disabled: isFirstPage,
-      onClick: () => setCurrentPage(currentPage - 1)
-    }
-  }
-  
-  const onClickAddLocationButton = () => {
-    navigate('/add-location');
-  };
   
   const renderTable = () => (
     <Table
       screenName={SCREEN_NAME}
       name="LocationList"
       columns={COLUMNS}
-      data={fetchedResult}
-      withTableNavigation={!isEmpty(fetchedResult)}
+      data={prepareDataForTable(renderEditButton)}
+      withTableNavigation={!isEmpty(fetchedData)}
       tableNavigationProps={tableNavigationProps}
     />
   );
@@ -80,7 +70,7 @@ const Dashboard = (props: Props): JSX.Element => {
           {...testProps(`${SCREEN_NAME}_AddLocation_Button`)}
         />
       </StyledListHeaderContainer>
-      {isLoading ? <LoadingOverlay /> : renderTable()}
+      {loading ? <LoadingOverlay /> : renderTable()}
     </StyledContainer>
   )
 }
