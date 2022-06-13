@@ -2,7 +2,7 @@ import React from 'react';
 import { cleanup, render, RenderResult } from '@testing-library/react';
 
 import Table from './Table.component';
-import { dataMock, columnMock } from '../../fixture/tableMockData';
+import { dataMock, columnMock } from '../../fixtures/tableMockData';
 
 describe('Table', () => {
   let result: RenderResult;
@@ -64,6 +64,17 @@ describe('Table', () => {
       const { getByTestId } = render(<Table {...emptyDataProps} />);
       
       expect(getByTestId(emptyRecordsTestId)).toBeTruthy()
+    });
+  
+    it('should render table navigation when withTableNavigation props is exist', () => {
+      const withNavigationProps = {
+        ...props,
+        withTableNavigation: true
+      }
+      const { getByText } = render(<Table {...withNavigationProps} />);
+      
+      expect(getByText('>')).toBeTruthy();
+      expect(getByText('<')).toBeTruthy();
     });
   });
 });

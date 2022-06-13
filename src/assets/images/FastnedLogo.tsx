@@ -1,13 +1,13 @@
 import * as React from 'react';
 
-import { Colors } from '../../themes/Colors';
+import { Colors } from '../../themes';
 
 const FastnedLogo = () => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     id="svg67"
     version="1.1"
-    width="232"
+    width="30vh"
     height="16"
     viewBox="-0.59182359 -0.59182359 202.04215718 20.91110018">
     <defs
@@ -25,12 +25,10 @@ const FastnedLogo = () => (
 
 const styles = {
   text: {
-    fill: Colors.white,
-    fillRule: 'evenodd'
+    fill: Colors.white
   },
   image: {
-    fill: Colors.primary,
-    fillRule: 'evenodd'
+    fill: Colors.primary
   }
 };
 

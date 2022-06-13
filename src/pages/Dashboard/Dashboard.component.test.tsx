@@ -1,15 +1,56 @@
 import React from 'react';
 import { shallow, ShallowWrapper } from 'enzyme';
+
 import Dashboard from './Dashboard.component';
+import { locationMockData } from '../../fixtures/locationData';
 
 describe('Dashboard', () => {
   let wrapper: ShallowWrapper;
+  const fetchedData = {
+    locations: {
+      data: [{
+        id: 1,
+        attributes: locationMockData
+      }],
+      meta: {
+        pagination: {
+          page: 1,
+          pageCount: 2
+        }
+      }
+    }
+  };
+  const prepareDataForTable = jest.fn()
+  const refetch = jest.fn()
+  const getTableNavigationProps = jest.fn()
+  const onClick = jest.fn()
+  const defaultTableNavigationProps = {
+    next: {
+      disabled: false,
+      onClick
+    },
+    previous: {
+      disabled: true,
+      onClick
+    }
+  };
+  
   const props = {
-    navigate: jest.fn()
+    navigate: jest.fn(),
+    refetch,
+    fetchedData,
+    loading: false,
+    prepareDataForTable,
+    getTableNavigationProps
   }
 
   beforeEach(() => {
-    wrapper = shallow(<Dashboard {...props} />)
+    getTableNavigationProps.mockReturnValue(defaultTableNavigationProps)
+    wrapper = shallow(<Dashboard {...props} />);
+  });
+  
+  afterEach(() => {
+    jest.clearAllMocks();
   });
 
   describe('#render', () => {
@@ -27,21 +68,66 @@ describe('Dashboard', () => {
       expect(addLocationButton).toHaveLength(1);
     });
   
-    it('should render Table component', () => {
-      const tableComponent = wrapper.find('Table')
-    
-      expect(tableComponent).toHaveLength(1);
+    it('should render Table with tableNavigationProps', () => {
+      const tableComponent = wrapper.find('Table');
+      const { tableNavigationProps }: any = tableComponent.props();
+      const expectedTableNavigationProps = {
+        next: {
+          disabled: false,
+          onClick: expect.any(Function)
+        },
+        previous: {
+          disabled: true,
+          onClick: expect.any(Function)
+        }
+      };
+      
+      expect(tableNavigationProps).toEqual(expectedTableNavigationProps)
+      
+    });
+  
+    it('should render LoadingOverlay when still fetching', () => {
+      const loadingProps = {
+        ...props,
+        loading: true
+      }
+      wrapper = shallow(<Dashboard {...loadingProps} />);
+      const loadingOverlayComponent = wrapper.find('LoadingOverlay');
+      
+      expect(loadingOverlayComponent).toHaveLength(1);
     });
   });
   
   describe('onClick', () => {
-    it('should call navigate to add location when add location button is pressed', () => {
+    let tableComponent: any;
+    
+    beforeEach(() => {
+      tableComponent = wrapper.find('Table');
+    });
+    
+    it('should call navigate to add location when add location button is clicked', () => {
       const addLocationButtonTestId = 'Dashboard_AddLocation_Button';
       const addLocationButton = wrapper.find({ id: addLocationButtonTestId })
       
       addLocationButton.simulate('click');
       
       expect(props.navigate).toHaveBeenCalledWith('/add-location')
+    });
+  
+    it('should call onClick when next button is clicked', () => {
+      const {  tableNavigationProps: { next: nextButton } }: any = tableComponent.props()
+      
+      nextButton.onClick();
+      
+      expect(onClick).toHaveBeenCalled();
+    });
+  
+    it('should call onClick when previousButton button is clicked', () => {
+      const {  tableNavigationProps: { previous: previousButton } }: any = tableComponent.props()
+    
+      previousButton.onClick();
+    
+      expect(onClick).toHaveBeenCalled();
     });
   });
 });

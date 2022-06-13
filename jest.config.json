@@ -1,16 +1,19 @@
 {
   "testEnvironment": "jsdom",
   "transform": {
-    "^.+\\.(j|t)sx?$": "babel-jest"
+    "^.+\\.(j|t)sx?$": "babel-jest",
+    "^.+\\.svg$": "<rootDir>/svgTransform.ts"
   },
   "coveragePathIgnorePatterns": [
     "index.t(s|sx)",
     ".*.styles.t(s|sx)",
     ".*.config.t(s|sx)",
     ".*.type.t(s|sx)",
+    ".*.container.t(s|sx)",
     "src/themes/*",
     "src/fixture/*",
     "src/assets/*",
+    "src/graphqls/*",
     "src/root/RootNavigation/*"
   ],
   "setupFilesAfterEnv": ["./src/setupTests.ts"]

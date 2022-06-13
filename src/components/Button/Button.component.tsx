@@ -3,7 +3,7 @@ import * as React from 'react';
 import type { Props } from './Button.type';
 import config from './Button.config';
 import { StyledButton, StyledText } from './Button.styles';
-import { TestUtils } from '../../util';
+import { TestUtils } from '../../utils';
 
 const { testProps } = TestUtils;
 

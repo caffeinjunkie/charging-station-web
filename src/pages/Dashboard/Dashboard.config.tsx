@@ -1,9 +1,3 @@
-// move to handler later
-import React from 'react';
-
-import { locationMock } from '../../fixture/locationData';
-import { Button } from '../../components/Button';
-
 interface ColumnType {
   key: string
   accessor: string,
@@ -49,48 +43,33 @@ const COLUMNS:Array<ColumnType> = [
   }
 ];
 
-interface LocationType {
-  id:number
-  name: string
-  locationNo: number
-  chargers: Array<Object>,
-  postalCode: string,
-  lastUpdated: string,
-  country: string
-}
-
-// move to handler later with renderActionButton params
-const mappedData = locationMock.map((location: LocationType) => {
-  const { name, locationNo, chargers, lastUpdated, country } = location;
-  return {
-    locationName: {
-      value: name,
-      className: TextAlign.LEFT
-    },
-    locationNo: {
-      value: locationNo,
-      className: TextAlign.LEFT
-    },
-    chargers: {
-      value: chargers.length,
-      className: TextAlign.CENTER
-    },
-    country: {
-      value: country,
-      className: TextAlign.CENTER
-    },
-    lastUpdated: {
-      value: lastUpdated,
-      className: TextAlign.CENTER
-    },
-    actions: {
-      value: <Button name="EditButton" screenName="Dashboard" className="action-button" text="Edit"/>,
-      className: TextAlign.RIGHT
+const defaultProps = {
+  loading: true,
+  fetchedData: {
+    locations: {
+      data: [],
+      meta: {}
     }
   }
-});
+}
+
+const DefaultLimit = 5;
+
+const DefaultSortValue = "name:ASC";
+
+const DefaultFetchVariables = {
+  pagination: {
+    page: 1,
+    pageSize: DefaultLimit
+  },
+  sort: [DefaultSortValue]
+};
 
 export default {
   COLUMNS,
-  data: mappedData
+  DefaultFetchVariables,
+  DefaultLimit,
+  defaultProps,
+  TextAlign,
+  data: []
 }

@@ -2,7 +2,7 @@ import React from 'react';
 import { shallow, ShallowWrapper } from 'enzyme';
 
 import Header from './Header.component';
-import FastnedLogo from "../../assets/images/FastnedLogo.component";
+import FastnedLogo from "../../assets/images/FastnedLogo";
 
 describe('Header', () => {
   let wrapper: ShallowWrapper;

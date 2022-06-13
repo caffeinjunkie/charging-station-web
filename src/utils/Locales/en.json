@@ -1,0 +1,12 @@
+{
+  "Dashboard-LocationList-title": "Locations",
+  "Dashboard-LocationList-Location-label": "Location",
+  "Dashboard-LocationList-LocationNo-label": "Location No.",
+  "Dashboard-LocationList-Chargers-label": "Chargers",
+  "Dashboard-LocationList-Country-label": "Country",
+  "Dashboard-LocationList-LastUpdated-label": "Last Updated",
+  "Dashboard-LocationList-Actions-label": "Actions",
+  "Dashboard-LocationList-empty-text": "No location has been added",
+  "Dashboard-ActionButton-Edit-text": "Edit",
+  "Dashboard-AddLocationButton-text": "Add Location"
+}
