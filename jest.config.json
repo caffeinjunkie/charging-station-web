@@ -1,7 +1,8 @@
 {
   "testEnvironment": "jsdom",
   "transform": {
-    "^.+\\.(j|t)sx?$": "babel-jest"
+    "^.+\\.(j|t)sx?$": "babel-jest",
+    "^.+\\.svg$": "<rootDir>/svgTransform.ts"
   },
   "coveragePathIgnorePatterns": [
     "index.t(s|sx)",
