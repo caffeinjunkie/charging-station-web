@@ -1,16 +1,21 @@
 import React from 'react';
+import { FaPlus } from 'react-icons/fa';
 
-import { CountryDataType, ChargerTypeDataType, Props } from './AddLocation.type';
-import { StyledContainer } from './AddLocation.styles';
+import { Props } from './AddLocation.type';
+import config from './AddLocation.config';
+import { LocationHookForm } from '../../components/LocationHookForm';
+import { useTranslation as translate } from "../../hooks/useTranslation";
 
-const AddLocation = (props: Props) => {
-  const { mapCountries, mapChargerTypes } = props;
-  return (
-    <StyledContainer>
-      {mapCountries().map((country: CountryDataType) => <div>{country.attributes.countryName}</div>)}
-      {mapChargerTypes().map((chargerType: ChargerTypeDataType) => <div>{chargerType.attributes.type}</div>)}
-    </StyledContainer>
-  )
-}
+const { SCREEN_NAME } = config;
+
+const AddLocation = (props: Props) => (
+  <LocationHookForm
+    screenName={SCREEN_NAME}
+    name="Add"
+    locationTitle={translate(`${SCREEN_NAME}-AddLocationForm-title`)}
+    locationFormIcon={FaPlus}
+    {...props}
+  />
+)
 
 export default AddLocation;

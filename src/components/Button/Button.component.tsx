@@ -18,6 +18,12 @@ const Button = (props: Props): JSX.Element => {
     renderIcon
   } = props;
   
+  const renderText = () => (
+    <StyledText className={className}>
+      {text}
+    </StyledText>
+  );
+  
   return (
     <StyledButton
       onClick={onClick}
@@ -26,9 +32,7 @@ const Button = (props: Props): JSX.Element => {
       {...testProps(`${screenName}_${name}_Button`)}
     >
       {renderIcon && renderIcon()}
-      <StyledText className={className}>
-        {text}
-      </StyledText>
+      {text && renderText()}
     </StyledButton>
   );
 };

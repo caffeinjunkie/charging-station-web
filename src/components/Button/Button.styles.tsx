@@ -11,7 +11,7 @@ export const StyledButton = styled.button`
   justify-content: center;
   align-items: center;
   padding: 10px 16px;
-  margin: 4px;
+  margin: 4px 0;
   border-radius: 4px;
   cursor: pointer;
   outline: none;

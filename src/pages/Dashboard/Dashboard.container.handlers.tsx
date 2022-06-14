@@ -8,7 +8,8 @@ const { TextAlign, DefaultFetchVariables, DefaultLimit } = config;
 const { timeSince } = TimeUtil;
 
 const constructFetchResult = (renderEditButton: Function, locationsData: Array<LocationType>) =>
-  locationsData?.map(({ attributes }: LocationType) => {
+  locationsData?.map((location: LocationType) => {
+  const { id, attributes } = location
   const { name, locationNo, chargers, updatedAt, country } = attributes;
   return {
     locationName: {
@@ -32,7 +33,7 @@ const constructFetchResult = (renderEditButton: Function, locationsData: Array<L
       className: TextAlign.CENTER
     },
     actions: {
-      value: renderEditButton(),
+      value: renderEditButton(id),
       className: TextAlign.RIGHT
     }
   }

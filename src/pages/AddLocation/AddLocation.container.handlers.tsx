@@ -1,6 +1,6 @@
 import { isEmpty } from 'lodash';
 
-import type { Props } from './AddLocation.type';
+import type { Props, ChargerTypeDataType, CountryDataType } from './AddLocation.type';
 
 // const constructFetchResult = (renderEditButton: Function, locationsData: Array<LocationType>) =>
 //   locationsData?.map(({ attributes }: LocationType) => {
@@ -40,7 +40,11 @@ const mapCountries = (props: Props) => () => {
   }
   
   const { countries: { data } } = fetchedData;
-  return data;
+  
+  return data.map(({ id, attributes }: CountryDataType) => ({
+    id,
+    ...attributes
+  }));
 };
 
 const mapChargerTypes = (props: Props) => () => {
@@ -50,7 +54,11 @@ const mapChargerTypes = (props: Props) => () => {
   }
   
   const { chargerTypes: { data } } = fetchedData;
-  return data;
+  
+  return data.map(({ id, attributes }: ChargerTypeDataType) => ({
+    id,
+    ...attributes
+  }));
 };
 
 export default {

@@ -34,11 +34,12 @@ const Dashboard = (props: Props): JSX.Element => {
     navigate('/locations');
   };
   
-  const renderEditButton = () => (
+  const renderEditButton = (id: string) => (
     <Button
       screenName={SCREEN_NAME}
       name="EditButton"
       className="action-button"
+      onClick={() => console.log(id)}
       text={translate(`${SCREEN_NAME}-ActionButton-Edit-text`)}
     />
   );

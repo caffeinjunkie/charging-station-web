@@ -6,7 +6,19 @@
   "Dashboard-LocationList-Country-label": "Country",
   "Dashboard-LocationList-LastUpdated-label": "Last Updated",
   "Dashboard-LocationList-Actions-label": "Actions",
-  "Dashboard-LocationList-empty-text": "No location has been added",
+  "Dashboard-LocationList-Empty-text": "No location has been added",
   "Dashboard-ActionButton-Edit-text": "Edit",
-  "Dashboard-AddLocationButton-text": "Add Location"
+  "Dashboard-AddLocationButton-text": "Add Location",
+  "AddLocation-AddLocationForm-title": "Add New Location",
+  "LocationHookForm-ChargersForm-title": "Chargers",
+  "LocationHookForm-LocationNameInput-label": "Name",
+  "LocationHookForm-LocationNoInput-label": "Location No.",
+  "LocationHookForm-CityInput-label": "City",
+  "LocationHookForm-PostalCodeInput-label": "Postal Code",
+  "LocationHookForm-CountryInput-label": "Country",
+  "ErrorMessage-LocationNameInput-Required-text": "Location name be filled",
+  "ErrorMessage-LocationNoInput-WrongPattern-text": "Location no. must be a number",
+  "ErrorMessage-LocationNoInput-Required-text": "Location no. be filled",
+  "ErrorMessage-CityInput-Required-text": "City be filled",
+  "ErrorMessage-PostalCodeInput-Required-text": "Postal code be filled"
 }
