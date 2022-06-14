@@ -58,8 +58,6 @@ N
 .src/components/Table/TableNavigation/index.tsx,c/8/c808ee22b1ca08ba2b5860e5c3ee03fa1c8eca28
 U
 %src/components/Table/Table.config.tsx,d/d/dddd193cfe9563135968daa176225e2f9572e9a1
-S
-#src/components/Table/Table.type.tsx,3/b/3b0b506d2157293f6e8045f930e3863683414c0b
 Z
 *src/hooks/useTranslation/useTranslation.ts,f/3/f35667ae85b548901634eb1921cf78f5e1fb2b8b
 P

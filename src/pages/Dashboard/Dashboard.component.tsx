@@ -59,7 +59,7 @@ const Dashboard = (props: Props): JSX.Element => {
     <StyledContainer>
       <StyledHeaderContainer>
         <StyledTitleText {...testProps(`${SCREEN_NAME}_LocationListTitle_Text`)}>
-          {translate( `${SCREEN_NAME}-LocationList-title`)}
+          {translate( `${SCREEN_NAME}-locationList-title`)}
         </StyledTitleText>
         <Button
           screenName={SCREEN_NAME}

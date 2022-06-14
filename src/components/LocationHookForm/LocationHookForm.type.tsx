@@ -23,6 +23,7 @@ export interface Props {
   loading: boolean
   mapCountries: Function
   mapChargerTypes: Function
+  handleSaveLocation: Function
   locationFormIcon: any
   screenName: string
   name: string

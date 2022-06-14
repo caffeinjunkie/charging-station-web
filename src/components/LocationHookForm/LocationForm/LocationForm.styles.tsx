@@ -1,7 +1,5 @@
 import styled from 'styled-components';
 
-import { FontStyles, FontSize, Colors } from '../../../themes';
-
 export const StyledContainer = styled.div`
   display: flex;
   width: 100%;
@@ -19,11 +17,4 @@ export const StyledInputContainer = styled.div`
   width: 100%;
   margin: 8px;
   flex-direction: column;
-`;
-
-export const StyledTitleText = styled.div`
-  ${FontStyles.Bold};
-  ${FontSize.Medium};
-  color: ${Colors.lightBlack};
-  margin-bottom: 4px;
 `;

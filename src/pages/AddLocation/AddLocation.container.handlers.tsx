@@ -43,7 +43,7 @@ const mapCountries = (props: Props) => () => {
   
   return data.map(({ id, attributes }: CountryDataType) => ({
     id,
-    ...attributes
+    name: attributes.countryName
   }));
 };
 
@@ -57,7 +57,7 @@ const mapChargerTypes = (props: Props) => () => {
   
   return data.map(({ id, attributes }: ChargerTypeDataType) => ({
     id,
-    ...attributes
+    name: attributes.type
   }));
 };
 

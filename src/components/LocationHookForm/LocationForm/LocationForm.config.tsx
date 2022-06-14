@@ -1,41 +1,46 @@
 const locationFormConfig = {
   locationInputProps: [
     {
-      name: 'LocationNameInput',
+      name: 'name',
       maxLength: 25,
       rules: {
-        required: 'ErrorMessage-LocationNameInput-Required-text'
+        required: 'ErrorMessage-name-required-text'
       }
     },
     {
-      name: 'LocationNoInput',
+      name: 'locationNo',
       maxLength: 6,
       rules: {
-        required: 'ErrorMessage-LocationNoInput-Required-text',
+        required: 'ErrorMessage-locationNo-required-text',
+        minLength: {
+          value: 6,
+          message: 'ErrorMessage-locationNo-minimum-text'
+        },
         pattern: {
           value: /^(0|[1-9]\d*)(\.\d+)?$/,
-          message: 'ErrorMessage-LocationNoInput-WrongPattern-text'
+          message: 'ErrorMessage-locationNo-wrongPattern-text'
         }
       }
     }
   ],
   addressInputProps: [
     {
-      name: 'CityInput',
+      name: 'city',
       maxLength: 25,
       rules: {
-        required: 'ErrorMessage-CityInput-Required-text'
+        required: 'ErrorMessage-city-required-text'
       }
     },
     {
-      name: 'PostalCodeInput',
+      name: 'postalCode',
       maxLength: 10,
       rules: {
-        required: 'ErrorMessage-PostalCodeInput-Required-text'
+        required: 'ErrorMessage-postalCode-required-text'
       }
     },
     {
-      name: 'CountryInput'
+      name: 'country',
+      isDropDown: true
     }
   ]
 }

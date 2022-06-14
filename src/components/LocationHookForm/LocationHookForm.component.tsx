@@ -7,7 +7,6 @@ import { StyledContainer } from './LocationHookForm.styles';
 import { CardView } from '../CardView';
 import { useTranslation as translate } from '../../hooks/useTranslation';
 import config from './LocationHookForm.config';
-import InputForm from '../InputForm/InputForm.component';
 import { LocationForm } from "./LocationForm";
 
 const { formConfig } = config;
@@ -19,9 +18,10 @@ const LocationHookForm = (props: Props) => {
     screenName,
     name,
     locationFormIcon,
-    locationTitle
+    locationTitle,
+    handleSaveLocation
   } = props;
-  const { options, rules } = formConfig()
+  const { options } = formConfig()
   
   const {
     control,
@@ -31,11 +31,14 @@ const LocationHookForm = (props: Props) => {
     formState: { errors, isValid }
   } = useForm(options);
   
-  const renderLocationForm = () => <LocationForm
-    control={control}
-    screenName={screenName}
-    errors={errors}
-  />
+  const renderLocationForm = () => (
+    <LocationForm
+      control={control}
+      screenName={screenName}
+      errors={errors}
+      listOfCountries={mapCountries()}
+    />
+  )
   
   return (
     <StyledContainer>
@@ -50,11 +53,17 @@ const LocationHookForm = (props: Props) => {
       <CardView
         screenName={screenName}
         renderIcon={() => <FaBolt />}
-        title={translate('LocationHookForm-ChargersForm-title')}
+        title={translate('LocationHookForm-chargersForm-title')}
         renderContent={() => <div>aaa</div>}
         name={`${name}Chargers`}
         key={`${name}Chargers`}
       />
+      {/* eslint-disable-next-line jsx-a11y/click-events-have-key-events,jsx-a11y/no-static-element-interactions */}
+      {isValid && <div
+        onClick={handleSubmit((values) => handleSaveLocation({ values, setError }))}
+      >
+        save button
+      </div>}
     </StyledContainer>
   )
 }

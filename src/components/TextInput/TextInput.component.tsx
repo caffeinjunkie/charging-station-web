@@ -7,7 +7,6 @@ import {
   StyledInputContainer,
   StyledErrorText,
   StyledContainer,
-  StyledErrorIcon,
   StyledContainerBorder
 } from './TextInput.styles';
 import { TestUtils } from '../../utils';
@@ -21,21 +20,16 @@ const { removeNonNumericChars } = config;
 const TextInput = (props: Props): JSX.Element => {
   const {
     onChange,
-    onBlur,
-    onKeyDown,
     screenName,
     name,
     value,
     label,
     errors = {},
-    renderRightIcon = () => { },
     disabled,
     type,
     maxLength,
-    autoComplete,
     isNumeric
   } = props;
-  const id = `${screenName}_${name}_Input`;
   const error = errors[name];
 
   const handleChange = ({ target: { value: initialValue } }: any) => {
@@ -54,13 +48,10 @@ const TextInput = (props: Props): JSX.Element => {
             <StyledInput
               type={type}
               onChange={handleChange}
-              onKeyDown={onKeyDown}
-              onBlur={onBlur}
               placeholder={label}
               value={value}
-              autoComplete={autoComplete}
               disabled={disabled}
-              {...testProps('aaa')}
+              {...testProps(`${screenName}_${name}_Input`)}
             />
           </StyledInputContainer>
         </StyledContainer>

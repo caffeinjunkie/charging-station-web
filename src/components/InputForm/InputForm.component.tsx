@@ -9,8 +9,7 @@ import TextInput from '../TextInput/TextInput.component';
 const InputForm = (props: any): JSX.Element => {
   const {
     control, name, label, rules, errors, screenName,
-    type, renderRightIcon, informationText, maxLength,
-    isNumeric, onChangeValue, formType, disabledInputValue,
+    type, maxLength, isNumeric, onChangeValue, disabled,
     isCached
   } = props;
   
@@ -18,7 +17,7 @@ const InputForm = (props: any): JSX.Element => {
     name,
     control,
     rules,
-    defaultValue: disabledInputValue
+    defaultValue: disabled
   });
   const { onChange, value } = field;
 
@@ -45,10 +44,8 @@ const InputForm = (props: any): JSX.Element => {
       label={label}
       errors={errors}
       value={value}
-      disabled={disabledInputValue}
+      disabled={disabled}
       type={type}
-      renderRightIcon={renderRightIcon}
-      informationText={informationText}
       isNumeric={isNumeric}
       maxLength={maxLength}
     />

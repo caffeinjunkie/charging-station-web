@@ -16,7 +16,7 @@ const TableNavigation = (props: Props) => {
       {...testProps(`${screenName}_TableNavigation_Container`)}
     >
       {mapButtonProps(tableNavigationProps).map((buttonProps) => (
-        <StyledButtonContainer>
+        <StyledButtonContainer key={buttonProps.name}>
           <Button screenName={screenName} {...buttonProps} />
         </StyledButtonContainer>
       ))}
