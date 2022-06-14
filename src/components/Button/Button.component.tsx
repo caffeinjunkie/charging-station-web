@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 
 import type { Props } from './Button.type';
 import config from './Button.config';

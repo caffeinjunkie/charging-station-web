@@ -1,21 +1,22 @@
-import * as React from 'react';
+import React from 'react';
 import { request } from 'graphql-request';
 import { useQuery } from 'react-query';
 
 import type { Props, QueryProps } from './withQuery.type';
+import config from '../../config';
+
+const { endpoint: { graphqlUrl } } = config;
 
 const withQuery = (queryProps: QueryProps): Function => (ComposedComponent: any) => {
-  function HOCComponent(props: Props) {
+  function HOCQuery(props: Props) {
     const { query, options } = queryProps;
     const { queryKey, ...queryVariables } = options;
     const [refetchVariables, setRefetchVariables] = React.useState(queryVariables);
-    // move endpoint to env later?
-    const endpoint = 'http://localhost:1337/graphql';
     const useQueryOptions =  {
       keepPreviousData: true
     }
     const result = useQuery([queryKey, refetchVariables], async () => request(
-      endpoint,
+      graphqlUrl,
       query,
       refetchVariables
     ), useQueryOptions);
@@ -31,7 +32,7 @@ const withQuery = (queryProps: QueryProps): Function => (ComposedComponent: any)
       <ComposedComponent {...updatedProps} />
     )
   }
-  return HOCComponent;
+  return HOCQuery;
 };
 
 export default withQuery;

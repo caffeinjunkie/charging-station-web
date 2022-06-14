@@ -4,7 +4,11 @@ interface GraphQLOption {
   query?: any,
   mutation?: any
   options?: any
-  
+}
+
+
+interface WithBackButtonOption {
+  redirectPath: string
 }
 
 export interface Options {
@@ -13,4 +17,5 @@ export interface Options {
   handlers?: any,
   snackBar?: boolean,
   graphql?: Array<GraphQLOption>
-};
+  withBackButton?: WithBackButtonOption
+}

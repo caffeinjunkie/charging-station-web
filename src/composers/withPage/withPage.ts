@@ -5,6 +5,7 @@ import {
 import { Conditionals } from '../../utils';
 import type { Options } from './withPage.type';
 import withQuery from '../withQuery/withQuery';
+import withBackButton from '../withBackButton/withBackButton';
 
 const { isEmptyArray, isEmptyObject } = Conditionals;
 
@@ -13,7 +14,8 @@ const withPage = (options: Options): Function => (Component: any) => {
     props: propsOptions = {},
     state: stateOptions = [],
     handlers: handlersOptions = {},
-    graphql: graphqlOptions = []
+    graphql: graphqlOptions = [],
+    withBackButton: backButtonOptions = {}
   } = options;
   const enhancers = [];
   
@@ -36,6 +38,10 @@ const withPage = (options: Options): Function => (Component: any) => {
   
   if (!isEmptyObject(propsOptions)) {
     enhancers.push(withProps(propsOptions));
+  }
+  
+  if (!isEmptyObject(backButtonOptions)) {
+    enhancers.push(withBackButton(backButtonOptions));
   }
   
   if (!isEmptyArray(stateOptions)) {

@@ -111,7 +111,7 @@ describe('Dashboard', () => {
       
       addLocationButton.simulate('click');
       
-      expect(props.navigate).toHaveBeenCalledWith('/add-location')
+      expect(props.navigate).toHaveBeenCalledWith('/locations')
     });
   
     it('should call onClick when next button is clicked', () => {

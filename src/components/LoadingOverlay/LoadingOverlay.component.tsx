@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import { TestUtils } from '../../utils';
 
 import { StyledLoadingContainer, StyledLoadingSpinner } from './LoadingOverlay.styles';

@@ -1,5 +1,6 @@
 const Paths = {
-  Dashboard: '/'
+  Dashboard: '/',
+  AddLocation: '/locations'
 };
 
 export default Paths;

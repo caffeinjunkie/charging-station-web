@@ -12,12 +12,12 @@ export const StyledContainer = styled.div`
 
 export const StyledTitleText = styled.div`
   margin: 4px;
-  ${FontStyles.Bold}
-  ${FontSize.Heading2}
-  color: ${Colors.lightBlack}
+  ${FontStyles.Bold};
+  ${FontSize.Heading2};
+  color: ${Colors.lightBlack};
 `;
 
-export const StyledListHeaderContainer = styled.div`
+export const StyledHeaderContainer = styled.div`
   display: flex;
   width: 100%;
   justify-content: space-between;

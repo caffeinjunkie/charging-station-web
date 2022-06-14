@@ -37,11 +37,11 @@ export const StyledTable = styled.table`
     td {
       display: flex;
       flex-direction: row;
-      background-color: ${Colors.white};
+      justify-content: space-between;
       border-style: none;
       border-width: 0;
       padding: 12px 24px;
-      text-align: left;
+      text-align: right;
       background-color: ${Colors.offWhite};
     }
 

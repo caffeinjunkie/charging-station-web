@@ -5,7 +5,7 @@ import type { Props } from './Dashboard.type';
 import {
   StyledContainer,
   StyledTitleText ,
-  StyledListHeaderContainer
+  StyledHeaderContainer
 } from './Dashboard.styles';
 import { Button } from '../../components/Button';
 import { useTranslation as translate } from '../../hooks/useTranslation';
@@ -28,11 +28,10 @@ const Dashboard = (props: Props): JSX.Element => {
     loading,
     getTableNavigationProps
   } = props;
-  
   const tableNavigationProps = getTableNavigationProps();
   
   const onClickAddLocationButton = () => {
-    navigate('/add-location');
+    navigate('/locations');
   };
   
   const renderEditButton = () => (
@@ -57,7 +56,7 @@ const Dashboard = (props: Props): JSX.Element => {
   
   return (
     <StyledContainer>
-      <StyledListHeaderContainer>
+      <StyledHeaderContainer>
         <StyledTitleText {...testProps(`${SCREEN_NAME}_LocationListTitle_Text`)}>
           {translate( `${SCREEN_NAME}-LocationList-title`)}
         </StyledTitleText>
@@ -69,7 +68,7 @@ const Dashboard = (props: Props): JSX.Element => {
           onClick={onClickAddLocationButton}
           {...testProps(`${SCREEN_NAME}_AddLocation_Button`)}
         />
-      </StyledListHeaderContainer>
+      </StyledHeaderContainer>
       {loading ? <LoadingOverlay /> : renderTable()}
     </StyledContainer>
   )
