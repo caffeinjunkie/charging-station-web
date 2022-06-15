@@ -30,10 +30,6 @@ Launches the test runner in the interactive watch mode.
 
 Launches the test runner with test coverage.
 
-### `npm run test:coverage`
-
-Launches the test runner with test coverage.
-
 ### `npm run lint`
 
 Launches lint checkers.
