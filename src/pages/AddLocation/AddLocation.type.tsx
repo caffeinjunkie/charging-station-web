@@ -23,4 +23,5 @@ export interface Props {
   loading: boolean
   mapCountries: Function
   mapChargerTypes: Function
+  handleSaveLocation: Function
 }

@@ -1,6 +1,6 @@
 export default {
   endpoint: {
-    restUrl: 'http://localhost:1337/api',
-    graphqlUrl: 'http://localhost:1337/graphql'
+    REST_URL: 'http://localhost:1337/api',
+    GRAPHQL_URL: 'http://localhost:1337/graphql'
   }
 };

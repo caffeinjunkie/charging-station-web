@@ -16,10 +16,12 @@
   "LocationHookForm-city-label": "City",
   "LocationHookForm-postalCode-label": "Postal Code",
   "LocationHookForm-country-label": "Country",
-  "ErrorMessage-name-required-text": "Location name be filled",
+  "AddLocation-country-placeholder-text": "Select country",
+  "ErrorMessage-name-required-text": "Location name must be filled",
   "ErrorMessage-locationNo-wrongPattern-text": "Location no. must be a number",
-  "ErrorMessage-locationNo-required-text": "Location no. be filled",
+  "ErrorMessage-locationNo-required-text": "Location no. must be filled",
   "ErrorMessage-locationNo-minimum-text": "Location no. must be 6 characters",
-  "ErrorMessage-city-required-text": "City be filled",
-  "ErrorMessage-postalCode-required-text": "Postal code be filled"
+  "ErrorMessage-locationNo-isExist-text": "Location no. is already exist",
+  "ErrorMessage-city-required-text": "City must be be filled",
+  "ErrorMessage-postalCode-required-text": "Postal code must be filled"
 }

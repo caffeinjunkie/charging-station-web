@@ -1,37 +1,8 @@
 import { isEmpty } from 'lodash';
 
 import type { Props, ChargerTypeDataType, CountryDataType } from './AddLocation.type';
-
-// const constructFetchResult = (renderEditButton: Function, locationsData: Array<LocationType>) =>
-//   locationsData?.map(({ attributes }: LocationType) => {
-//   const { name, locationNo, chargers, updatedAt, country } = attributes;
-//   return {
-//     locationName: {
-//       value: name,
-//       className: TextAlign.LEFT
-//     },
-//     locationNo: {
-//       value: locationNo,
-//       className: TextAlign.LEFT
-//     },
-//     chargers: {
-//       value: chargers.data.length,
-//       className: TextAlign.CENTER
-//     },
-//     country: {
-//       value: country.data?.attributes.countryAbbreviation,
-//       className: TextAlign.CENTER
-//     },
-//     lastUpdated: {
-//       value: timeSince(updatedAt),
-//       className: TextAlign.CENTER
-//     },
-//     actions: {
-//       value: renderEditButton(),
-//       className: TextAlign.RIGHT
-//     }
-//   }
-// });
+import { post } from '../../hooks/useAxiosPost';
+import Paths from '../../root/RootNavigation/Paths';
 
 const mapCountries = (props: Props) => () => {
   const { fetchedData } = props;
@@ -61,7 +32,31 @@ const mapChargerTypes = (props: Props) => () => {
   }));
 };
 
+const handleSaveLocation = (props: Props) => async (values: any, setError: Function) => {
+  const { navigate } = props;
+  
+  const mappedBody = {
+    ...values,
+    country: values.country.id
+  }
+  const payload = {
+    path: '/locations',
+    body: mappedBody
+  }
+  
+  console.log(values)
+  
+  const response = await post(payload);
+  if (response.error) {
+    const { key, message } = response.error;
+    setError(key, { message });
+  }
+
+  navigate(Paths.Dashboard);
+}
+
 export default {
   mapCountries,
-  mapChargerTypes
+  mapChargerTypes,
+  handleSaveLocation
 };

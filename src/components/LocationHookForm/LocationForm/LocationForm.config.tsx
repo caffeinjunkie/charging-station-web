@@ -12,13 +12,13 @@ const locationFormConfig = {
       maxLength: 6,
       rules: {
         required: 'ErrorMessage-locationNo-required-text',
-        minLength: {
-          value: 6,
-          message: 'ErrorMessage-locationNo-minimum-text'
-        },
         pattern: {
           value: /^(0|[1-9]\d*)(\.\d+)?$/,
           message: 'ErrorMessage-locationNo-wrongPattern-text'
+        },
+        minLength: {
+          value: 6,
+          message: 'ErrorMessage-locationNo-minimum-text'
         }
       }
     }
@@ -40,11 +40,20 @@ const locationFormConfig = {
     },
     {
       name: 'country',
-      isDropDown: true
+      rules: {
+        required: true
+      },
+      isDropdown: true
     }
   ]
 }
 
+const defaultProps = {
+  screenName: '',
+  listOfCountries: []
+}
+
 export default {
-  locationFormConfig
+  locationFormConfig,
+  defaultProps
 }

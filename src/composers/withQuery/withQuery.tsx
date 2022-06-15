@@ -5,7 +5,7 @@ import { useQuery } from 'react-query';
 import type { Props, QueryProps } from './withQuery.type';
 import config from '../../config';
 
-const { endpoint: { graphqlUrl } } = config;
+const { endpoint: { GRAPHQL_URL } } = config;
 
 const withQuery = (queryProps: QueryProps): Function => (ComposedComponent: any) => {
   function HOCQuery(props: Props) {
@@ -16,7 +16,7 @@ const withQuery = (queryProps: QueryProps): Function => (ComposedComponent: any)
       keepPreviousData: true
     }
     const result = useQuery([queryKey, refetchVariables], async () => request(
-      graphqlUrl,
+      GRAPHQL_URL,
       query,
       refetchVariables
     ), useQueryOptions);

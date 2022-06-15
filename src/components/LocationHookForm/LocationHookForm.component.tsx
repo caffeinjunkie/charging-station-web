@@ -1,5 +1,5 @@
 import React from 'react';
-import { FaBolt, FaPlus } from 'react-icons/fa';
+import { FaBolt } from 'react-icons/fa';
 import { useForm } from 'react-hook-form';
 
 import { Props } from './LocationHookForm.type';
@@ -60,7 +60,7 @@ const LocationHookForm = (props: Props) => {
       />
       {/* eslint-disable-next-line jsx-a11y/click-events-have-key-events,jsx-a11y/no-static-element-interactions */}
       {isValid && <div
-        onClick={handleSubmit((values) => handleSaveLocation({ values, setError }))}
+        onClick={handleSubmit((values) => handleSaveLocation(values, setError))}
       >
         save button
       </div>}

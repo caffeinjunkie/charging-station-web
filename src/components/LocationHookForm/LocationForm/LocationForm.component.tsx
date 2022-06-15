@@ -1,6 +1,6 @@
 import React from 'react';
 
-// import { Props } from './LocationHookForm.type';
+import { Props } from './LocationForm.type';
 import {
   StyledContainer,
   StyledInputSectionContainer,
@@ -8,11 +8,10 @@ import {
 } from './LocationForm.styles';
 import InputForm from '../../InputForm/InputForm.component';
 import config from './LocationForm.config';
-import { useTranslation as translate } from '../../../hooks/useTranslation';
 
 const { locationFormConfig: { locationInputProps, addressInputProps } } = config;
 
-const LocationForm = (props: any) => {
+const LocationForm = (props: Props) => {
   const {
     screenName,
     listOfCountries,
@@ -21,15 +20,14 @@ const LocationForm = (props: any) => {
   } = props;
   
   const renderInput = (inputProps: any) => {
-    if (inputProps.isDropDown) {
-      Object.assign(inputProps, { dropdownData: listOfCountries })
+    if (inputProps.isDropdown) {
+      Object.assign(inputProps, { options: listOfCountries })
     }
     
     return (
       <StyledInputContainer key={inputProps.name}>
         <InputForm
           control={control}
-          label={translate(`LocationHookForm-${inputProps.name}-label`)}
           screenName={screenName}
           errors={errors}
           type="text"
@@ -51,6 +49,6 @@ const LocationForm = (props: any) => {
   )
 }
 
-// LocationForm.defaultProps = config.defaultProps;
+LocationForm.defaultProps = config.defaultProps;
 
 export default LocationForm;

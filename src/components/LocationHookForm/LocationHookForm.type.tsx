@@ -25,6 +25,7 @@ export interface Props {
   mapChargerTypes: Function
   handleSaveLocation: Function
   locationFormIcon: any
+  responseError?: any
   screenName: string
   name: string
   locationTitle: string

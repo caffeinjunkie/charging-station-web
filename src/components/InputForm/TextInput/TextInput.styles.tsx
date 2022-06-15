@@ -1,15 +1,6 @@
 import styled from 'styled-components';
 
-import { FontStyles, FontSize, Colors } from '../../themes';
-
-// export const StyledErrorIcon = styled(ErrorIcon)`
-//   margin-right: 16px;
-// `;
-
-export const StyledErrorIcon = styled.div`
-  margin-right: 16px;
-  background-color: #C21F39;
-`;
+import { FontStyles, FontSize, Colors } from '../../../themes';
 
 export const StyledInput = styled.input`
   ${FontSize.Large}
@@ -21,10 +12,15 @@ export const StyledInput = styled.input`
   border: none;
   outline: none;
   
+  &.error {
+    border: 1px solid ${Colors.error};
+  }
+  
   ${({ disabled }) => disabled && `
-    background: ${Colors.lighterGrey};
+    background: ${Colors.lightGrey};
     pointer-events: none;
     color: ${Colors.grey};
+   
   `}
 `;
 
@@ -46,16 +42,6 @@ export const StyledContainer = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
-`;
-
-export const StyledContainerBorder = styled.div`
-  border: 1px solid ${Colors.lightGrey}
-  position: relative;
-  border-radius: 8px;
-  
-  .error {
-    border: 1px solid ${Colors.error}
-  }
 `;
 
 export const StyledText = styled.p`
