@@ -1,15 +1,22 @@
 import React from 'react';
-import { FaBolt } from 'react-icons/fa';
+import { FaBolt, FaSave } from 'react-icons/fa';
+import { GoX } from 'react-icons/go';
 import { useForm } from 'react-hook-form';
 
 import { Props } from './LocationHookForm.type';
-import { StyledContainer } from './LocationHookForm.styles';
+import {
+  StyledContainer,
+  StyledFooterButtonContainer
+} from './LocationHookForm.styles';
 import { LocationForm } from './LocationForm';
 import { CardView } from '../CardView';
 import { useTranslation as translate } from '../../hooks/useTranslation';
 import config from './LocationHookForm.config';
+import { Button } from '../Button';
+import { TestUtils } from '../../utils';
 
-const { defaultOptions } = config;
+const { defaultOptions, EDIT_LOCATION_PAGE } = config;
+const { testProps } = TestUtils;
 
 const LocationHookForm = (props: Props) => {
   const {
@@ -22,6 +29,7 @@ const LocationHookForm = (props: Props) => {
     handleSaveLocation,
     formOptions
   } = props;
+  const isEditLocationPage = screenName === EDIT_LOCATION_PAGE;
   
   const {
     control,
@@ -38,6 +46,31 @@ const LocationHookForm = (props: Props) => {
       screenName={screenName}
       errors={errors}
       listOfCountries={mapCountries()}
+    />
+  )
+  
+  const renderSaveButton = () => (
+    <Button
+      screenName={screenName}
+      name={name}
+      disabled={!isValid}
+      text={translate(`${screenName}-saveButton-text`)}
+      className="primary flex-end"
+      renderIcon={FaSave}
+      onClick={handleSubmit((values) => handleSaveLocation(values, setError))}
+      {...testProps(`${screenName}_${name}Location_SaveButton`)}
+    />
+  )
+  
+  const renderRemoveButton = () => (
+    <Button
+      screenName={screenName}
+      name={name}
+      text={translate(`${screenName}-removeButton-text`)}
+      className="secondary flex-start"
+      renderIcon={GoX}
+      onClick={handleSubmit((values) => handleSaveLocation(values, setError))}
+      {...testProps(`${screenName}_${name}Location_SaveButton`)}
     />
   )
   
@@ -59,12 +92,12 @@ const LocationHookForm = (props: Props) => {
         name={`${name}Chargers`}
         key={`${name}Chargers`}
       />
-      {/* eslint-disable-next-line jsx-a11y/click-events-have-key-events,jsx-a11y/no-static-element-interactions */}
-      {isValid && <div
-        onClick={handleSubmit((values) => handleSaveLocation(values, setError))}
+      <StyledFooterButtonContainer
+        className={name.toLowerCase()}
       >
-        save button
-      </div>}
+        {isEditLocationPage && renderRemoveButton()}
+        {renderSaveButton()}
+      </StyledFooterButtonContainer>
     </StyledContainer>
   )
 }

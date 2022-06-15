@@ -11,7 +11,7 @@ export const StyledContainer = styled.div`
 
 export const StyledBackButton = styled(FaChevronLeft)`
   padding: 10px 12px 10px 10px;
-  margin: 24px 8px 12px 32px;
+  margin: 24px 8px 2px 32px;
   border-radius: 0.4vh;
   border-color: ${Colors.lighterGrey};
   justify-content: center;

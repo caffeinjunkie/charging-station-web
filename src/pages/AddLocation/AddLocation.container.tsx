@@ -14,6 +14,7 @@ export default withPage({
       }
     }
   ],
+  withSubmissionLoading: true,
   withBackButton: {
     redirectPath: Paths.Dashboard
   }

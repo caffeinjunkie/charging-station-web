@@ -10,6 +10,7 @@ import type {
 } from './EditLocation.type';
 import { post } from '../../hooks/useAxiosPost';
 import Paths from '../../root/RootNavigation/Paths';
+import { useSubmissionLoading } from '../../hooks/useSubmissionLoading';
 
 const mapCountries = (props: Props) => () => {
   const { fetchedData } = props;
@@ -39,7 +40,7 @@ const mapChargerTypes = (props: Props) => () => {
   }));
 };
 
-const handleSaveLocation = (props: Props) => async (values: any, setError: Function) => {
+const onSubmit = (props: Props) => async (values: any, setError: Function) => {
   const { navigate } = props;
   const { id } = mapPayload(props)();
   const mappedBody = {
@@ -106,6 +107,10 @@ const mapHookFormDefaultValues = (props: Props) => () => {
     }
   }
 }
+
+const handleSaveLocation = (props: Props) => async (values: any, setError: Function) => {
+  await useSubmissionLoading(props, () => onSubmit(props)(values, setError));
+};
 
 export default {
   mapCountries,

@@ -22,7 +22,6 @@ describe('dashboardHandlers', () => {
     navigate: jest.fn(),
     refetch: jest.fn(),
     fetchedData,
-    loading: false,
     prepareTableData: jest.fn(),
     getTableNavigationProps: jest.fn()
   }

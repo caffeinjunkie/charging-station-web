@@ -8,4 +8,6 @@ const defaultOptions: any = {
   mode: 'all'
 }
 
-export default { defaultProps, defaultOptions };
+const EDIT_LOCATION_PAGE = 'EditLocation';
+
+export default { defaultProps, defaultOptions, EDIT_LOCATION_PAGE };

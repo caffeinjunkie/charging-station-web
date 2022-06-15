@@ -39,7 +39,6 @@ export interface ChargerDataType {
 export interface Props {
   navigate: Function
   fetchedData: any
-  loading: boolean
   mapCountries: Function
   mapChargerTypes: Function
   handleSaveLocation: Function

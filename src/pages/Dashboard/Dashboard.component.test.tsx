@@ -39,7 +39,6 @@ describe('Dashboard', () => {
     navigate: jest.fn(),
     refetch,
     fetchedData,
-    loading: false,
     prepareTableData,
     getTableNavigationProps
   }
@@ -84,17 +83,6 @@ describe('Dashboard', () => {
       
       expect(tableNavigationProps).toEqual(expectedTableNavigationProps)
       
-    });
-  
-    it('should render LoadingOverlay when still fetching', () => {
-      const loadingProps = {
-        ...props,
-        loading: true
-      }
-      wrapper = shallow(<Dashboard {...loadingProps} />);
-      const loadingOverlayComponent = wrapper.find('LoadingOverlay');
-      
-      expect(loadingOverlayComponent).toHaveLength(1);
     });
   });
   

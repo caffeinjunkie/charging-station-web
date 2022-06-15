@@ -23,7 +23,8 @@ const withQuery = (queryProps: QueryProps): Function => (ComposedComponent: any)
     const useQueryOptions =  {
       keepPreviousData: true,
       staleTime: Infinity,
-      cacheTime: Infinity
+      cacheTime: 0,
+      refetchInterval: 500
     }
     
     const result = useQuery([queryKey, refetchVariables], async () => request(

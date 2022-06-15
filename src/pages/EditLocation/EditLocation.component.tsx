@@ -4,7 +4,6 @@ import { FaMapMarkerAlt } from 'react-icons/fa';
 import { Props } from './EditLocation.type';
 import config from './EditLocation.config';
 import { LocationHookForm } from '../../components/LocationHookForm';
-import { useTranslation as translate } from '../../hooks/useTranslation';
 
 const { SCREEN_NAME } = config;
 

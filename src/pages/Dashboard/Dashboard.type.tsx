@@ -47,5 +47,4 @@ export interface Props {
   fetchedData: any
   refetch: Function
   getTableNavigationProps: Function
-  loading: boolean
 }

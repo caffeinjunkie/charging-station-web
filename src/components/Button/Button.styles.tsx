@@ -48,6 +48,14 @@ export const StyledButton = styled.button`
   &.action-button:hover {
     background-color: ${Colors.offWhite};
   }
+  
+  &.flex-end {
+    align-self: flex-end;
+  }
+
+  &.flex-start {
+    align-self: flex-start;
+  }
 
   @media screen and (max-width:720px) {
     &.action-button {

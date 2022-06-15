@@ -1,5 +1,6 @@
 import React from 'react';
 import { isEmpty } from 'lodash';
+import { FaPlus } from 'react-icons/fa';
 
 import type { Props } from './Dashboard.type';
 import {
@@ -24,7 +25,6 @@ const Dashboard = (props: Props): JSX.Element => {
     navigate,
     prepareTableData,
     fetchedData,
-    loading,
     getTableNavigationProps
   } = props;
   const tableNavigationProps = getTableNavigationProps();
@@ -39,7 +39,7 @@ const Dashboard = (props: Props): JSX.Element => {
       name="EditButton"
       className="action-button"
       onClick={() => navigate(`/locations/${id}`)}
-      text={translate(`${SCREEN_NAME}-ActionButton-Edit-text`)}
+      text={translate(`${SCREEN_NAME}-actionButton-edit-text`)}
     />
   );
   
@@ -58,8 +58,9 @@ const Dashboard = (props: Props): JSX.Element => {
     <Button
       screenName={SCREEN_NAME}
       name="AddLocation"
-      text={translate(`${SCREEN_NAME}-AddLocationButton-text`)}
+      text={translate(`${SCREEN_NAME}-addLocationButton-text`)}
       className="primary"
+      renderIcon={FaPlus}
       onClick={() => onClickAddLocationButton()}
       {...testProps(`${SCREEN_NAME}_AddLocation_Button`)}
     />

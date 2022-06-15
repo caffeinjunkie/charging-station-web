@@ -13,9 +13,10 @@ interface WithBackButtonOption {
 
 export interface Options {
   props?: any,
-  state?: Array<StateOptions>,
+  state?: Array<StateOptions>
   handlers?: any,
-  snackBar?: boolean,
+  snackBar?: boolean
   graphql?: Array<GraphQLOption>
   withBackButton?: WithBackButtonOption
+  withSubmissionLoading?: boolean
 }
