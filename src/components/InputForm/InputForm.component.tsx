@@ -5,8 +5,6 @@ import TextInput from './TextInput/TextInput.component';
 import Dropdown from './Dropdown/Dropdown.component';
 
 import type { Props } from './InputForm.type';
-// import config from './InputForm.config';
-// import { StyledInputFormContainer } from './InputForm.styles';
 
 const InputForm = (props: Props): JSX.Element => {
   const {
@@ -24,7 +22,7 @@ const InputForm = (props: Props): JSX.Element => {
   
   const renderDropdown = () => (
     <Dropdown
-      value={value}
+      value={value ? value.name : ''}
       onChange={onChange}
       {...props}
     />
@@ -40,7 +38,5 @@ const InputForm = (props: Props): JSX.Element => {
 
   return isDropdown ? renderDropdown() : renderTextInput();
 };
-
-// InputForm.defaultProps = config.defaultProps;
 
 export default InputForm;

@@ -37,21 +37,20 @@ const handleSaveLocation = (props: Props) => async (values: any, setError: Funct
   
   const mappedBody = {
     ...values,
-    country: values.country.id
+    country: values.country.id,
+    chargers: []
   }
   const payload = {
     path: '/locations',
     body: mappedBody
   }
   
-  console.log(values)
-  
   const response = await post(payload);
   if (response.error) {
     const { key, message } = response.error;
     setError(key, { message });
+    return;
   }
-
   navigate(Paths.Dashboard);
 }
 

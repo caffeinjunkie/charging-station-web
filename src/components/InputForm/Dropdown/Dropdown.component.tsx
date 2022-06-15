@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { FaCaretDown } from 'react-icons/fa'
+import { FaCaretDown } from 'react-icons/fa';
 
 import type { Props, OptionType } from './Dropdown.type';
 import {
@@ -9,17 +9,19 @@ import {
   StyledContainer,
   StyledDropdownOverlay
 } from './Dropdown.styles';
-import { TestUtils } from '../../../utils';
+import { TestUtils, Conditionals } from '../../../utils';
 import config from './Dropdown.config';
 import { useTranslation as translate } from '../../../hooks/useTranslation';
 
 const { testProps } = TestUtils;
+const { isEmptyString } = Conditionals;
 
 const Dropdown = (props: Props): JSX.Element => {
   const {
     onChange,
     screenName,
     name,
+    value,
     disabled,
     options
   } = props;
@@ -36,10 +38,10 @@ const Dropdown = (props: Props): JSX.Element => {
         <StyledLabel>
           {label}
         </StyledLabel>
-        <StyledDropdown onChange={handleChange} disabled={disabled}>
+        <StyledDropdown onChange={handleChange} disabled={disabled} defaultValue={value}>
           <option
             value=""
-            selected
+            selected={isEmptyString(value)}
             disabled
             hidden
             key="defaultValue"

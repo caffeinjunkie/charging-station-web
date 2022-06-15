@@ -9,13 +9,13 @@ import { useTranslation as translate } from '../../hooks/useTranslation';
 const { SCREEN_NAME } = config;
 
 const AddLocation = (props: Props) => (
-  <LocationHookForm
-    screenName={SCREEN_NAME}
-    name="Add"
-    locationTitle={translate(`${SCREEN_NAME}-AddLocationForm-title`)}
-    locationFormIcon={FaPlus}
-    {...props}
-  />
-)
+    <LocationHookForm
+      screenName={`${SCREEN_NAME}`}
+      name="Add"
+      locationTitle={translate(`${SCREEN_NAME}-addLocationForm-title`)}
+      locationFormIcon={FaPlus}
+      {...props}
+    />
+  )
 
 export default AddLocation;

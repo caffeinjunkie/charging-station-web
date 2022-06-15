@@ -1,4 +1,4 @@
-interface CountryAttributesType {
+export interface CountryAttributesType {
   countryName: string
   countryAbbreviation: string
 }
@@ -8,13 +8,32 @@ export interface CountryDataType {
   attributes: CountryAttributesType
 }
 
-interface ChargerTypeAttributesType {
+export interface ChargerTypeAttributesType {
   type: string
 }
 
 export interface ChargerTypeDataType {
   id: number
   attributes: ChargerTypeAttributesType
+}
+
+interface ChargerAttributesType {
+  type: string
+  serialNumber: string
+  status: string
+}
+
+export interface ChargerType {
+  data: Array<ChargerDataType>
+}
+
+export interface CountryType {
+  data: CountryDataType
+}
+
+export interface ChargerDataType {
+  id: number
+  attributes: ChargerAttributesType
 }
 
 export interface Props {
@@ -24,10 +43,5 @@ export interface Props {
   mapCountries: Function
   mapChargerTypes: Function
   handleSaveLocation: Function
-  locationFormIcon: any
-  responseError?: any
-  screenName: string
-  name: string
-  locationTitle: string
-  formOptions: any
+  mapHookFormDefaultValues: Function
 }

@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { Colors, FontSize, FontStyles } from '../../themes';
 
 export const StyledContainer = styled.div`
-  padding: 16px 8px;
+  padding: 18px 12px;
   border: 1px solid ${Colors.lightGrey};
   background-color: ${Colors.white};
   box-sizing: border-box;

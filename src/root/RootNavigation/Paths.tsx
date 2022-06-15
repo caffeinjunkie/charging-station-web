@@ -1,6 +1,7 @@
 const Paths = {
   Dashboard: '/',
-  AddLocation: '/locations'
+  AddLocation: '/locations',
+  EditLocation: '/locations/:id'
 };
 
 export default Paths;

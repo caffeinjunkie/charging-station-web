@@ -20,7 +20,7 @@ describe('Dashboard', () => {
       }
     }
   };
-  const prepareDataForTable = jest.fn()
+  const prepareTableData = jest.fn()
   const refetch = jest.fn()
   const getTableNavigationProps = jest.fn()
   const onClick = jest.fn()
@@ -40,7 +40,7 @@ describe('Dashboard', () => {
     refetch,
     fetchedData,
     loading: false,
-    prepareDataForTable,
+    prepareTableData,
     getTableNavigationProps
   }
 

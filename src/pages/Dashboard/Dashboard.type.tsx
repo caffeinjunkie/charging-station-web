@@ -8,7 +8,7 @@ interface CountryDataType {
   attributes: CountryAttributesType
 }
 
-interface CountryType {
+export interface CountryType {
   data: CountryDataType
 }
 
@@ -18,12 +18,12 @@ interface ChargerAttributesType {
   status: string
 }
 
-interface ChargerDataType {
+export interface ChargerDataType {
   id: number
   attributes: ChargerAttributesType
 }
 
-interface ChargerType {
+export interface ChargerType {
   data: Array<ChargerDataType>
 }
 
@@ -37,13 +37,13 @@ export interface LocationAttributesType {
 }
 
 export interface LocationType {
-  id:number
+  id:string
   attributes: LocationAttributesType
 }
 
 export interface Props {
   navigate: Function
-  prepareDataForTable: Function
+  prepareTableData: Function
   fetchedData: any
   refetch: Function
   getTableNavigationProps: Function

@@ -1,6 +1,12 @@
 import { isEmpty } from 'lodash';
 
-import type { LocationType, Props } from './Dashboard.type';
+import type {
+  Props,
+  LocationType,
+  CountryType,
+  ChargerType,
+  ChargerDataType
+} from './Dashboard.type';
 import config from './Dashboard.config';
 import { TimeUtil } from '../../utils';
 
@@ -88,7 +94,7 @@ const getTableNavigationProps = (props: Props) => () => {
   }
 };
 
-const prepareDataForTable = (props: Props) => (renderEditButton: Function) => {
+const prepareTableData = (props: Props) => (renderEditButton: Function) => {
   const { fetchedData } = props;
   if(isEmpty(fetchedData)) {
     return [];
@@ -99,6 +105,6 @@ const prepareDataForTable = (props: Props) => (renderEditButton: Function) => {
 };
 
 export default {
-  prepareDataForTable,
+  prepareTableData,
   getTableNavigationProps
 };

@@ -1,14 +1,11 @@
 const defaultProps = {
   location: {},
-  chargers: []
+  chargers: [],
+  formOptions: {}
 }
 
-const formConfig: any = () => (
-  {
-    options: {
-      mode: 'all'
-    }
-  }
-);
+const defaultOptions: any = {
+  mode: 'all'
+}
 
-export default { defaultProps, formConfig };
+export default { defaultProps, defaultOptions };

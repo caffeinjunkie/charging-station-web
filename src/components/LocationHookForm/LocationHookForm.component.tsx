@@ -4,12 +4,12 @@ import { useForm } from 'react-hook-form';
 
 import { Props } from './LocationHookForm.type';
 import { StyledContainer } from './LocationHookForm.styles';
+import { LocationForm } from './LocationForm';
 import { CardView } from '../CardView';
 import { useTranslation as translate } from '../../hooks/useTranslation';
 import config from './LocationHookForm.config';
-import { LocationForm } from "./LocationForm";
 
-const { formConfig } = config;
+const { defaultOptions } = config;
 
 const LocationHookForm = (props: Props) => {
   const {
@@ -19,17 +19,18 @@ const LocationHookForm = (props: Props) => {
     name,
     locationFormIcon,
     locationTitle,
-    handleSaveLocation
+    handleSaveLocation,
+    formOptions
   } = props;
-  const { options } = formConfig()
   
   const {
     control,
     handleSubmit,
+    getValues,
     setError,
     trigger,
     formState: { errors, isValid }
-  } = useForm(options);
+  } = useForm({ ...defaultOptions, ...formOptions });
   
   const renderLocationForm = () => (
     <LocationForm
