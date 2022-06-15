@@ -1,6 +1,4 @@
 
-9
-	README.md,8/e/8ec9a00bfd09b3190ac6b22251dbb1aa95a0579d
 =
 tsconfig.json,6/1/61ebb9fd6e8cf9082658121d5d81e297791dacd0
 @
@@ -84,8 +82,6 @@ F
 src/root/Root.test.tsx,2/9/29659747d2134237268ba2cf97abe2ab0b24eb2e
 H
 src/root/Root.styles.tsx,6/e/6ea203e26b757a52c8adef94f212cbb9b9ebe418
-<
-package.json,7/0/7030d0b2f71b999ff89a343de08c414af32fc93a
 @
 src/App.test.tsx,1/f/1fc1c06a0502bf303f8ba35e530938a98e7e35b2
 ;
@@ -122,14 +118,10 @@ l
 <src/components/Table/EmptyRecords/EmptyRecords.component.tsx,6/1/61fe61e7ed5b2d6eb3bde8abc808e286b0c28f94
 E
 src/themes/Colors.tsx,b/7/b741925672f593e002f600aa096c27c8ec91fdf0
-R
-"src/components/TextInput/index.tsx,f/2/f2df6417ced59540a56530dd2125de204ac91cf3
 q
 Asrc/components/Table/EmptyRecords/EmptyRecords.component.test.tsx,f/0/f0a7bf7109e1a212e151a1fe0594cf6f1113547e
 S
 #src/components/Table/Table.type.tsx,3/b/3b0b506d2157293f6e8045f930e3863683414c0b
-d
-4src/components/TextInput/TextInput.component.test.js,3/a/3a036f6615ed1f00884f6adc458b914490c29739
 f
 6src/components/LocationHookForm/LocationForm/index.tsx,c/9/c98918e1cad4b2976c308fb28f8464cd090e1eda
 o
