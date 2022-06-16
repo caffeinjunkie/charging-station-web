@@ -6,7 +6,7 @@
   "Dashboard-LocationList-Country-label": "Country",
   "Dashboard-LocationList-LastUpdated-label": "Last Updated",
   "Dashboard-LocationList-Actions-label": "Actions",
-  "Dashboard-LocationList-Empty-text": "No location has been added",
+  "Dashboard-LocationList-empty-text": "No location has been added",
   "Dashboard-actionButton-edit-text": "Edit",
   "Dashboard-addLocationButton-text": "Add Location",
   "LocationHookForm-chargersForm-title": "Chargers",
@@ -27,5 +27,7 @@
   "ErrorMessage-locationNo-minimum-text": "Location no. must be 6 characters",
   "ErrorMessage-locationNo-isExist-text": "Location no. is already exist",
   "ErrorMessage-city-required-text": "City must be be filled",
-  "ErrorMessage-postalCode-required-text": "Postal code must be filled"
+  "ErrorMessage-postalCode-required-text": "Postal code must be filled",
+  "AddLocation-cancelPopup-confirmationButton-text": "Confirm",
+  "AddLocation-cancelPopup-cancelButton-text": "Cancel"
 }
