@@ -22,11 +22,15 @@ export interface Props {
   fetchedData: any
   mapCountries: Function
   mapChargerTypes: Function
-  handleSaveLocation: Function
+  onSaveButtonClick: () => void
+  onRemoveButtonClick?: () => void
   locationFormIcon: any
   responseError?: any
   screenName: string
   name: string
   locationTitle: string
   formOptions: any
+  isValid: boolean
+  errors: any
+  control: any
 }

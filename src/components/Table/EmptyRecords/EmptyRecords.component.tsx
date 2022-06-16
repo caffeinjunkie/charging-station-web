@@ -21,7 +21,7 @@ const EmptyRecords = (props: Props): JSX.Element => {
           <StyledEmptyRecordsText
             {...testProps(`${screenName}_${name}_EmptyRecords_Text`)}
           >
-            {translate(`${screenName}-${name}-Empty-text`)}
+            {translate(`${screenName}-${name}-empty-text`)}
           </StyledEmptyRecordsText>
         </StyledBody>
       </StyledRow>

@@ -1,6 +1,6 @@
 import React from 'react';
-import { TestUtils } from '../../utils';
 
+import { TestUtils } from '../../utils';
 import { StyledLoadingContainer, StyledLoadingSpinner } from './LoadingOverlay.styles';
 
 const { testProps } = TestUtils;

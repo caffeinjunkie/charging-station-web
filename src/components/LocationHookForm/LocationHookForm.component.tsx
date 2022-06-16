@@ -1,7 +1,6 @@
 import React from 'react';
 import { FaBolt, FaSave } from 'react-icons/fa';
 import { GoX } from 'react-icons/go';
-import { useForm } from 'react-hook-form';
 
 import { Props } from './LocationHookForm.type';
 import {
@@ -15,7 +14,7 @@ import config from './LocationHookForm.config';
 import { Button } from '../Button';
 import { TestUtils } from '../../utils';
 
-const { defaultOptions, EDIT_LOCATION_PAGE } = config;
+const { EDIT_LOCATION_PAGE } = config;
 const { testProps } = TestUtils;
 
 const LocationHookForm = (props: Props) => {
@@ -26,19 +25,13 @@ const LocationHookForm = (props: Props) => {
     name,
     locationFormIcon,
     locationTitle,
-    handleSaveLocation,
-    formOptions
+    onSaveButtonClick,
+    onRemoveButtonClick,
+    isValid,
+    errors,
+    control
   } = props;
   const isEditLocationPage = screenName === EDIT_LOCATION_PAGE;
-  
-  const {
-    control,
-    handleSubmit,
-    getValues,
-    setError,
-    trigger,
-    formState: { errors, isValid }
-  } = useForm({ ...defaultOptions, ...formOptions });
   
   const renderLocationForm = () => (
     <LocationForm
@@ -57,7 +50,7 @@ const LocationHookForm = (props: Props) => {
       text={translate(`${screenName}-saveButton-text`)}
       className="primary flex-end"
       renderIcon={FaSave}
-      onClick={handleSubmit((values) => handleSaveLocation(values, setError))}
+      onClick={onSaveButtonClick}
       {...testProps(`${screenName}_${name}Location_SaveButton`)}
     />
   )
@@ -69,7 +62,7 @@ const LocationHookForm = (props: Props) => {
       text={translate(`${screenName}-removeButton-text`)}
       className="secondary flex-start"
       renderIcon={GoX}
-      onClick={handleSubmit((values) => handleSaveLocation(values, setError))}
+      onClick={onRemoveButtonClick}
       {...testProps(`${screenName}_${name}Location_SaveButton`)}
     />
   )

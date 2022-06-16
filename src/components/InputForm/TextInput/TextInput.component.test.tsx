@@ -35,12 +35,6 @@ describe('TextInput', () => {
       expect(getByDisplayValue(textInputDisplayValue)).toBeTruthy();
     });
 
-    it('should render textInputLabelText as text and label text', () => {
-      const { getByText } = result;
-
-      expect(getByText(textInputLabelText)).toBeTruthy();
-    });
-
     it('should render errorText when there is input error with message', () => {
       const { getByText, rerender } = result;
       const errorText = 'Error text example';

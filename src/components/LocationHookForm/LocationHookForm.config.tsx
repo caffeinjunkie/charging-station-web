@@ -4,10 +4,6 @@ const defaultProps = {
   formOptions: {}
 }
 
-const defaultOptions: any = {
-  mode: 'all'
-}
-
 const EDIT_LOCATION_PAGE = 'EditLocation';
 
-export default { defaultProps, defaultOptions, EDIT_LOCATION_PAGE };
+export default { defaultProps, EDIT_LOCATION_PAGE };

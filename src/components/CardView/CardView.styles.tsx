@@ -36,36 +36,3 @@ export const StyledTitle = styled.div`
     min-width: 20px;
   }
 `;
-
-export const StyledTitleBadge = styled.div`
-  ${FontSize.Small};
-  ${FontStyles.Regular};
-  color: ${Colors.grey};
-  background-color: ${Colors.lighterGrey};
-  border-radius: 16px;
-  padding: 2px 12px;
-`;
-
-export const StyledInformationText = styled.div`
-  border-radius: 16px;
-  background-color: ${Colors.primary};
-  padding: 2px 12px;
-  display: flex;
-  z-index: 10;
-  align-items: center;
-  color: ${Colors.primary[500]};
-  ${FontSize.Small};
-  ${FontStyles.Regular};
-  margin-top: -6px;
-  margin-bottom: 16px;
-
-  svg {
-    margin-right: 6px;
-  }
-`;
-
-export const StyledText = styled.div`
-  ${FontSize.Small};
-  ${FontStyles.Regular};
-  width: 100%;
-`;
