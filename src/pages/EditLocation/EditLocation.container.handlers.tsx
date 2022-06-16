@@ -6,9 +6,10 @@ import type {
   CountryDataType,
   ChargerDataType,
   ChargerType,
-  CountryType
+  CountryType,
+  ChargerPayloadType
 } from './EditLocation.type';
-import { post } from '../../hooks/useAxiosPost';
+import { post, remove } from '../../hooks/useAxios';
 import Paths from '../../root/RootNavigation/Paths';
 import { useSubmissionLoading } from '../../hooks/useSubmissionLoading';
 
@@ -40,14 +41,27 @@ const mapChargerTypes = (props: Props) => () => {
   }));
 };
 
-const onSubmit = (props: Props) => async (values: any, setError: Function) => {
+const onDelete = (props: Props) => async () => {
+  const { navigate } = props;
+  const { id } = mapPayload(props)();
+  const payload = {
+    path: `/locations/${id}`
+  }
+  
+  await remove(payload);
+  
+  navigate(Paths.Dashboard);
+}
+
+const onSubmit = (props: Props) => async (values: any, submitArgs: any) => {
+  const { setError, chargers } = submitArgs;
   const { navigate } = props;
   const { id } = mapPayload(props)();
   const mappedBody = {
     ...values,
     id,
     country: values.country.id,
-    chargers: []
+    chargers: chargers.map((charger: ChargerPayloadType) => charger.id)
   }
   
   const payload = {
@@ -61,7 +75,7 @@ const onSubmit = (props: Props) => async (values: any, setError: Function) => {
     setError(key, { message });
     return;
   }
-  
+
   navigate(Paths.Dashboard);
 }
 
@@ -94,6 +108,7 @@ const mapPayload = (props: Props) => () => {
 
 const mapHookFormDefaultValues = (props: Props) => () => {
   const { name, locationNo, city, postalCode, country }: any = mapPayload(props)();
+  
   return {
     defaultValues: {
       name,
@@ -108,14 +123,19 @@ const mapHookFormDefaultValues = (props: Props) => () => {
   }
 }
 
-const handleSaveLocation = (props: Props) => async (values: any, setError: Function) => {
-  await useSubmissionLoading(props, () => onSubmit(props)(values, setError));
+const handleSaveLocation = (props: Props) => async (values: any, submitArgs: any) => {
+  await useSubmissionLoading(props, () => onSubmit(props)(values, submitArgs));
 };
+
+const handleRemoveLocation = (props: Props) => async () => {
+  await useSubmissionLoading(props, () => onDelete(props)());
+}
 
 export default {
   mapCountries,
   mapChargerTypes,
   handleSaveLocation,
   mapPayload,
+  handleRemoveLocation,
   mapHookFormDefaultValues
 };

@@ -17,6 +17,14 @@ export interface ChargerTypeDataType {
   attributes: ChargerTypeAttributesType
 }
 
+export interface ChargerPayloadType {
+  id: number
+  type: string
+  serialNumber: string
+  status: string
+  updatedAt: string
+}
+
 export interface Props {
   navigate: Function
   fetchedData: any

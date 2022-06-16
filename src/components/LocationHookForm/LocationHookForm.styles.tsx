@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { Colors } from "../../themes";
 
 export const StyledContainer = styled.div`
   padding: 16px 32px;
@@ -15,4 +16,9 @@ export const StyledFooterButtonContainer = styled.div`
   &.add {
     justify-content: flex-end;
   }
+`;
+
+export const StyledChargerPopupContainer = styled.div`
+  padding: 32px;
+  background-color: ${Colors.white};
 `;

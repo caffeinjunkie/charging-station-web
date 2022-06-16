@@ -69,6 +69,5 @@ export default {
   DefaultFetchVariables,
   DefaultLimit,
   defaultProps,
-  TextAlign,
-  data: []
+  TextAlign
 }

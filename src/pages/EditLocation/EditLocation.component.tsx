@@ -17,6 +17,8 @@ const EditLocation = (props: Props) => {
   const {
     navigate,
     mapHookFormDefaultValues,
+    mapPayload,
+    handleRemoveLocation,
     handleSaveLocation
   } = props;
   const formOptions = mapHookFormDefaultValues();
@@ -24,28 +26,41 @@ const EditLocation = (props: Props) => {
     control,
     handleSubmit,
     setError,
+    trigger,
     formState: { errors, isValid, isDirty }
   } = useForm({ ...defaultOptions, ...formOptions });
-  const [addedChargers, setAddedChargers] = React.useState([]);
+  const { chargers } = mapPayload();
+  const [addedChargers, setAddedChargers] = React.useState(chargers);
   const [isBackPopupOpen, setIsBackPopupOpen] = React.useState(false);
-  const isFormValid = isValid && isDirty;
+  const [isRemovePopupOpen, setIsRemovePopupOpen] = React.useState(false);
+  // checking length change to is edited
+  const hasDataChanged = chargers.length !== addedChargers.length;
+  const isFormValid = isValid && (isDirty || hasDataChanged);
+  const submitArgs = {
+    chargers: addedChargers,
+    setError
+  };
   
-  const handleCancelBackButton = () => setIsBackPopupOpen(!isBackPopupOpen);
+  const handleCancelButton = () => {
+    setIsBackPopupOpen(false);
+    setIsRemovePopupOpen(false);
+  }
   
   const handleConfirmBackButton = () => navigate(Paths.Dashboard);
   
   const onBackButtonClick = () => {
-    if (isDirty) {
+    const showCancelConfirmation = isDirty || hasDataChanged;
+    if (showCancelConfirmation) {
       setIsBackPopupOpen(true);
       return
     }
     navigate(Paths.Dashboard);
   }
   
-  const renderCancelPopupContent = () => (
+  const renderCancelPopupContent = (name: string) => (
     <StyledBackPopupContentContainer>
       <StyledBackPopupContentText>
-        {translate('CancelPopup-cancelPopup-text')}
+        {translate(`CancelPopup-${name}Popup-text`)}
       </StyledBackPopupContentText>
     </StyledBackPopupContentContainer>
   )
@@ -54,14 +69,28 @@ const EditLocation = (props: Props) => {
     <PopupMenu
       isOpen={isBackPopupOpen}
       screenName={SCREEN_NAME}
-      name="Add"
+      name="Edit"
       withButtons
-      buttons={cancelButtons(handleConfirmBackButton, handleCancelBackButton)}
-      renderContent={renderCancelPopupContent}
+      buttons={cancelButtons(handleConfirmBackButton, handleCancelButton)}
+      renderContent={() => renderCancelPopupContent('cancel')}
       withCloseButton
       onClickCloseButton={() => setIsBackPopupOpen(false)}
     />
   )
+  
+  const renderRemovePopup = () => (
+    <PopupMenu
+      isOpen={isRemovePopupOpen}
+      screenName={SCREEN_NAME}
+      name="Edit"
+      withButtons
+      buttons={cancelButtons(handleRemoveLocation, handleCancelButton)}
+      renderContent={() => renderCancelPopupContent('remove')}
+      withCloseButton
+      onClickCloseButton={() => setIsRemovePopupOpen(false)}
+    />
+  )
+  
   return (
     <>
       <BackButton onClick={onBackButtonClick} />
@@ -73,14 +102,20 @@ const EditLocation = (props: Props) => {
         formOptions={formOptions}
         control={control}
         errors={errors}
+        trigger={trigger}
         isValid={isFormValid}
-        onSaveButtonClick={handleSubmit((values: any) => handleSaveLocation(values, setError))}
-        onRemoveButtonClick={() => {}}
+        tableData={addedChargers}
+        setTableData={setAddedChargers}
+        onSaveButtonClick={handleSubmit((values: any) => handleSaveLocation(values, submitArgs))}
+        onRemoveButtonClick={() => setIsRemovePopupOpen(true)}
         {...props}
       />
       {renderCancelPopup()}
+      {renderRemovePopup()}
     </>
   )
 }
+
+EditLocation.defaultProps = config.defaultProps;
 
 export default EditLocation;

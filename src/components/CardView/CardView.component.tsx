@@ -17,6 +17,8 @@ const CardView = (props: Props): JSX.Element => {
     screenName,
     renderIcon,
     renderContent,
+    withHeaderButton,
+    renderHeaderButton,
     title,
     name
   } = props;
@@ -33,6 +35,7 @@ const CardView = (props: Props): JSX.Element => {
   const renderTitleContainer = () => (
     <StyledTitleContainer>
       {renderTitle()}
+      {withHeaderButton && renderHeaderButton()}
     </StyledTitleContainer>
   );
   

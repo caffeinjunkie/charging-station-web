@@ -9,13 +9,14 @@ import {
   StyledRow,
   StyledTableBody,
   StyledTableHead,
+  StyledInlineText,
   StyledTableContainer
 } from './Table.styles';
 import type { Props, ColumnType, ContentType } from './Table.type';
 import { useTranslation as translate } from '../../hooks/useTranslation';
 import { TestUtils } from '../../utils';
 import config from './Table.config';
-import EmptyRecords from "./EmptyRecords/EmptyRecords.component";
+import EmptyRecords from './EmptyRecords/EmptyRecords.component';
 import TableNavigation from "./TableNavigation/TableNavigation.component";
 
 const { testProps } = TestUtils;
@@ -48,7 +49,7 @@ const Table = (props: Props): JSX.Element => {
         className={className}
         data-label={translate(`${screenName}-${name}-${columns[index].key}-label`)}
       >
-        {value}
+        <StyledInlineText>{value}</StyledInlineText>
       </StyledBodyText>
     )
   }

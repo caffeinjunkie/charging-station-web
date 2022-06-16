@@ -1,11 +1,12 @@
 import React from 'react';
-import { FaBolt, FaSave } from 'react-icons/fa';
+import { FaBolt, FaPlus, FaSave } from 'react-icons/fa';
 import { GoX } from 'react-icons/go';
 
-import { Props } from './LocationHookForm.type';
+import type { ChargerType, Props } from './LocationHookForm.type';
 import {
   StyledContainer,
-  StyledFooterButtonContainer
+  StyledFooterButtonContainer,
+  StyledChargerPopupContainer
 } from './LocationHookForm.styles';
 import { LocationForm } from './LocationForm';
 import { CardView } from '../CardView';
@@ -13,8 +14,11 @@ import { useTranslation as translate } from '../../hooks/useTranslation';
 import config from './LocationHookForm.config';
 import { Button } from '../Button';
 import { TestUtils } from '../../utils';
+import { ChargersTable } from "./ChargersTable";
+import { PopupMenu } from "../PopupMenu";
+import ChargerForm from "./ChargerForm/ChargerForm.component";
 
-const { EDIT_LOCATION_PAGE } = config;
+const { EDIT_LOCATION_PAGE, chargerPopupButtons } = config;
 const { testProps } = TestUtils;
 
 const LocationHookForm = (props: Props) => {
@@ -26,12 +30,41 @@ const LocationHookForm = (props: Props) => {
     locationFormIcon,
     locationTitle,
     onSaveButtonClick,
+    tableData,
+    setTableData,
     onRemoveButtonClick,
     isValid,
     errors,
     control
   } = props;
   const isEditLocationPage = screenName === EDIT_LOCATION_PAGE;
+  const [isAddChargerPopupOpen, setIsAddChargerPopupOpen] = React.useState(false)
+  const [isEditChargerPopupOpen, setIsEditChargerPopupOpen] = React.useState(false)
+  const [selectedCharger, setSelectedCharger] = React.useState({});
+  const [defaultChargerFormValues, setDefaultChargerFormValues] = React.useState({});
+  
+  const handleCancelEditPopupClick = () => setIsEditChargerPopupOpen(false);
+  const handleAddEditPopupClick = () => setIsAddChargerPopupOpen(false);
+  
+  const handleEditButtonClick = (selectedItem: ChargerType) => {
+    // setSelectedCharger(selectedItem);
+    const chargerFormValues = {
+      type: {
+        name: selectedItem.type
+      },
+      status: {
+        name: selectedItem.status
+      },
+      serialNumber: selectedItem.serialNumber
+    }
+    setDefaultChargerFormValues(chargerFormValues);
+    setIsEditChargerPopupOpen(true);
+  }
+  
+  const removeDeletedItemFromData = (deletedItem: ChargerType) => {
+    const filteredData = tableData.filter((charger: ChargerType) => charger.id !== deletedItem.id);
+    setTableData(filteredData);
+  }
   
   const renderLocationForm = () => (
     <LocationForm
@@ -67,6 +100,65 @@ const LocationHookForm = (props: Props) => {
     />
   )
   
+  const renderChargerCardHeaderButton = () => (
+    <Button
+      screenName={screenName}
+      name={name}
+      text={translate('LocationHookForm-addCharger-text')}
+      className="primary"
+      renderIcon={FaPlus}
+      onClick={() => setIsAddChargerPopupOpen(true)}
+      {...testProps(`${screenName}_${name}Location_SaveButton`)}
+    />
+  )
+  
+  const renderChargersTable = () => (
+    <ChargersTable
+      screenName={screenName}
+      data={tableData}
+      onClickEdit={handleEditButtonClick}
+      onClickDelete={removeDeletedItemFromData}
+    />
+  )
+  
+  const renderChargerPopupContent = () => (
+    <StyledChargerPopupContainer>
+      <ChargerForm
+        screenName={screenName}
+        defaultChargerFormValues={defaultChargerFormValues}
+        listOfChargerType={mapChargerTypes()}
+       />
+    </StyledChargerPopupContainer>
+  )
+  
+  const renderAddChargerPopup = () => (
+    <PopupMenu
+      isOpen={isAddChargerPopupOpen}
+      screenName={screenName}
+      title={translate('LocationHookForm-addCharger-title')}
+      name="AddCharger"
+      withCloseButton
+      withButtons
+      buttons={chargerPopupButtons(() => {}, handleAddEditPopupClick)}
+      onClickCloseButton={() => setIsAddChargerPopupOpen(false)}
+      renderContent={renderChargerPopupContent}
+    />
+  )
+  
+  const renderEditChargerPopup = () => (
+    <PopupMenu
+      isOpen={isEditChargerPopupOpen}
+      screenName={screenName}
+      title={translate('LocationHookForm-editCharger-title')}
+      name="EditCharger"
+      withCloseButton
+      withButtons
+      buttons={chargerPopupButtons(() => {}, handleCancelEditPopupClick)}
+      onClickCloseButton={() => setIsEditChargerPopupOpen(false)}
+      renderContent={renderChargerPopupContent}
+    />
+  )
+  
   return (
     <StyledContainer>
       <CardView
@@ -81,7 +173,9 @@ const LocationHookForm = (props: Props) => {
         screenName={screenName}
         renderIcon={() => <FaBolt />}
         title={translate('LocationHookForm-chargersForm-title')}
-        renderContent={() => <div>aaa</div>}
+        renderContent={renderChargersTable}
+        withHeaderButton
+        renderHeaderButton={renderChargerCardHeaderButton}
         name={`${name}Chargers`}
         key={`${name}Chargers`}
       />
@@ -91,6 +185,8 @@ const LocationHookForm = (props: Props) => {
         {isEditLocationPage && renderRemoveButton()}
         {renderSaveButton()}
       </StyledFooterButtonContainer>
+      {renderAddChargerPopup()}
+      {renderEditChargerPopup()}
     </StyledContainer>
   )
 }

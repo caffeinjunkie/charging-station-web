@@ -1,6 +1,6 @@
 const defaultProps = {
-  isInformationText: false,
-  titleBadge: false
+  withHeaderButton: false,
+  renderHeaderButton: () => {}
 };
 
 export default { defaultProps };

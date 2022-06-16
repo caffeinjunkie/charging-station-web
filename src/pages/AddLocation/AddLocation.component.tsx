@@ -27,11 +27,16 @@ const AddLocation = (props: Props) => {
     control,
     handleSubmit,
     setError,
+    trigger,
     formState: { errors, isValid, isDirty }
   } = useForm({ ...defaultOptions, defaultValues });
   const [addedChargers, setAddedChargers] = React.useState([]);
   const [isBackPopupOpen, setIsBackPopupOpen] = React.useState(false);
   const isFormValid = isValid && isDirty;
+  const submitArgs = {
+    chargers: addedChargers,
+    setError
+  };
   
   const handleCancelBackButton = () => setIsBackPopupOpen(!isBackPopupOpen);
   
@@ -77,8 +82,11 @@ const AddLocation = (props: Props) => {
         locationFormIcon={FaPlus}
         control={control}
         errors={errors}
+        trigger={trigger}
         isValid={isFormValid}
-        onSaveButtonClick={handleSubmit((values: any) => handleSaveLocation(values, setError))}
+        tableData={addedChargers}
+        setTableData={setAddedChargers}
+        onSaveButtonClick={handleSubmit((values: any) => handleSaveLocation(values, submitArgs))}
         {...props}
       />
       {renderCancelPopup()}

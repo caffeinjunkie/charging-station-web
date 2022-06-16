@@ -113,8 +113,10 @@ export const StyledHeaderText = styled.th`
   }
 `;
 
+export const StyledInlineText = styled.p``
+
 export const StyledBodyText = styled.td`
-  padding: 8px 12px;
+  padding: 0 12px;
   ${FontStyles.Light}
   ${FontSize.Medium}
 
@@ -130,6 +132,36 @@ export const StyledBodyText = styled.td`
 
   &.align-left {
     text-align: left;
+  }
+  
+  &.connected p {
+    display: inline;
+    background-color: ${Colors.success};
+    color: ${Colors.white};
+    padding: 6px;
+    border-radius: 4px;
+    ${FontStyles.Bold};
+    ${FontSize.Small};
+  }
+
+  &.not_connected p {
+    display: inline;
+    background-color: ${Colors.error};
+    color: ${Colors.white};
+    padding: 6px;
+    border-radius: 4px;
+    ${FontStyles.Bold};
+    ${FontSize.Small};
+  }
+
+  &.removed p {
+    display: inline;
+    background-color: ${Colors.lightGrey};
+    color: ${Colors.white};
+    padding: 6px;
+    border-radius: 4px;
+    ${FontStyles.Bold};
+    ${FontSize.Small};
   }
 
   @media screen and (max-width:720px) {

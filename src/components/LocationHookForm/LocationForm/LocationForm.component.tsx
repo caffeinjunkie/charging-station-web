@@ -40,10 +40,10 @@ const LocationForm = (props: Props) => {
   return (
     <StyledContainer>
       <StyledInputSectionContainer>
-        {locationInputProps.map((renderInput))}
+        {locationInputProps.map(renderInput)}
       </StyledInputSectionContainer>
       <StyledInputSectionContainer>
-        {addressInputProps.map((renderInput))}
+        {addressInputProps.map(renderInput)}
       </StyledInputSectionContainer>
     </StyledContainer>
   )

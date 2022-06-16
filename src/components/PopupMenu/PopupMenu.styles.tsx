@@ -5,14 +5,16 @@ import { Colors, FontStyles, FontSize } from '../../themes';
 
 export const StyledPopupOverlay = styled.div`
   display: flex;
-  background: rgba(0, 0, 0, 0.4);
+  background: rgba(0, 0, 0, 0.8);
   top: 0;
   right: 0;
-  left: 0;
   bottom: 0;
+  left: 0;
   width: 100%;
-  height: 100%;
-  position: absolute;
+  margin: 0;
+  height: 100vh;
+  position: fixed;
+  overflow: hidden;
   align-items: center;
   justify-content: center;
 
@@ -27,6 +29,7 @@ export const StyledContainer = styled.div`
   align-items: center;
   justify-content: center;
   display: flex;
+  overflow: hidden;
   flex-direction: column;
   border-radius: 4px;
   background-color: ${Colors.white};

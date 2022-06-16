@@ -44,7 +44,7 @@ const PopupMenu = (props: Props): JSX.Element => {
     } = button;
 
     return (
-      <StyledButtonContainer>
+      <StyledButtonContainer key={index}>
         <Button
           key={index}
           text={text}

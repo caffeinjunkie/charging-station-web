@@ -1,8 +1,13 @@
 import { isEmpty } from 'lodash';
 
-import type { Props, ChargerTypeDataType, CountryDataType } from './AddLocation.type';
-import { post } from '../../hooks/useAxiosPost';
+import { post } from '../../hooks/useAxios';
 import Paths from '../../root/RootNavigation/Paths';
+import type {
+  Props,
+  ChargerTypeDataType,
+  CountryDataType,
+ChargerPayloadType
+} from './AddLocation.type';
 import { useSubmissionLoading } from '../../hooks/useSubmissionLoading';
 
 const mapCountries = (props: Props) => () => {
@@ -33,14 +38,15 @@ const mapChargerTypes = (props: Props) => () => {
   }));
 };
 
-const onSubmit = (props: Props) => async (values: any, setError: Function) => {
+const onSubmit = (props: Props) => async (values: any, submitArgs: any) => {
+  const { chargers, setError } = submitArgs;
   const { navigate } = props;
-  
   const mappedBody = {
     ...values,
     country: values.country.id,
-    chargers: []
+    chargers: chargers.map((charger: ChargerPayloadType) => charger.id)
   }
+  
   const payload = {
     path: '/locations',
     body: mappedBody
@@ -56,8 +62,8 @@ const onSubmit = (props: Props) => async (values: any, setError: Function) => {
   navigate(Paths.Dashboard);
 }
 
-const handleSaveLocation = (props: Props) => async (values: any, setError: Function) => {
-  await useSubmissionLoading(props, () => onSubmit(props)(values, setError));
+const handleSaveLocation = (props: Props) => async (values: any, submitArgs: any) => {
+  await useSubmissionLoading(props, () => onSubmit(props)(values, submitArgs));
 };
 
 export default {
