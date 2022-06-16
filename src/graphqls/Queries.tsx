@@ -16,7 +16,34 @@ const LocationsQuery = gql`
           name
           updatedAt
           locationNo
+          chargers {
+            data {
+              id
+            }
+          }
+          country {
+            data {
+              attributes {
+                countryAbbreviation
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+`;
+
+const BulkEditLocationQueries = gql`
+  query ($id: ID!) {
+    location(id: $id) {
+      data {
+        id
+        attributes {
+          name
+          locationNo
           postalCode
+          city
           chargers {
             data {
               id
@@ -24,6 +51,7 @@ const LocationsQuery = gql`
                 type
                 status
                 serialNumber
+                updatedAt
               }
             }
           }
@@ -36,6 +64,23 @@ const LocationsQuery = gql`
               }
             }
           }
+        }
+      }
+    }
+    chargerTypes {
+      data {
+        id
+        attributes {
+          type
+        }
+      }
+    }
+    countries {
+      data {
+        id
+        attributes {
+          countryName
+          countryAbbreviation
         }
       }
     }
@@ -66,5 +111,6 @@ const CountriesAndChargerTypesQuery = gql`
 
 export default {
   LocationsQuery,
-  CountriesAndChargerTypesQuery
+  CountriesAndChargerTypesQuery,
+  BulkEditLocationQueries
 }

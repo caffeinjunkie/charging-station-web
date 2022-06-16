@@ -5,6 +5,7 @@ import {
 import { Conditionals } from '../../utils';
 import type { Options } from './withPage.type';
 import withQuery from '../withQuery/withQuery';
+import withLoadingOverlay from "../withLoadingOverlay";
 
 const { isEmptyArray, isEmptyObject } = Conditionals;
 
@@ -13,29 +14,24 @@ const withPage = (options: Options): Function => (Component: any) => {
     props: propsOptions = {},
     state: stateOptions = [],
     handlers: handlersOptions = {},
-    graphql: graphqlOptions = []
+    graphql: graphqlOptions = [],
+    withSubmissionLoading = true
   } = options;
   const enhancers = [];
   
   if (!isEmptyArray(graphqlOptions)) {
-    // let isMutationExist = false;
     graphqlOptions.forEach((option) => {
-      const { query = null, mutation = null, ...gqlOptions } = option;
+      const { query = null, ...gqlOptions } = option;
       enhancers.push(withQuery({ query, options: gqlOptions.options }));
-      // enhancers.push(withMutation({ mutation, options: gqlOptions.options }));
-
-      // if (isPresent(mutation)) {
-      //   isMutationExist = true;
-      // }
     });
-
-    // if (isMutationExist) {
-    //   enhancers.push(withLoadingOverlay());
-    // }
   }
   
   if (!isEmptyObject(propsOptions)) {
     enhancers.push(withProps(propsOptions));
+  }
+
+  if (withSubmissionLoading) {
+    enhancers.push(withLoadingOverlay());
   }
   
   if (!isEmptyArray(stateOptions)) {

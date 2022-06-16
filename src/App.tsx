@@ -14,11 +14,9 @@ function App() {
   return (
     <BrowserRouter>
       <Header />
-      <div className="App">
-        <QueryClientProvider client={queryClient}>
-          <RootNavigation />
-        </QueryClientProvider>
-      </div>
+      <QueryClientProvider client={queryClient}>
+        <RootNavigation />
+      </QueryClientProvider>
     </BrowserRouter>
   );
 }

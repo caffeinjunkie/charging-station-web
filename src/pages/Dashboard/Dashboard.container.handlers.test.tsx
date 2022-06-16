@@ -1,7 +1,7 @@
 import handlers from './Dashboard.container.handlers';
 import { locationMockData, mappedLocationData } from '../../fixtures/locationData'
 
-const { prepareDataForTable, getTableNavigationProps } = handlers;
+const { prepareTableData, getTableNavigationProps } = handlers;
 
 describe('dashboardHandlers', () => {
   const fetchedData = {
@@ -22,8 +22,7 @@ describe('dashboardHandlers', () => {
     navigate: jest.fn(),
     refetch: jest.fn(),
     fetchedData,
-    loading: false,
-    prepareDataForTable: jest.fn(),
+    prepareTableData: jest.fn(),
     getTableNavigationProps: jest.fn()
   }
   
@@ -31,11 +30,11 @@ describe('dashboardHandlers', () => {
     jest.clearAllMocks();
   });
   
-  describe('#prepareDataForTable', () => {
+  describe('#prepareTableData', () => {
     it('should return mapped data when fetchedDatafetchedData is not empty', () => {
       const renderEditButton = () => '';
       
-      const result = prepareDataForTable(props)(renderEditButton);
+      const result = prepareTableData(props)(renderEditButton);
       
       expect(result).toEqual(mappedLocationData)
     });
@@ -47,7 +46,7 @@ describe('dashboardHandlers', () => {
         fetchedData: []
       }
     
-      const result = prepareDataForTable(emptyDataProps)(renderEditButton);
+      const result = prepareTableData(emptyDataProps)(renderEditButton);
     
       expect(result).toEqual([])
     });

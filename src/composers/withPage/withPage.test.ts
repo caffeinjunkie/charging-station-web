@@ -1,13 +1,15 @@
 import {
-  compose, withHandlers, withProps, withState
+  compose, withHandlers
 } from 'recompose';
 
 import withPage from './withPage';
 import withQuery from '../withQuery/withQuery';
+import withLoadingOverlay from '../withLoadingOverlay/withLoadingOverlay';
 
 jest
   .mock('recompose')
-  .mock('../withQuery/withQuery', () => jest.fn());
+  .mock('../withQuery/withQuery', () => jest.fn())
+  .mock('../withLoadingOverlay/withLoadingOverlay', () => jest.fn());
 
 describe('withPage', () => {
   const component = 'Component';
@@ -63,43 +65,22 @@ describe('withPage', () => {
       expect(withHandlers).not.toHaveBeenCalled();
     });
   });
-
-  describe('withProps', () => {
-    it('should call withProps when `props` is present', () => {
-      const options = { props: { isLoading: true } };
-
-      withPage(options)(component);
-
-      expect(withProps).toBeCalledWith(options.props);
-    });
-
-    it('should not call withProps when `props` is not present', () => {
-      const options = {};
-
-      withPage(options)(component);
-
-      expect(withProps).not.toHaveBeenCalled();
-    });
-  });
   
-  describe('withState', () => {
-    it('should call withState when `state` is present', () => {
-      const firstState = ['firstState', 'setFirstState', {}];
-      const secondState = ['secondState', 'setSecondState', 0];
-      const options: any = { state: [firstState, secondState] };
+  describe('withLoadingOverlay', () => {
+    it('should call withLoadingOverlay when `withSubmissionLoading` is present', () => {
+      const options: any = { withSubmissionLoading: true };
 
       withPage(options)(component);
 
-      expect(withState).toHaveBeenNthCalledWith(1, ...firstState);
-      expect(withState).toHaveBeenNthCalledWith(2, ...secondState);
+      expect(withLoadingOverlay).toHaveBeenCalled();
     });
 
-    it('should not call withState when `state` is not present', () => {
+    it('should not call withLoadingOverlay when `withSubmissionLoading` is not present', () => {
       const options = {};
 
       withPage(options)(component);
 
-      expect(withState).not.toBeCalled();
+      expect(withLoadingOverlay).not.toBeCalled();
     });
   });
   

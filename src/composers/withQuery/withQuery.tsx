@@ -1,21 +1,34 @@
-import * as React from 'react';
+import React from 'react';
 import { request } from 'graphql-request';
 import { useQuery } from 'react-query';
+import { useParams } from 'react-router-dom';
 
 import type { Props, QueryProps } from './withQuery.type';
+import config from '../../config';
+import { LoadingOverlay } from "../../components/LoadingOverlay";
+
+const { endpoint: { GRAPHQL_URL } } = config;
 
 const withQuery = (queryProps: QueryProps): Function => (ComposedComponent: any) => {
-  function HOCComponent(props: Props) {
+  function HOCQuery(props: Props) {
+    const { id } = useParams();
     const { query, options } = queryProps;
     const { queryKey, ...queryVariables } = options;
-    const [refetchVariables, setRefetchVariables] = React.useState(queryVariables);
-    // move endpoint to env later?
-    const endpoint = 'http://localhost:1337/graphql';
-    const useQueryOptions =  {
-      keepPreviousData: true
+    const isFetchById = queryKey === 'fetchById';
+    if (isFetchById) {
+      Object.assign(queryVariables, { id });
+      
     }
+    const [refetchVariables, setRefetchVariables] = React.useState(queryVariables);
+    const useQueryOptions =  {
+      keepPreviousData: true,
+      staleTime: Infinity,
+      cacheTime: 0,
+      refetchInterval: 500
+    }
+    
     const result = useQuery([queryKey, refetchVariables], async () => request(
-      endpoint,
+      GRAPHQL_URL,
       query,
       refetchVariables
     ), useQueryOptions);
@@ -27,11 +40,12 @@ const withQuery = (queryProps: QueryProps): Function => (ComposedComponent: any)
       loading: isLoading,
       error
     }
+    
     return (
-      <ComposedComponent {...updatedProps} />
+      isLoading ? <LoadingOverlay /> : <ComposedComponent {...updatedProps} />
     )
   }
-  return HOCComponent;
+  return HOCQuery;
 };
 
 export default withQuery;

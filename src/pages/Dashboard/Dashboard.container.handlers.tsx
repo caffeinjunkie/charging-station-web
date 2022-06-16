@@ -1,6 +1,12 @@
 import { isEmpty } from 'lodash';
 
-import type { LocationType, Props } from './Dashboard.type';
+import type {
+  Props,
+  LocationType,
+  CountryType,
+  ChargerType,
+  ChargerDataType
+} from './Dashboard.type';
 import config from './Dashboard.config';
 import { TimeUtil } from '../../utils';
 
@@ -8,7 +14,8 @@ const { TextAlign, DefaultFetchVariables, DefaultLimit } = config;
 const { timeSince } = TimeUtil;
 
 const constructFetchResult = (renderEditButton: Function, locationsData: Array<LocationType>) =>
-  locationsData?.map(({ attributes }: LocationType) => {
+  locationsData?.map((location: LocationType) => {
+  const { id, attributes } = location
   const { name, locationNo, chargers, updatedAt, country } = attributes;
   return {
     locationName: {
@@ -32,7 +39,7 @@ const constructFetchResult = (renderEditButton: Function, locationsData: Array<L
       className: TextAlign.CENTER
     },
     actions: {
-      value: renderEditButton(),
+      value: renderEditButton(id),
       className: TextAlign.RIGHT
     }
   }
@@ -87,7 +94,7 @@ const getTableNavigationProps = (props: Props) => () => {
   }
 };
 
-const prepareDataForTable = (props: Props) => (renderEditButton: Function) => {
+const prepareTableData = (props: Props) => (renderEditButton: Function) => {
   const { fetchedData } = props;
   if(isEmpty(fetchedData)) {
     return [];
@@ -98,6 +105,6 @@ const prepareDataForTable = (props: Props) => (renderEditButton: Function) => {
 };
 
 export default {
-  prepareDataForTable,
+  prepareTableData,
   getTableNavigationProps
 };

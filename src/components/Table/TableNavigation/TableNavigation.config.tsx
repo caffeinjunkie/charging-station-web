@@ -1,17 +1,6 @@
-interface TableNavigationButtonProps {
-  disabled?: boolean
-  onClick?: Function
-}
+import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
 
-interface TableNavigationProps {
-  next?: TableNavigationButtonProps
-  previous?: TableNavigationButtonProps
-}
-
-export interface Props {
-  screenName: string
-  tableNavigationProps?: TableNavigationProps
-}
+import type { TableNavigationProps } from './TableNavigation.type';
 
 const defaultProps = {
   tableNavigationProps: {
@@ -26,4 +15,19 @@ const defaultProps = {
   }
 };
 
-export default { defaultProps };
+const mapButtonProps = (tableNavigationProps: TableNavigationProps) => [
+  {
+    ...tableNavigationProps.previous,
+    name: "Previous",
+    className: "action-button",
+    renderIcon: FaChevronLeft
+  },
+  {
+    ...tableNavigationProps.next,
+    name: "Next",
+    className: "action-button",
+    renderIcon: FaChevronRight
+  }
+]
+
+export default { defaultProps, mapButtonProps };

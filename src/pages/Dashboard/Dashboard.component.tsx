@@ -1,46 +1,45 @@
 import React from 'react';
-import { isEmpty } from "lodash";
+import { isEmpty } from 'lodash';
+import { FaPlus } from 'react-icons/fa';
 
 import type { Props } from './Dashboard.type';
 import {
   StyledContainer,
   StyledTitleText ,
-  StyledListHeaderContainer
+  StyledHeaderContainer
 } from './Dashboard.styles';
 import { Button } from '../../components/Button';
 import { useTranslation as translate } from '../../hooks/useTranslation';
 import { Table } from '../../components/Table';
 import config from './Dashboard.config';
 import { TestUtils } from '../../utils';
-import { LoadingOverlay } from '../../components/LoadingOverlay';
+import Paths from '../../root/RootNavigation/Paths';
 
 const SCREEN_NAME = 'Dashboard';
 
 const { testProps } = TestUtils;
-
 const { COLUMNS } = config;
 
 const Dashboard = (props: Props): JSX.Element => {
   const {
     navigate,
-    prepareDataForTable,
+    prepareTableData,
     fetchedData,
-    loading,
     getTableNavigationProps
   } = props;
-  
   const tableNavigationProps = getTableNavigationProps();
   
   const onClickAddLocationButton = () => {
-    navigate('/add-location');
+    navigate(Paths.AddLocation)
   };
   
-  const renderEditButton = () => (
+  const renderEditButton = (id: string) => (
     <Button
       screenName={SCREEN_NAME}
       name="EditButton"
       className="action-button"
-      text={translate(`${SCREEN_NAME}-ActionButton-Edit-text`)}
+      onClick={() => navigate(`/locations/${id}`)}
+      text={translate(`${SCREEN_NAME}-actionButton-edit-text`)}
     />
   );
   
@@ -49,28 +48,33 @@ const Dashboard = (props: Props): JSX.Element => {
       screenName={SCREEN_NAME}
       name="LocationList"
       columns={COLUMNS}
-      data={prepareDataForTable(renderEditButton)}
+      data={prepareTableData(renderEditButton)}
       withTableNavigation={!isEmpty(fetchedData)}
       tableNavigationProps={tableNavigationProps}
     />
   );
   
+  const renderAddLocationButton = () => (
+    <Button
+      screenName={SCREEN_NAME}
+      name="AddLocation"
+      text={translate(`${SCREEN_NAME}-addLocationButton-text`)}
+      className="primary"
+      renderIcon={FaPlus}
+      onClick={() => onClickAddLocationButton()}
+      {...testProps(`${SCREEN_NAME}_AddLocation_Button`)}
+    />
+  )
+  
   return (
     <StyledContainer>
-      <StyledListHeaderContainer>
+      <StyledHeaderContainer>
         <StyledTitleText {...testProps(`${SCREEN_NAME}_LocationListTitle_Text`)}>
-          {translate( `${SCREEN_NAME}-LocationList-title`)}
+          {translate( `${SCREEN_NAME}-locationList-title`)}
         </StyledTitleText>
-        <Button
-          screenName={SCREEN_NAME}
-          name="AddLocation"
-          text={translate(`${SCREEN_NAME}-AddLocationButton-text`)}
-          className="primary"
-          onClick={onClickAddLocationButton}
-          {...testProps(`${SCREEN_NAME}_AddLocation_Button`)}
-        />
-      </StyledListHeaderContainer>
-      {loading ? <LoadingOverlay /> : renderTable()}
+        {renderAddLocationButton()}
+      </StyledHeaderContainer>
+      {renderTable()}
     </StyledContainer>
   )
 }

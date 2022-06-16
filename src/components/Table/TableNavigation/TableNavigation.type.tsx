@@ -3,7 +3,7 @@ interface TableNavigationButtonProps {
   onClick: () => void
 }
 
-interface TableNavigationProps {
+export interface TableNavigationProps {
   next: TableNavigationButtonProps
   previous: TableNavigationButtonProps
 }

@@ -9,7 +9,10 @@ export default withPage({
   graphql: [
     {
       query: Queries.LocationsQuery,
-      options: config.DefaultFetchVariables
+      options: {
+        queryKey: 'locationsQuery',
+        ...config.DefaultFetchVariables
+      }
     }
   ]
 })(Dashboard);

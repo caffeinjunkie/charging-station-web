@@ -20,7 +20,7 @@ describe('Dashboard', () => {
       }
     }
   };
-  const prepareDataForTable = jest.fn()
+  const prepareTableData = jest.fn()
   const refetch = jest.fn()
   const getTableNavigationProps = jest.fn()
   const onClick = jest.fn()
@@ -39,8 +39,7 @@ describe('Dashboard', () => {
     navigate: jest.fn(),
     refetch,
     fetchedData,
-    loading: false,
-    prepareDataForTable,
+    prepareTableData,
     getTableNavigationProps
   }
 
@@ -85,17 +84,6 @@ describe('Dashboard', () => {
       expect(tableNavigationProps).toEqual(expectedTableNavigationProps)
       
     });
-  
-    it('should render LoadingOverlay when still fetching', () => {
-      const loadingProps = {
-        ...props,
-        loading: true
-      }
-      wrapper = shallow(<Dashboard {...loadingProps} />);
-      const loadingOverlayComponent = wrapper.find('LoadingOverlay');
-      
-      expect(loadingOverlayComponent).toHaveLength(1);
-    });
   });
   
   describe('onClick', () => {
@@ -111,7 +99,7 @@ describe('Dashboard', () => {
       
       addLocationButton.simulate('click');
       
-      expect(props.navigate).toHaveBeenCalledWith('/add-location')
+      expect(props.navigate).toHaveBeenCalledWith('/locations')
     });
   
     it('should call onClick when next button is clicked', () => {

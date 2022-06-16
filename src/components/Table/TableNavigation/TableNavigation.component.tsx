@@ -1,35 +1,25 @@
 import React from 'react';
 
-import { StyledNavigationContainer } from './TableNavigation.styles';
+import { StyledNavigationContainer, StyledButtonContainer } from './TableNavigation.styles';
 import { Button } from '../../Button';
 import { Props } from './TableNavigation.type';
 import config from './TableNavigation.config';
 import { TestUtils } from '../../../utils';
 
 const { testProps } = TestUtils;
+const { mapButtonProps } = config;
 
 const TableNavigation = (props: Props) => {
-  const { screenName, tableNavigationProps: { next, previous } } = props;
+  const { screenName, tableNavigationProps } = props;
   return (
     <StyledNavigationContainer
       {...testProps(`${screenName}_TableNavigation_Container`)}
     >
-      <Button
-        disabled={previous.disabled}
-        name="Previous"
-        screenName={screenName}
-        className="action-button"
-        onClick={previous.onClick}
-        text="<"
-      />
-      <Button
-        disabled={next.disabled}
-        name="Next"
-        screenName={screenName}
-        className="action-button"
-        onClick={next.onClick}
-        text=">"
-      />
+      {mapButtonProps(tableNavigationProps).map((buttonProps) => (
+        <StyledButtonContainer key={buttonProps.name}>
+          <Button screenName={screenName} {...buttonProps} />
+        </StyledButtonContainer>
+      ))}
     </StyledNavigationContainer>
   )
 }

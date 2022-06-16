@@ -25,5 +25,8 @@ export const FontSize = {
   `,
   Heading2: `
     font-size: 22px;
+  `,
+  Heading3: `
+    font-size: 18px;
   `
 }

@@ -2,15 +2,14 @@ type StateOptions = Array<[string, string, any]>;
 
 interface GraphQLOption {
   query?: any,
-  mutation?: any
   options?: any
-  
 }
 
 export interface Options {
   props?: any,
-  state?: Array<StateOptions>,
+  state?: Array<StateOptions>
   handlers?: any,
-  snackBar?: boolean,
+  snackBar?: boolean
   graphql?: Array<GraphQLOption>
-};
+  withSubmissionLoading?: boolean
+}

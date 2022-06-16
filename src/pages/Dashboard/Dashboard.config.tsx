@@ -44,7 +44,6 @@ const COLUMNS:Array<ColumnType> = [
 ];
 
 const defaultProps = {
-  loading: true,
   fetchedData: {
     locations: {
       data: [],
