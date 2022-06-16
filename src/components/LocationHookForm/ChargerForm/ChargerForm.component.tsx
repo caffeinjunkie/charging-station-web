@@ -1,6 +1,4 @@
 import React from 'react';
-import { useForm } from 'react-hook-form';
-import { isEmpty } from 'lodash';
 
 import { Props } from './ChargerForm.type';
 import {
@@ -11,22 +9,15 @@ import {
 import InputForm from '../../InputForm/InputForm.component';
 import config from './ChargerForm.config';
 
-const { chargerFormProps, defaultValuesConfig, defaultOptions } = config;
+const { chargerFormProps } = config;
 
 const ChargerForm = (props: Props) => {
   const {
     screenName,
-    defaultChargerFormValues,
+    errors,
+    control,
     listOfChargerType
   } = props;
-  const defaultValues = isEmpty(defaultChargerFormValues) ?
-    defaultValuesConfig(listOfChargerType) : defaultChargerFormValues
-  const {
-    control,
-    handleSubmit,
-    setError,
-    formState: { errors, isValid, isDirty }
-  } = useForm({ ...defaultOptions, defaultValues });
   
   const renderInput = (inputProps: any) => (
     <StyledInputContainer key={inputProps.name}>

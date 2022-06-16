@@ -5,6 +5,7 @@ export interface ChargerTypeType {
 
 export interface Props {
   screenName: string
+  errors: any
+  control: any
   listOfChargerType: Array<ChargerTypeType>
-  defaultChargerFormValues: Object
 }

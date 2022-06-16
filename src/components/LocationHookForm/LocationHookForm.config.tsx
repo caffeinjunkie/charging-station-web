@@ -1,4 +1,5 @@
 import { useTranslation as translate } from "../../hooks/useTranslation";
+import {ChargerTypeType} from "./ChargersTable/ChargersTable.type";
 
 const defaultProps = {
   location: {},
@@ -6,11 +7,12 @@ const defaultProps = {
   formOptions: {}
 }
 
-const chargerPopupButtons = (handleSaveButtonClick: Function, handleCancelButtonClick: Function) => [
+const chargerPopupButtons = (handleSaveButtonClick: Function, handleCancelButtonClick: Function, disabled: boolean) => [
   {
     text: translate('LocationHookForm-saveButton-text'),
     onClick: handleSaveButtonClick,
     className: 'primary',
+    disabled,
     name: 'Save'
   },
   {
@@ -23,4 +25,17 @@ const chargerPopupButtons = (handleSaveButtonClick: Function, handleCancelButton
 
 const EDIT_LOCATION_PAGE = 'EditLocation';
 
-export default { defaultProps, EDIT_LOCATION_PAGE, chargerPopupButtons };
+
+const defaultValuesConfig = (listOfChargerType: Array<ChargerTypeType>) => ({
+  type: listOfChargerType[0],
+  status: {
+    name: "CONNECTED"
+  },
+  serialNumber: ''
+})
+
+const defaultOptions: any = {
+  mode: 'all'
+}
+
+export default { defaultProps, EDIT_LOCATION_PAGE, chargerPopupButtons, defaultOptions, defaultValuesConfig };

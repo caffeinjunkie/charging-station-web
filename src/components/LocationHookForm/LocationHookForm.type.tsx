@@ -30,6 +30,8 @@ export interface Props {
   fetchedData: any
   mapCountries: Function
   mapChargerTypes: Function
+  onUpdateCharger: Function
+  onSaveCharger: Function
   trigger: Function
   onSaveButtonClick: () => void
   onRemoveButtonClick?: () => void

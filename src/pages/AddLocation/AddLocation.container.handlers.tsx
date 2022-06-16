@@ -6,7 +6,8 @@ import type {
   Props,
   ChargerTypeDataType,
   CountryDataType,
-ChargerPayloadType
+  ChargerType,
+  SaveChargerPayloadType, EditChargerPayloadType
 } from './AddLocation.type';
 import { useSubmissionLoading } from '../../hooks/useSubmissionLoading';
 
@@ -38,13 +39,51 @@ const mapChargerTypes = (props: Props) => () => {
   }));
 };
 
+const onSaveCharger = () => async (
+  savePayload: SaveChargerPayloadType,
+  addedChargers: Array<ChargerType>,
+  setAddedChargers: Function
+) => {
+  const payload = {
+    path: '/chargers',
+    body: savePayload
+  }
+  
+  const response = await post(payload);
+  
+  setAddedChargers([...addedChargers, response]);
+}
+
+const onUpdateCharger = () => async (
+  updatePayload: EditChargerPayloadType,
+  addedChargers: Array<ChargerType>,
+  setAddedChargers: Function
+) => {
+  const { id } = updatePayload;
+  const payload = {
+    path: `/chargers/${id}`,
+    body: updatePayload
+  }
+  
+  const response = await post(payload);
+  
+  const updatedChargers = addedChargers.map((charger: ChargerType) => {
+    if (charger.id.toString() === id) {
+      return response
+    }
+    return charger;
+  })
+  
+  setAddedChargers(updatedChargers);
+}
+
 const onSubmit = (props: Props) => async (values: any, submitArgs: any) => {
   const { chargers, setError } = submitArgs;
   const { navigate } = props;
   const mappedBody = {
     ...values,
     country: values.country.id,
-    chargers: chargers.map((charger: ChargerPayloadType) => charger.id)
+    chargers: chargers.map((charger: ChargerType) => charger.id)
   }
   
   const payload = {
@@ -66,8 +105,24 @@ const handleSaveLocation = (props: Props) => async (values: any, submitArgs: any
   await useSubmissionLoading(props, () => onSubmit(props)(values, submitArgs));
 };
 
+const handleSaveCharger = (props: Props) => async (
+  body: SaveChargerPayloadType,
+  addedChargers: Array<ChargerType>,
+  setAddedChargers: Function) => {
+    await useSubmissionLoading(props, () => onSaveCharger()(body, addedChargers, setAddedChargers));
+};
+
+const handleUpdateCharger = (props: Props) => async (
+  body: EditChargerPayloadType,
+  addedChargers: Array<ChargerType>,
+  setAddedChargers: Function) => {
+  await useSubmissionLoading(props, () => onUpdateCharger()(body, addedChargers, setAddedChargers));
+};
+
 export default {
   mapCountries,
   mapChargerTypes,
-  handleSaveLocation
+  handleSaveLocation,
+  handleSaveCharger,
+  handleUpdateCharger
 };

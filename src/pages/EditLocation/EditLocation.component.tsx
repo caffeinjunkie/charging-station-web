@@ -2,12 +2,16 @@ import React from 'react';
 import { FaMapMarkerAlt } from 'react-icons/fa';
 import { useForm } from 'react-hook-form';
 
-import { Props } from './EditLocation.type';
+import type {
+  EditChargerPayloadType,
+  Props,
+  SaveChargerPayloadType
+} from './EditLocation.type';
 import config from './EditLocation.config';
 import { LocationHookForm } from '../../components/LocationHookForm';
 import BackButton from '../../components/BackButton/BackButton';
 import Paths from '../../root/RootNavigation/Paths';
-import { StyledBackPopupContentContainer, StyledBackPopupContentText } from '../AddLocation/AddLocation.styles';
+import { StyledBackPopupContentContainer, StyledBackPopupContentText } from './EditLocation.styles';
 import { useTranslation as translate } from '../../hooks/useTranslation';
 import { PopupMenu } from '../../components/PopupMenu';
 
@@ -18,7 +22,9 @@ const EditLocation = (props: Props) => {
     navigate,
     mapHookFormDefaultValues,
     mapPayload,
+    handleUpdateCharger,
     handleRemoveLocation,
+    handleSaveCharger,
     handleSaveLocation
   } = props;
   const formOptions = mapHookFormDefaultValues();
@@ -33,9 +39,7 @@ const EditLocation = (props: Props) => {
   const [addedChargers, setAddedChargers] = React.useState(chargers);
   const [isBackPopupOpen, setIsBackPopupOpen] = React.useState(false);
   const [isRemovePopupOpen, setIsRemovePopupOpen] = React.useState(false);
-  // checking length change to is edited
-  const hasDataChanged = chargers.length !== addedChargers.length;
-  const isFormValid = isValid && (isDirty || hasDataChanged);
+  const isFormValid = isValid && (isDirty || addedChargers.length !== chargers.length);
   const submitArgs = {
     chargers: addedChargers,
     setError
@@ -49,8 +53,7 @@ const EditLocation = (props: Props) => {
   const handleConfirmBackButton = () => navigate(Paths.Dashboard);
   
   const onBackButtonClick = () => {
-    const showCancelConfirmation = isDirty || hasDataChanged;
-    if (showCancelConfirmation) {
+    if (isDirty) {
       setIsBackPopupOpen(true);
       return
     }
@@ -102,6 +105,12 @@ const EditLocation = (props: Props) => {
         formOptions={formOptions}
         control={control}
         errors={errors}
+        onSaveCharger={(payload: SaveChargerPayloadType) =>
+          handleSaveCharger(payload, addedChargers, setAddedChargers)
+        }
+        onUpdateCharger={(payload: EditChargerPayloadType) =>
+          handleUpdateCharger(payload, addedChargers, setAddedChargers)
+        }
         trigger={trigger}
         isValid={isFormValid}
         tableData={addedChargers}

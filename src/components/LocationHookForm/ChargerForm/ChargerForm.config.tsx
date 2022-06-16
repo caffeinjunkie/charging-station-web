@@ -12,16 +12,26 @@ const statusOptions = [
   }
 ];
 
+const defaultProps = {
+  screenName: ''
+}
+
 const chargerFormProps = (typeOptions: Array<ChargerTypeType>) => [
   {
     name: 'status',
     isDropdown: true,
-    options: statusOptions
+    options: statusOptions,
+    rules: {
+      required: true
+    }
   },
   {
     name: 'type',
     isDropdown: true,
-    options: typeOptions
+    options: typeOptions,
+    rules: {
+      required: true
+    }
   },
   {
     name: 'serialNumber',
@@ -29,33 +39,15 @@ const chargerFormProps = (typeOptions: Array<ChargerTypeType>) => [
     rules: {
       required: 'ErrorMessage-serialNumber-required-text',
       minLength: {
-        value: 6,
+        value: 9,
         message: 'ErrorMessage-serialNumber-minimum-text'
       }
     }
   }
 ]
 
-const defaultProps = {
-  screenName: '',
-  listOfChargerType: [],
-  defaultChargerFormValues: null
-}
-
-const defaultValuesConfig = (listOfChargerType: Array<ChargerTypeType>) => ({
-  type: listOfChargerType[0],
-  status: statusOptions[0],
-  serialNumber: ''
-})
-
-const defaultOptions: any = {
-  mode: 'all'
-}
-
 export default {
   chargerFormProps,
   defaultProps,
-  statusOptions,
-  defaultValuesConfig,
-  defaultOptions
+  statusOptions
 }

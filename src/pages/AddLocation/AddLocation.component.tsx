@@ -3,7 +3,11 @@ import { FaPlus } from 'react-icons/fa';
 import { isEmpty } from "lodash";
 
 import { useForm } from "react-hook-form";
-import { Props } from './AddLocation.type';
+import type {
+  Props,
+  SaveChargerPayloadType,
+  EditChargerPayloadType
+} from './AddLocation.type';
 import config from './AddLocation.config';
 import { LocationHookForm } from '../../components/LocationHookForm';
 import { useTranslation as translate } from '../../hooks/useTranslation';
@@ -20,7 +24,9 @@ const { SCREEN_NAME, defaultOptions, defaultValues, cancelButtons } = config;
 const AddLocation = (props: Props) => {
   const {
     navigate,
-    handleSaveLocation
+    handleSaveLocation,
+    handleSaveCharger,
+    handleUpdateCharger
   } = props;
   
   const {
@@ -82,6 +88,12 @@ const AddLocation = (props: Props) => {
         locationFormIcon={FaPlus}
         control={control}
         errors={errors}
+        onSaveCharger={(payload: SaveChargerPayloadType) =>
+          handleSaveCharger(payload, addedChargers, setAddedChargers
+        )}
+        onUpdateCharger={(payload: EditChargerPayloadType) =>
+          handleUpdateCharger(payload, addedChargers, setAddedChargers
+        )}
         trigger={trigger}
         isValid={isFormValid}
         tableData={addedChargers}

@@ -1,6 +1,7 @@
 import React from 'react';
 import { FaBolt, FaPlus, FaSave } from 'react-icons/fa';
 import { GoX } from 'react-icons/go';
+import { useForm } from 'react-hook-form';
 
 import type { ChargerType, Props } from './LocationHookForm.type';
 import {
@@ -18,7 +19,12 @@ import { ChargersTable } from "./ChargersTable";
 import { PopupMenu } from "../PopupMenu";
 import ChargerForm from "./ChargerForm/ChargerForm.component";
 
-const { EDIT_LOCATION_PAGE, chargerPopupButtons } = config;
+const {
+  EDIT_LOCATION_PAGE,
+  chargerPopupButtons,
+  defaultValuesConfig,
+  defaultOptions
+} = config;
 const { testProps } = TestUtils;
 
 const LocationHookForm = (props: Props) => {
@@ -28,6 +34,8 @@ const LocationHookForm = (props: Props) => {
     screenName,
     name,
     locationFormIcon,
+    onSaveCharger,
+    onUpdateCharger,
     locationTitle,
     onSaveButtonClick,
     tableData,
@@ -40,24 +48,51 @@ const LocationHookForm = (props: Props) => {
   const isEditLocationPage = screenName === EDIT_LOCATION_PAGE;
   const [isAddChargerPopupOpen, setIsAddChargerPopupOpen] = React.useState(false)
   const [isEditChargerPopupOpen, setIsEditChargerPopupOpen] = React.useState(false)
-  const [selectedCharger, setSelectedCharger] = React.useState({});
-  const [defaultChargerFormValues, setDefaultChargerFormValues] = React.useState({});
+  const [selectedChargerId, setSelectedChargerId] = React.useState("");
+  const {
+    control: chargerControl,
+    reset,
+    getValues,
+    formState: { errors: chargerErrors, isValid: isChargerValid, isDirty }
+  } = useForm({ ...defaultOptions });
+  const isSaveChargerButtonValid = isChargerValid && isDirty;
   
-  const handleCancelEditPopupClick = () => setIsEditChargerPopupOpen(false);
-  const handleAddEditPopupClick = () => setIsAddChargerPopupOpen(false);
+  const handleCancelEditPopupClick = () => {
+    setIsEditChargerPopupOpen(false);
+    setSelectedChargerId("");
+    reset();
+  }
   
-  const handleEditButtonClick = (selectedItem: ChargerType) => {
-    // setSelectedCharger(selectedItem);
-    const chargerFormValues = {
-      type: {
-        name: selectedItem.type
-      },
-      status: {
-        name: selectedItem.status
-      },
-      serialNumber: selectedItem.serialNumber
+  const handleAddCancelPopupClick = () => {
+    setIsAddChargerPopupOpen(false);
+    reset();
+  }
+  
+  const handleSaveEditedCharger = () => {
+    const updatePayload = {
+      id: selectedChargerId,
+      type: getValues('type'),
+      status: getValues('status'),
+      serialNumber: getValues('serialNumber')
     }
-    setDefaultChargerFormValues(chargerFormValues);
+    onUpdateCharger(updatePayload)
+    setIsEditChargerPopupOpen(false);
+    reset();
+  }
+  
+  const handleSaveAddedCharger = () => {
+    const savePayload = {
+      type: getValues('type'),
+      status: getValues('status'),
+      serialNumber: getValues('serialNumber')
+    }
+    onSaveCharger(savePayload)
+    setIsAddChargerPopupOpen(false);
+    reset();
+  }
+  
+  const handleEditButtonClick = (selectedCharger: ChargerType) => {
+    setSelectedChargerId(selectedCharger.id.toString());
     setIsEditChargerPopupOpen(true);
   }
   
@@ -124,8 +159,9 @@ const LocationHookForm = (props: Props) => {
   const renderChargerPopupContent = () => (
     <StyledChargerPopupContainer>
       <ChargerForm
+        control={chargerControl}
+        errors={chargerErrors}
         screenName={screenName}
-        defaultChargerFormValues={defaultChargerFormValues}
         listOfChargerType={mapChargerTypes()}
        />
     </StyledChargerPopupContainer>
@@ -139,7 +175,7 @@ const LocationHookForm = (props: Props) => {
       name="AddCharger"
       withCloseButton
       withButtons
-      buttons={chargerPopupButtons(() => {}, handleAddEditPopupClick)}
+      buttons={chargerPopupButtons(handleSaveAddedCharger, handleAddCancelPopupClick, !isSaveChargerButtonValid)}
       onClickCloseButton={() => setIsAddChargerPopupOpen(false)}
       renderContent={renderChargerPopupContent}
     />
@@ -153,7 +189,7 @@ const LocationHookForm = (props: Props) => {
       name="EditCharger"
       withCloseButton
       withButtons
-      buttons={chargerPopupButtons(() => {}, handleCancelEditPopupClick)}
+      buttons={chargerPopupButtons(handleSaveEditedCharger, handleCancelEditPopupClick, !isSaveChargerButtonValid)}
       onClickCloseButton={() => setIsEditChargerPopupOpen(false)}
       renderContent={renderChargerPopupContent}
     />

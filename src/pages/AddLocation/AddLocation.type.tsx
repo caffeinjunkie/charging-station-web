@@ -17,7 +17,7 @@ export interface ChargerTypeDataType {
   attributes: ChargerTypeAttributesType
 }
 
-export interface ChargerPayloadType {
+export interface ChargerType {
   id: number
   type: string
   serialNumber: string
@@ -25,10 +25,25 @@ export interface ChargerPayloadType {
   updatedAt: string
 }
 
+export interface SaveChargerPayloadType {
+  type: string
+  serialNumber: string
+  status: string
+}
+
+export interface EditChargerPayloadType {
+  id: string
+  type: string
+  serialNumber: string
+  status: string
+}
+
 export interface Props {
   navigate: Function
   fetchedData: any
   mapCountries: Function
+  handleUpdateCharger: Function
   mapChargerTypes: Function
   handleSaveLocation: Function
+  handleSaveCharger: Function
 }

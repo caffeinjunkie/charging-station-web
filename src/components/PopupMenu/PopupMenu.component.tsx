@@ -40,6 +40,7 @@ const PopupMenu = (props: Props): JSX.Element => {
       text,
       onClick,
       className,
+      disabled,
       name: buttonName
     } = button;
 
@@ -49,6 +50,7 @@ const PopupMenu = (props: Props): JSX.Element => {
           key={index}
           text={text}
           onClick={onClick}
+          disabled={disabled}
           className={className}
           screenName={screenName}
           name={buttonName}

@@ -15,4 +15,5 @@ export interface ButtonPropsType {
   onClick: () => void
   className: string
   name: string
+  disabled: boolean
 }
