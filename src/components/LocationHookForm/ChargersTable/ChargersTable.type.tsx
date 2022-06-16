@@ -7,7 +7,6 @@ export interface ChargerType {
 }
 
 export interface ChargerTypeType {
-  id: number
   name: string
 }
 

@@ -26,6 +26,7 @@ const ChargerForm = (props: Props) => {
         screenName={screenName}
         errors={errors}
         type="text"
+        key={inputProps.name}
         {...inputProps}
       />
     </StyledInputContainer>

@@ -2,10 +2,7 @@ import { isEmpty } from 'lodash';
 
 import type {
   Props,
-  LocationType,
-  CountryType,
-  ChargerType,
-  ChargerDataType
+  LocationType
 } from './Dashboard.type';
 import config from './Dashboard.config';
 import { TimeUtil } from '../../utils';

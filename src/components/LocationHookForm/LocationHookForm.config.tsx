@@ -1,5 +1,4 @@
-import { useTranslation as translate } from "../../hooks/useTranslation";
-import {ChargerTypeType} from "./ChargersTable/ChargersTable.type";
+import { useTranslation as translate } from '../../hooks/useTranslation';
 
 const defaultProps = {
   location: {},
@@ -25,17 +24,13 @@ const chargerPopupButtons = (handleSaveButtonClick: Function, handleCancelButton
 
 const EDIT_LOCATION_PAGE = 'EditLocation';
 
-
-const defaultValuesConfig = (listOfChargerType: Array<ChargerTypeType>) => ({
-  type: listOfChargerType[0],
-  status: {
-    name: "CONNECTED"
-  },
-  serialNumber: ''
-})
-
 const defaultOptions: any = {
   mode: 'all'
 }
 
-export default { defaultProps, EDIT_LOCATION_PAGE, chargerPopupButtons, defaultOptions, defaultValuesConfig };
+export default {
+  defaultProps,
+  EDIT_LOCATION_PAGE,
+  chargerPopupButtons,
+  defaultOptions
+};

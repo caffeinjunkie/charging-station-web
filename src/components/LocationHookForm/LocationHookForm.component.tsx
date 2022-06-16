@@ -2,6 +2,7 @@ import React from 'react';
 import { FaBolt, FaPlus, FaSave } from 'react-icons/fa';
 import { GoX } from 'react-icons/go';
 import { useForm } from 'react-hook-form';
+import { isEmpty } from "lodash";
 
 import type { ChargerType, Props } from './LocationHookForm.type';
 import {
@@ -22,7 +23,6 @@ import ChargerForm from "./ChargerForm/ChargerForm.component";
 const {
   EDIT_LOCATION_PAGE,
   chargerPopupButtons,
-  defaultValuesConfig,
   defaultOptions
 } = config;
 const { testProps } = TestUtils;
@@ -49,13 +49,22 @@ const LocationHookForm = (props: Props) => {
   const [isAddChargerPopupOpen, setIsAddChargerPopupOpen] = React.useState(false)
   const [isEditChargerPopupOpen, setIsEditChargerPopupOpen] = React.useState(false)
   const [selectedChargerId, setSelectedChargerId] = React.useState("");
+  const [currentCharger, setCurrentCharger]: any = React.useState();
   const {
     control: chargerControl,
     reset,
     getValues,
+    setValue,
     formState: { errors: chargerErrors, isValid: isChargerValid, isDirty }
   } = useForm({ ...defaultOptions });
   const isSaveChargerButtonValid = isChargerValid && isDirty;
+  
+  React.useEffect(() => {
+    if (!isEmpty(currentCharger)) {
+      const { serialNumber } = currentCharger;
+      setValue('serialNumber', serialNumber)
+    }
+  }, [currentCharger]);
   
   const handleCancelEditPopupClick = () => {
     setIsEditChargerPopupOpen(false);
@@ -93,6 +102,7 @@ const LocationHookForm = (props: Props) => {
   
   const handleEditButtonClick = (selectedCharger: ChargerType) => {
     setSelectedChargerId(selectedCharger.id.toString());
+    setCurrentCharger(selectedCharger);
     setIsEditChargerPopupOpen(true);
   }
   
