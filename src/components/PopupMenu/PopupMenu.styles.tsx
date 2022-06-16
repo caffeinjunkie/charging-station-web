@@ -43,10 +43,12 @@ export const StyledHeaderContainer = styled.div`
 export const StyledFooterContainer = styled.div`
   display: flex;
   flex-direction: row;
+  width: 100%;
   border-top: 1px solid ${Colors.lightGrey};
   align-items: center;
   justify-content: center;
-  padding: 12px
+  padding-top: 12px;
+  padding-bottom: 12px;
 `;
 
 export const StyledTitle = styled.div`
@@ -62,8 +64,8 @@ export const StyledCloseButton = styled(GoX)`
   align-items: flex-end;
   justify-content: flex-end;
   align-self: center;
-  width: 28px;
-  height: 28px;
+  width: 24px;
+  height: 24px;
   color: ${Colors.lightBlack};
   margin: 20px 24px;
   

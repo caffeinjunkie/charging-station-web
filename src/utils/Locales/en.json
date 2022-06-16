@@ -28,6 +28,7 @@
   "ErrorMessage-locationNo-isExist-text": "Location no. is already exist",
   "ErrorMessage-city-required-text": "City must be be filled",
   "ErrorMessage-postalCode-required-text": "Postal code must be filled",
-  "AddLocation-cancelPopup-confirmationButton-text": "Confirm",
-  "AddLocation-cancelPopup-cancelButton-text": "Cancel"
+  "CancelPopup-cancelPopup-confirmationButton-text": "Confirm",
+  "CancelPopup-cancelPopup-cancelButton-text": "Cancel",
+  "CancelPopup-cancelPopup-text": "You will lose your changes. Are you sure?"
 }

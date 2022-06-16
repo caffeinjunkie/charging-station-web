@@ -7,9 +7,13 @@ import { Props } from './AddLocation.type';
 import config from './AddLocation.config';
 import { LocationHookForm } from '../../components/LocationHookForm';
 import { useTranslation as translate } from '../../hooks/useTranslation';
-import BackButton from "../../components/BackButton/BackButton";
+import BackButton from '../../components/BackButton/BackButton';
 import Paths from '../../root/RootNavigation/Paths';
-import { PopupMenu } from "../../components/PopupMenu";
+import { PopupMenu } from '../../components/PopupMenu';
+import {
+  StyledBackPopupContentContainer,
+  StyledBackPopupContentText
+} from './AddLocation.styles';
 
 const { SCREEN_NAME, defaultOptions, defaultValues, cancelButtons } = config;
 
@@ -42,6 +46,14 @@ const AddLocation = (props: Props) => {
     navigate(Paths.Dashboard);
   }
   
+  const renderCancelPopupContent = () => (
+    <StyledBackPopupContentContainer>
+      <StyledBackPopupContentText>
+        {translate('CancelPopup-cancelPopup-text')}
+      </StyledBackPopupContentText>
+    </StyledBackPopupContentContainer>
+  )
+  
   const renderCancelPopup = () => (
     <PopupMenu
       isOpen={isBackPopupOpen}
@@ -49,7 +61,7 @@ const AddLocation = (props: Props) => {
       name="Add"
       withButtons
       buttons={cancelButtons(handleConfirmBackButton, handleCancelBackButton)}
-      renderContent={() => <div>aaa</div>}
+      renderContent={renderCancelPopupContent}
       withCloseButton
       onClickCloseButton={() => setIsBackPopupOpen(false)}
     />

@@ -15,13 +15,13 @@ const defaultOptions: any = {
 
 const cancelButtons = (handleConfirmBackButton: Function, handleCancelBackButton: Function) => [
   {
-    text: translate(`${SCREEN_NAME}-cancelPopup-confirmationButton-text`),
+    text: translate('CancelPopup-cancelPopup-confirmationButton-text'),
     onClick: handleConfirmBackButton,
     className: 'secondary',
     name: 'ConfirmationPopup'
   },
   {
-    text: translate(`${SCREEN_NAME}-cancelPopup-cancelButton-text`),
+    text: translate('CancelPopup-cancelPopup-cancelButton-text'),
     onClick: handleCancelBackButton,
     className: 'primary',
     name: 'CancelPopup'
