@@ -9,7 +9,8 @@ import type {
   CountryType,
   ChargerPayloadType,
   SaveChargerPayloadType,
-  EditChargerPayloadType
+  EditChargerPayloadType,
+  CountryDropDownType
 } from './EditLocation.type';
 import { post, remove } from '../../hooks/useAxios';
 import Paths from '../../root/RootNavigation/Paths';
@@ -97,10 +98,11 @@ const onSubmit = (props: Props) => async (values: any, submitArgs: any) => {
   const { setError, chargers } = submitArgs;
   const { navigate } = props;
   const { id } = mapPayload(props)();
+  const selectedCountry = mapCountries(props)().find((country: CountryDropDownType) => country.name === values.country);
   const mappedBody = {
     ...values,
     id,
-    country: values.country.id,
+    country: selectedCountry.id.toString(),
     chargers: chargers.map((charger: ChargerPayloadType) => charger.id.toString())
   }
   
@@ -155,10 +157,7 @@ const mapHookFormDefaultValues = (props: Props) => () => {
       locationNo,
       city,
       postalCode,
-      country: {
-        id: country.id,
-        name: country.countryName
-      }
+      country: country.countryName
     }
   }
 }

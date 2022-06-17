@@ -61,8 +61,10 @@ const LocationHookForm = (props: Props) => {
   
   React.useEffect(() => {
     if (!isEmpty(currentCharger)) {
-      const { serialNumber } = currentCharger;
+      const { serialNumber, type, status } = currentCharger;
       setValue('serialNumber', serialNumber)
+      setValue('type', type)
+      setValue('status', status)
     }
   }, [currentCharger]);
   

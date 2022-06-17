@@ -22,7 +22,7 @@ const InputForm = (props: Props): JSX.Element => {
   
   const renderDropdown = () => (
     <Dropdown
-      value={value ? value.name : ''}
+      value={value || ''}
       onChange={onChange}
       {...props}
     />

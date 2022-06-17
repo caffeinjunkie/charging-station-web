@@ -7,7 +7,9 @@ import type {
   ChargerTypeDataType,
   CountryDataType,
   ChargerType,
-  SaveChargerPayloadType, EditChargerPayloadType
+  SaveChargerPayloadType,
+  EditChargerPayloadType,
+  CountryDropDownType
 } from './AddLocation.type';
 import { useSubmissionLoading } from '../../hooks/useSubmissionLoading';
 
@@ -80,9 +82,10 @@ const onUpdateCharger = () => async (
 const onSubmit = (props: Props) => async (values: any, submitArgs: any) => {
   const { chargers, setError } = submitArgs;
   const { navigate } = props;
+  const selectedCountry = mapCountries(props)().find((country: CountryDropDownType) => country.name === values.country);
   const mappedBody = {
     ...values,
-    country: values.country.id.toString(),
+    country: selectedCountry.id.toString(),
     chargers: chargers.map((charger: ChargerType) => charger.id.toString())
   }
   

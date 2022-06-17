@@ -28,8 +28,7 @@ const Dropdown = (props: Props): JSX.Element => {
   const label = translate(`LocationHookForm-${name}-label`);
   
   const handleChange = (event: any) => {
-    const position = event.target.options.selectedIndex - 1;
-    onChange(options[position]);
+    onChange(event.target.value);
   }
   
   return (

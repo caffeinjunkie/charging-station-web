@@ -38,6 +38,11 @@ export interface EditChargerPayloadType {
   status: string
 }
 
+export interface CountryDropDownType {
+  id: string
+  name: string
+}
+
 export interface Props {
   navigate: Function
   fetchedData: any

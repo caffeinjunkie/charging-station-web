@@ -3,6 +3,11 @@ export interface CountryAttributesType {
   countryAbbreviation: string
 }
 
+export interface CountryDropDownType {
+  id: string
+  name: string
+}
+
 export interface CountryDataType {
   id: number
   attributes: CountryAttributesType
