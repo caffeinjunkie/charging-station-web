@@ -64,6 +64,7 @@ export interface Props {
   mapChargerTypes: Function
   handleSaveLocation: Function
   handleUpdateCharger: Function
+  handleBackButtonClick: Function
   handleSaveCharger: Function
   handleRemoveLocation: Function
   mapHookFormDefaultValues: Function

@@ -185,6 +185,28 @@ const handleUpdateCharger = (props: Props) => async (
   await useSubmissionLoading(props, () => onUpdateCharger()(body, addedChargers, setAddedChargers));
 };
 
+const onDeleteChargers = (props: Props) => async (modifiedChargers: Array<ChargerType>) => {
+  const { navigate } = props;
+  const { chargers } = mapPayload(props)();
+  const removedChargers = modifiedChargers;
+  chargers.forEach(() => {
+    removedChargers.shift();
+  })
+  
+  const payload = {
+    path: '/delete-chargers',
+    body: { chargers: removedChargers }
+  }
+  
+  await post(payload);
+  
+  navigate(Paths.Dashboard);
+}
+
+const handleBackButtonClick = (props: Props) => async (chargers: Array<ChargerType>) => {
+  await useSubmissionLoading(props, () => onDeleteChargers(props)(chargers))
+}
+
 export default {
   mapCountries,
   mapChargerTypes,
@@ -192,6 +214,7 @@ export default {
   handleUpdateCharger,
   mapPayload,
   handleRemoveLocation,
+  handleBackButtonClick,
   mapHookFormDefaultValues,
   handleSaveCharger
 };

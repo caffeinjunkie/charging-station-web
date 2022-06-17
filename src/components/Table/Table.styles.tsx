@@ -119,6 +119,8 @@ export const StyledBodyText = styled.td`
   padding: 0 12px;
   ${FontStyles.Light}
   ${FontSize.Medium}
+  justify-content: center;
+  align-items: center;
 
   &.align-center {
     text-align: center;
@@ -128,6 +130,13 @@ export const StyledBodyText = styled.td`
     display: flex;
     text-align: right;
     justify-content: flex-end;
+  }
+  
+  &.align-right p {
+    @media screen and (max-width:720px) {
+      width: 100%;
+      justify-content: center;
+    }
   }
 
   &.align-left {
@@ -142,6 +151,13 @@ export const StyledBodyText = styled.td`
     border-radius: 4px;
     ${FontStyles.Bold};
     ${FontSize.Small};
+    
+    @media screen and (max-width:720px) {
+      background-color: transparent;
+      color: ${Colors.black};
+      ${FontStyles.Light};
+      ${FontSize.Medium};
+    }
   }
 
   &.not_connected p {
@@ -152,6 +168,13 @@ export const StyledBodyText = styled.td`
     border-radius: 4px;
     ${FontStyles.Bold};
     ${FontSize.Small};
+
+    @media screen and (max-width:720px) {
+      background-color: transparent;
+      color: ${Colors.black};
+      ${FontStyles.Light};
+      ${FontSize.Medium};
+    }
   }
 
   &.removed p {
@@ -162,6 +185,13 @@ export const StyledBodyText = styled.td`
     border-radius: 4px;
     ${FontStyles.Bold};
     ${FontSize.Small};
+
+    @media screen and (max-width:720px) {
+      background-color: transparent;
+      color: ${Colors.black};
+      ${FontStyles.Light};
+      ${FontSize.Medium};
+    }
   }
 
   @media screen and (max-width:720px) {

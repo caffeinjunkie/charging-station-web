@@ -23,5 +23,11 @@ export const StyledActionButton = styled.div`
     border-left: 1px solid ${Colors.lighterGrey};
     color: ${Colors.softRed}
   }
+  
+  @media screen and (max-width:720px) {
+    width: 100%;
+    justify-content: center;
+  }
+  
 `;
 

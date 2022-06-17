@@ -11,7 +11,6 @@ yarn install
 ```
 
 
-
 After installing all the required packages, you can:
 
 
@@ -32,4 +31,4 @@ Launches the test runner with test coverage.
 
 ### `npm run lint`
 
-Launches lint checkers.
+Launches lint checkers with prettier plugin.

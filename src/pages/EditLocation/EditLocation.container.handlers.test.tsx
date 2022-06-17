@@ -50,6 +50,7 @@ describe('editLocationHandlers', () => {
     navigate: jest.fn(),
     mapCountries: jest.fn(),
     handleUpdateCharger: jest.fn(),
+    handleBackButtonClick: jest.fn(),
     mapChargerTypes: jest.fn(),
     handleSaveLocation: jest.fn(),
     handleSaveCharger: jest.fn(),

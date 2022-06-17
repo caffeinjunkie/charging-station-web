@@ -1,6 +1,6 @@
 import { isEmpty } from 'lodash';
 
-import { post } from '../../hooks/useAxios';
+import { post, remove } from '../../hooks/useAxios';
 import Paths from '../../root/RootNavigation/Paths';
 import type {
   Props,
@@ -10,6 +10,7 @@ import type {
   SaveChargerPayloadType, EditChargerPayloadType
 } from './AddLocation.type';
 import { useSubmissionLoading } from '../../hooks/useSubmissionLoading';
+import { ChargerDataType, CountryType } from "../EditLocation/EditLocation.type";
 
 const mapCountries = (props: Props) => () => {
   const { fetchedData } = props;
@@ -119,10 +120,27 @@ const handleUpdateCharger = (props: Props) => async (
   await useSubmissionLoading(props, () => onUpdateCharger()(body, addedChargers, setAddedChargers));
 };
 
+const onDeleteChargers = (props: Props) => async (chargers: Array<ChargerType>) => {
+  const { navigate } = props;
+  const payload = {
+    path: '/delete-chargers',
+    body: { chargers }
+  }
+  
+  await post(payload);
+  
+  navigate(Paths.Dashboard);
+}
+
+const handleBackButtonClick = (props: Props) => async (chargers: Array<ChargerType>) => {
+  await useSubmissionLoading(props, () => onDeleteChargers(props)(chargers))
+}
+
 export default {
   mapCountries,
   mapChargerTypes,
   handleSaveLocation,
   handleSaveCharger,
-  handleUpdateCharger
+  handleUpdateCharger,
+  handleBackButtonClick
 };

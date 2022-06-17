@@ -23,6 +23,7 @@ const EditLocation = (props: Props) => {
     mapHookFormDefaultValues,
     mapPayload,
     handleUpdateCharger,
+    handleBackButtonClick,
     handleRemoveLocation,
     handleSaveCharger,
     handleSaveLocation
@@ -50,10 +51,13 @@ const EditLocation = (props: Props) => {
     setIsRemovePopupOpen(false);
   }
   
-  const handleConfirmBackButton = () => navigate(Paths.Dashboard);
+  const handleConfirmBackButton = () => {
+    handleBackButtonClick(addedChargers);
+  }
   
   const onBackButtonClick = () => {
-    if (isDirty) {
+    const chargerListHasChange = addedChargers.length !== chargers.length;
+    if (isDirty || chargerListHasChange) {
       setIsBackPopupOpen(true);
       return
     }

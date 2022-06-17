@@ -26,7 +26,8 @@ const AddLocation = (props: Props) => {
     navigate,
     handleSaveLocation,
     handleSaveCharger,
-    handleUpdateCharger
+    handleUpdateCharger,
+    handleBackButtonClick
   } = props;
   
   const {
@@ -46,7 +47,9 @@ const AddLocation = (props: Props) => {
   
   const handleCancelBackButton = () => setIsBackPopupOpen(!isBackPopupOpen);
   
-  const handleConfirmBackButton = () => navigate(Paths.Dashboard);
+  const handleConfirmBackButton = () => {
+    handleBackButtonClick(addedChargers)
+  }
   
   const onBackButtonClick = () => {
     const showCancelConfirmation = isDirty || !isEmpty(addedChargers);

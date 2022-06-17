@@ -46,6 +46,7 @@ describe('addLocationHandlers', () => {
     handleUpdateCharger: jest.fn(),
     mapChargerTypes: jest.fn(),
     handleSaveLocation: jest.fn(),
+    handleBackButtonClick: jest.fn(),
     handleSaveCharger: jest.fn()
   }
   

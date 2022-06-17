@@ -46,4 +46,5 @@ export interface Props {
   mapChargerTypes: Function
   handleSaveLocation: Function
   handleSaveCharger: Function
+  handleBackButtonClick: Function
 }
