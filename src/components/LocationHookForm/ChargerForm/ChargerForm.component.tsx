@@ -19,18 +19,21 @@ const ChargerForm = (props: Props) => {
     listOfChargerType
   } = props;
   
-  const renderInput = (inputProps: any) => (
-    <StyledInputContainer key={inputProps.name}>
-      <InputForm
-        control={control}
-        screenName={screenName}
-        errors={errors}
-        type="text"
-        key={inputProps.name}
-        {...inputProps}
-      />
-    </StyledInputContainer>
-  )
+  const renderInput = (inputProps: any) => {
+    const { name } = inputProps;
+    return (
+      <StyledInputContainer key={name}>
+        <InputForm
+          control={control}
+          screenName={screenName}
+          errors={errors}
+          type="text"
+          key={name}
+          {...inputProps}
+        />
+      </StyledInputContainer>
+    )
+  }
   
   return (
     <StyledContainer>

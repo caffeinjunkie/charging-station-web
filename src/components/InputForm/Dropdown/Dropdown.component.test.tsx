@@ -5,16 +5,16 @@ import Dropdown from './Dropdown.component';
 
 describe('Dropdown', () => {
   let result: RenderResult;
-  const textInputDisplayValue = 'Value example';
-  const textInputLabelText = 'Label Example';
+  const dropDownDisplayValue = 'Value example';
+  const dropDownLabelText = 'Label Example';
   const onChange = jest.fn();
-  const screenName = 'Screen';
-  const name = 'Name';
-  const textInputTestId = `${screenName}_${name}_Input`;
+  const screenName = 'LocationHookForm-label';
+  const name = 'country';
+  const dropDownTestId = `${screenName}_${name}_Select`;
   const props = {
     screenName,
     onChange,
-    label: textInputLabelText,
+    label: dropDownLabelText,
     name
   };
 
@@ -28,27 +28,27 @@ describe('Dropdown', () => {
   });
 
   describe('#render', () => {
-    it('should render textInputDisplayValue when value is provided', () => {
+    it('should render dropDownDisplayValue when value is provided', () => {
       const { getByDisplayValue, rerender } = result;
-      rerender(<Dropdown {...props} value={textInputDisplayValue} />);
+      rerender(<Dropdown {...props} value={dropDownDisplayValue} />);
 
-      expect(getByDisplayValue(textInputDisplayValue)).toBeTruthy();
+      expect(getByDisplayValue(dropDownDisplayValue)).toBeTruthy();
     });
 
-    it('should render textInputLabelText as text and label text', () => {
-      const { getByText } = result;
+    it('should render dropDownLabelText as text and label text', () => {
+      const { getByTestId } = result;
 
-      expect(getByText(textInputLabelText)).toBeTruthy();
+      expect(getByTestId(dropDownLabelText)).toBeTruthy();
     });
     
     describe('#onChange', () => {
-      it('should invoke onChange when textInput is changed', () => {
+      it('should invoke onChange when dropDown is changed', () => {
         const { getByTestId } = result;
-        const textInput = getByTestId(textInputTestId);
+        const dropDown = getByTestId(dropDownTestId);
 
-        fireEvent.change(textInput, { target: { value: 'Change value' } });
+        fireEvent.change(dropDown, { target: { value: 'Change value' } });
 
-        expect(onChange).toBeCalled();
+        expect(onChange).toBeCalledWith();
       });
     });
   });

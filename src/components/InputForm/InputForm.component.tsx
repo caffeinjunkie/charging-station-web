@@ -1,8 +1,8 @@
 import React from 'react';
 import { useController } from 'react-hook-form';
 
-import TextInput from './TextInput/TextInput.component';
-import Dropdown from './Dropdown/Dropdown.component';
+import { TextInput } from './TextInput';
+import { Dropdown } from './Dropdown';
 
 import type { Props } from './InputForm.type';
 

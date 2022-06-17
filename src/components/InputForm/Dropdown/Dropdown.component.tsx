@@ -31,14 +31,19 @@ const Dropdown = (props: Props): JSX.Element => {
     const position = event.target.options.selectedIndex - 1;
     onChange(options[position]);
   }
-
+  
   return (
     <StyledContainer>
       <StyledDropdownContainer>
         <StyledLabel>
           {label}
         </StyledLabel>
-        <StyledDropdown onChange={handleChange} disabled={disabled} defaultValue={value}>
+        <StyledDropdown
+          onChange={handleChange}
+          disabled={disabled}
+          defaultValue={value}
+          {...testProps(`${screenName}_${label}_Select`)}
+        >
           <option
             value=""
             selected={isEmptyString(value)}

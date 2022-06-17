@@ -3,6 +3,15 @@ export interface ChargerTypeType {
   name: string
 }
 
+export interface ChargerType {
+  id: number
+  type: string
+  serialNumber: string
+  status: string
+  updatedAt: string
+}
+
+
 export interface Props {
   screenName: string
   errors: any

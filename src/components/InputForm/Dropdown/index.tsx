@@ -1,1 +1,1 @@
-export { default as TextInput } from './Dropdown.component';
+export { default as Dropdown } from './Dropdown.component';
