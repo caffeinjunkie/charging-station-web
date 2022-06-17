@@ -6,9 +6,10 @@ import {
   saveChargerPayload,
   editChargerPayload,
   charger1, charger2
-} from '../../fixtures/chargerData.fixture'
+} from '../../fixtures/chargerData.fixture';
 import { useSubmissionLoading } from '../../hooks/useSubmissionLoading';
 import { post } from '../../hooks/useAxios';
+import { locationData } from "../../fixtures/locationData.fixture";
 
 jest.mock('../../hooks/useSubmissionLoading');
 jest.mock('../../hooks/useAxios');
@@ -31,6 +32,9 @@ describe('editLocationHandlers', () => {
     },
     chargerTypes: {
       data: [hpc, t52]
+    },
+    location: {
+      data: locationData
     }
   }
   beforeEach(() => {
@@ -106,6 +110,7 @@ describe('editLocationHandlers', () => {
   describe('#handleSaveLocation', () => {
     it('should invoke setError with error value when post response is error',async () => {
       const requestBody = {
+        id: "1",
         name: 'Planet Sport',
         locationNo: '112233',
         city: 'Jakarta',
@@ -124,7 +129,7 @@ describe('editLocationHandlers', () => {
           chargers: ["1"],
           country: "1"
         },
-        path: '/locations'
+        path: '/locations/1'
       };
       (post as jest.Mock).mockReturnValue({
         error: {
@@ -142,6 +147,7 @@ describe('editLocationHandlers', () => {
   
     it('should navigate to Dashboard when post response error is null',async () => {
       const requestBody = {
+        id: "1",
         name: 'Planet Sport',
         locationNo: '112233',
         city: 'Jakarta',
@@ -160,7 +166,7 @@ describe('editLocationHandlers', () => {
           chargers: [],
           country: "1"
         },
-        path: '/locations'
+        path: '/locations/1'
       };
       (post as jest.Mock).mockReturnValue({
         error: null
