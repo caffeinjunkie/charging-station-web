@@ -9,7 +9,7 @@ import type {
 } from './EditLocation.type';
 import config from './EditLocation.config';
 import { LocationHookForm } from '../../components/LocationHookForm';
-import BackButton from '../../components/BackButton/BackButton';
+import { BackButton } from '../../components/BackButton';
 import Paths from '../../root/RootNavigation/Paths';
 import { StyledBackPopupContentContainer, StyledBackPopupContentText } from './EditLocation.styles';
 import { useTranslation as translate } from '../../hooks/useTranslation';
@@ -96,7 +96,10 @@ const EditLocation = (props: Props) => {
   
   return (
     <>
-      <BackButton onClick={onBackButtonClick} />
+      <BackButton
+        screenName={SCREEN_NAME}
+        onClick={onBackButtonClick}
+      />
       <LocationHookForm
         screenName={SCREEN_NAME}
         name="Edit"

@@ -11,7 +11,7 @@ import type {
 import config from './AddLocation.config';
 import { LocationHookForm } from '../../components/LocationHookForm';
 import { useTranslation as translate } from '../../hooks/useTranslation';
-import BackButton from '../../components/BackButton/BackButton';
+import { BackButton } from '../../components/BackButton';
 import Paths from '../../root/RootNavigation/Paths';
 import { PopupMenu } from '../../components/PopupMenu';
 import {
@@ -80,7 +80,10 @@ const AddLocation = (props: Props) => {
   
   return (
     <>
-      <BackButton onClick={onBackButtonClick} />
+      <BackButton
+        screenName={SCREEN_NAME}
+        onClick={onBackButtonClick}
+        />
       <LocationHookForm
         screenName={`${SCREEN_NAME}`}
         name="Add"
