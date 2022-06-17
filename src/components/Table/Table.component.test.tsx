@@ -71,10 +71,10 @@ describe('Table', () => {
         ...props,
         withTableNavigation: true
       }
-      const { getByText } = render(<Table {...withNavigationProps} />);
+      const { getByTestId } = render(<Table {...withNavigationProps} />);
       
-      expect(getByText('>')).toBeTruthy();
-      expect(getByText('<')).toBeTruthy();
+      expect(getByTestId('Dashboard_Next_Button')).toBeTruthy();
+      expect(getByTestId('Dashboard_Previous_Button')).toBeTruthy();
     });
   });
 });

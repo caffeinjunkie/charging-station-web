@@ -62,7 +62,7 @@ export const mappedLocationData =  [{
     },
     lastUpdated: {
       className: "align-center",
-      value: "07:00 AM"
+      value: "07.00"
     },
     locationName: {
       className: "align-left",

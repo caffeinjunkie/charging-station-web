@@ -1,6 +1,7 @@
 import React from 'react';
 import { cleanup, render, RenderResult } from '@testing-library/react';
-import CardView from "./CardView.component";
+
+import CardView from './CardView.component';
 
 describe('CardView', () => {
   let result: RenderResult;
@@ -22,6 +23,7 @@ describe('CardView', () => {
   
   afterEach(() => {
     cleanup();
+    jest.clearAllMocks()
   });
 
   describe('#render', () => {
