@@ -37,7 +37,7 @@ export interface ChargerDataType {
 }
 
 export interface ChargerPayloadType {
-  id: number
+  id: string
   type: string
   serialNumber: string
   status: string
@@ -63,9 +63,9 @@ export interface Props {
   mapCountries: Function
   mapChargerTypes: Function
   handleSaveLocation: Function
-  handleRemoveLocation: Function
   handleUpdateCharger: Function
   handleSaveCharger: Function
+  handleRemoveLocation: Function
   mapHookFormDefaultValues: Function
   mapPayload: Function
 }

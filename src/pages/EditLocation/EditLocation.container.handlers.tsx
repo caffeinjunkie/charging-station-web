@@ -57,7 +57,7 @@ const onDelete = (props: Props) => async () => {
 
 const onSaveCharger = () => async (
   savePayload: SaveChargerPayloadType,
-  addedChargers: Array<ChargerType>,
+  addedChargers: Array<ChargerPayloadType>,
   setAddedChargers: Function
 ) => {
   const payload = {
@@ -72,7 +72,7 @@ const onSaveCharger = () => async (
 
 const onUpdateCharger = () => async (
   updatePayload: EditChargerPayloadType,
-  addedChargers: Array<ChargerType>,
+  addedChargers: Array<ChargerPayloadType>,
   setAddedChargers: Function
 ) => {
   const { id } = updatePayload;
@@ -173,14 +173,14 @@ const handleRemoveLocation = (props: Props) => async () => {
 
 const handleSaveCharger = (props: Props) => async (
   body: SaveChargerPayloadType,
-  addedChargers: Array<ChargerType>,
+  addedChargers: Array<ChargerPayloadType>,
   setAddedChargers: Function) => {
   await useSubmissionLoading(props, () => onSaveCharger()(body, addedChargers, setAddedChargers));
 };
 
 const handleUpdateCharger = (props: Props) => async (
   body: EditChargerPayloadType,
-  addedChargers: Array<ChargerType>,
+  addedChargers: Array<ChargerPayloadType>,
   setAddedChargers: Function) => {
   await useSubmissionLoading(props, () => onUpdateCharger()(body, addedChargers, setAddedChargers));
 };
@@ -189,8 +189,8 @@ export default {
   mapCountries,
   mapChargerTypes,
   handleSaveLocation,
-  mapPayload,
   handleUpdateCharger,
+  mapPayload,
   handleRemoveLocation,
   mapHookFormDefaultValues,
   handleSaveCharger

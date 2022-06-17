@@ -1,5 +1,5 @@
 import handlers from './Dashboard.container.handlers';
-import { locationMockData, mappedLocationData } from '../../fixtures/locationData'
+import { locationMockData, mappedLocationData } from '../../fixtures/locationData.fixture'
 
 const { prepareTableData, getTableNavigationProps } = handlers;
 
