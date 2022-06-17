@@ -21,7 +21,6 @@ const {
   handleSaveCharger,
   handleUpdateCharger,
   handleBackButtonClick,
-  mapPayload,
   handleRemoveLocation,
   mapHookFormDefaultValues
 } = handlers;

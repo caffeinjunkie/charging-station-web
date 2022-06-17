@@ -1,6 +1,6 @@
 import { isEmpty } from 'lodash';
 
-import { post, remove } from '../../hooks/useAxios';
+import { post } from '../../hooks/useAxios';
 import Paths from '../../root/RootNavigation/Paths';
 import type {
   Props,
@@ -10,7 +10,6 @@ import type {
   SaveChargerPayloadType, EditChargerPayloadType
 } from './AddLocation.type';
 import { useSubmissionLoading } from '../../hooks/useSubmissionLoading';
-import { ChargerDataType, CountryType } from "../EditLocation/EditLocation.type";
 
 const mapCountries = (props: Props) => () => {
   const { fetchedData } = props;

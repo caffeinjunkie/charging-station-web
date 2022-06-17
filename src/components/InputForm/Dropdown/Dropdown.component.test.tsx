@@ -1,5 +1,5 @@
 import React from 'react';
-import {cleanup, render, fireEvent, RenderResult } from '@testing-library/react';
+import { cleanup, render, fireEvent, RenderResult } from '@testing-library/react';
 
 import Dropdown from './Dropdown.component';
 
