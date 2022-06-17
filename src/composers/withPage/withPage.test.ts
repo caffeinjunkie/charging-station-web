@@ -1,5 +1,5 @@
 import {
-  compose, withHandlers
+  compose, withHandlers, withProps, withState
 } from 'recompose';
 
 import withPage from './withPage';
@@ -37,11 +37,10 @@ describe('withPage', () => {
 
   it('should invoke compose with empty enhancers when options is empty', () => {
     const options = {};
-    const enhancers:any = [];
 
     withPage(options)(component);
 
-    expect(compose).toBeCalledWith(...enhancers);
+    expect(compose).toBeCalled();
   });
 
   describe('withHandlers', () => {
@@ -67,7 +66,7 @@ describe('withPage', () => {
   });
   
   describe('withLoadingOverlay', () => {
-    it('should call withLoadingOverlay when `withSubmissionLoading` is present', () => {
+    it('should call withLoadingOverlay when `withSubmissionLoading` is true', () => {
       const options: any = { withSubmissionLoading: true };
 
       withPage(options)(component);
@@ -75,8 +74,8 @@ describe('withPage', () => {
       expect(withLoadingOverlay).toHaveBeenCalled();
     });
 
-    it('should not call withLoadingOverlay when `withSubmissionLoading` is not present', () => {
-      const options = {};
+    it('should not call withLoadingOverlay when `withSubmissionLoading` is false', () => {
+      const options = { withSubmissionLoading: false };
 
       withPage(options)(component);
 
@@ -103,6 +102,45 @@ describe('withPage', () => {
       withPage(options)(component);
       
       expect(withQuery).not.toHaveBeenCalled();
+    });
+  });
+  
+  describe('withProps', () => {
+    it('should call withProps when `props` is present', () => {
+      const options = { props: { isLoading: true } };
+      
+      withPage(options)(component);
+      
+      expect(withProps).toBeCalledWith(options.props);
+    });
+    
+    it('should not call withProps when `props` is not present', () => {
+      const options = {};
+      
+      withPage(options)(component);
+      
+      expect(withProps).not.toHaveBeenCalled();
+    });
+  });
+  
+  describe('withState', () => {
+    it('should call withState when `state` is present', () => {
+      const firstState = ['firstState', 'setFirstState', {}];
+      const secondState = ['secondState', 'setSecondState', 0];
+      const options: any = { state: [firstState, secondState] };
+      
+      withPage(options)(component);
+      
+      expect(withState).toHaveBeenNthCalledWith(1, ...firstState);
+      expect(withState).toHaveBeenNthCalledWith(2, ...secondState);
+    });
+    
+    it('should not call withState when `state` is not present', () => {
+      const options = {};
+      
+      withPage(options)(component);
+      
+      expect(withState).not.toBeCalled();
     });
   });
 });
