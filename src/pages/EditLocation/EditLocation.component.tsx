@@ -14,8 +14,10 @@ import Paths from '../../root/RootNavigation/Paths';
 import { StyledBackPopupContentContainer, StyledBackPopupContentText } from './EditLocation.styles';
 import { useTranslation as translate } from '../../hooks/useTranslation';
 import { PopupMenu } from '../../components/PopupMenu';
+import { TestUtils } from '../../utils';
 
 const { SCREEN_NAME, defaultOptions, cancelButtons } = config;
+const { testProps } = TestUtils;
 
 const EditLocation = (props: Props) => {
   const {
@@ -33,7 +35,6 @@ const EditLocation = (props: Props) => {
     control,
     handleSubmit,
     setError,
-    trigger,
     formState: { errors, isValid, isDirty }
   } = useForm({ ...defaultOptions, ...formOptions });
   const { chargers } = mapPayload();
@@ -65,7 +66,9 @@ const EditLocation = (props: Props) => {
   }
   
   const renderCancelPopupContent = (name: string) => (
-    <StyledBackPopupContentContainer>
+    <StyledBackPopupContentContainer
+      {...testProps(`${SCREEN_NAME}_${name}Popup_Content`)}
+    >
       <StyledBackPopupContentText>
         {translate(`CancelPopup-${name}Popup-text`)}
       </StyledBackPopupContentText>
@@ -82,6 +85,7 @@ const EditLocation = (props: Props) => {
       renderContent={() => renderCancelPopupContent('cancel')}
       withCloseButton
       onClickCloseButton={() => setIsBackPopupOpen(false)}
+      {...testProps(`${SCREEN_NAME}_CancelPopup`)}
     />
   )
   
@@ -95,6 +99,7 @@ const EditLocation = (props: Props) => {
       renderContent={() => renderCancelPopupContent('remove')}
       withCloseButton
       onClickCloseButton={() => setIsRemovePopupOpen(false)}
+      {...testProps(`${SCREEN_NAME}_RemovePopup`)}
     />
   )
   
@@ -118,7 +123,6 @@ const EditLocation = (props: Props) => {
         onUpdateCharger={(payload: EditChargerPayloadType) =>
           handleUpdateCharger(payload, addedChargers, setAddedChargers)
         }
-        trigger={trigger}
         isValid={isFormValid}
         tableData={addedChargers}
         setTableData={setAddedChargers}

@@ -185,7 +185,7 @@ const handleUpdateCharger = (props: Props) => async (
   await useSubmissionLoading(props, () => onUpdateCharger()(body, addedChargers, setAddedChargers));
 };
 
-const onDeleteChargers = (props: Props) => async (modifiedChargers: Array<ChargerType>) => {
+const onDeleteChargers = (props: Props) => async (modifiedChargers: Array<EditChargerPayloadType>) => {
   const { navigate } = props;
   const { chargers } = mapPayload(props)();
   const removedChargers = modifiedChargers;
@@ -203,7 +203,7 @@ const onDeleteChargers = (props: Props) => async (modifiedChargers: Array<Charge
   navigate(Paths.Dashboard);
 }
 
-const handleBackButtonClick = (props: Props) => async (chargers: Array<ChargerType>) => {
+const handleBackButtonClick = (props: Props) => async (chargers: Array<EditChargerPayloadType>) => {
   await useSubmissionLoading(props, () => onDeleteChargers(props)(chargers))
 }
 

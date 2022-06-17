@@ -18,7 +18,7 @@ export interface ChargerTypeDataType {
 }
 
 export interface ChargerType {
-  id: number
+  id: string
   type: string
   serialNumber: string
   status: string
@@ -32,7 +32,6 @@ export interface Props {
   mapChargerTypes: Function
   onUpdateCharger: Function
   onSaveCharger: Function
-  trigger: Function
   onSaveButtonClick: () => void
   onRemoveButtonClick?: () => void
   locationFormIcon: any

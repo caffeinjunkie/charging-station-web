@@ -18,7 +18,8 @@ const {
   mapChargerTypes,
   handleSaveLocation,
   handleSaveCharger,
-  handleUpdateCharger
+  handleUpdateCharger,
+  handleBackButtonClick
 } = handlers;
 
 describe('addLocationHandlers', () => {
@@ -96,6 +97,24 @@ describe('addLocationHandlers', () => {
       await useSubmissionCallback();
       
       expect(setAddedChargers).toHaveBeenCalledWith([responseData, charger2]);
+    });
+  });
+  
+  describe('#handleBackButtonClick', () => {
+    it('should navigate to dashboard and call axios post /delete-chargers',async () => {
+      const removedChargers = [charger1, charger2];
+      (post as jest.Mock).mockReturnValue({})
+      const postPayload = {
+        body: {
+          chargers: removedChargers
+        },
+        path: '/delete-chargers'
+      };
+      
+      await handleBackButtonClick(props)(removedChargers);
+      await useSubmissionCallback();
+      
+      expect(post).toHaveBeenCalledWith(postPayload);
     });
   });
   

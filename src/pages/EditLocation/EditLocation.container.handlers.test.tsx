@@ -8,8 +8,8 @@ import {
   charger1, charger2
 } from '../../fixtures/chargerData.fixture';
 import { useSubmissionLoading } from '../../hooks/useSubmissionLoading';
-import { post } from '../../hooks/useAxios';
-import { locationData } from "../../fixtures/locationData.fixture";
+import { post, remove } from '../../hooks/useAxios';
+import { locationData } from '../../fixtures/locationData.fixture';
 
 jest.mock('../../hooks/useSubmissionLoading');
 jest.mock('../../hooks/useAxios');
@@ -20,6 +20,7 @@ const {
   handleSaveLocation,
   handleSaveCharger,
   handleUpdateCharger,
+  handleBackButtonClick,
   mapPayload,
   handleRemoveLocation,
   mapHookFormDefaultValues
@@ -59,6 +60,25 @@ describe('editLocationHandlers', () => {
     mapPayload: jest.fn()
   }
   
+  describe('#handleBackButtonClick', () => {
+    it('should navigate to dashboard and call axios post /delete-chargers',async () => {
+      const removedChargers = [charger1];
+      (post as jest.Mock).mockReturnValue({})
+      const postPayload = {
+        body: {
+          chargers: removedChargers
+        },
+        path: '/delete-chargers'
+      };
+      
+      await handleBackButtonClick(props)(removedChargers);
+      await useSubmissionCallback();
+      
+      expect(post).toHaveBeenCalledWith(postPayload);
+      expect(props.navigate).toHaveBeenCalledWith('/');
+    });
+  });
+  
   describe('#handleSaveCharger', () => {
     it('should call setAddedChargers with data from response',async () => {
       const setAddedChargers = jest.fn();
@@ -87,6 +107,42 @@ describe('editLocationHandlers', () => {
       
       expect(setAddedChargers).toHaveBeenCalledWith([...addedChargers, responseData]);
       expect(post).toHaveBeenCalledWith(postPayload);
+    });
+  });
+  
+  describe('#mapHookFormDefaultValues', () => {
+    it('should return mapped default values', () => {
+      const exptectedResult = {
+        defaultValues: {
+          name: "Blvd 2",
+          city: "City",
+          country: {
+            id: "1",
+            name: "Country Name"
+          },
+          locationNo: "122314",
+          postalCode: "144BB"
+        }
+      }
+      
+      const result = mapHookFormDefaultValues(props)();
+      
+      expect(result).toEqual(exptectedResult)
+    });
+  });
+  
+  describe('#handleRemovelocation', () => {
+    it('should navigate to dashboard and invoke axios delete /locations/1',async () => {
+      (remove as jest.Mock).mockReturnValue({})
+      const payload = {
+        path: `/locations/1`
+      }
+      
+      await handleRemoveLocation(props)();
+      await useSubmissionCallback();
+      
+      expect(remove).toHaveBeenCalledWith(payload);
+      expect(props.navigate).toHaveBeenCalledWith('/');
     });
   });
   

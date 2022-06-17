@@ -1,21 +1,31 @@
 import React from 'react';
-import { cleanup, render, fireEvent, RenderResult } from '@testing-library/react';
+import {cleanup, render, fireEvent, RenderResult } from '@testing-library/react';
 
 import Dropdown from './Dropdown.component';
 
 describe('Dropdown', () => {
   let result: RenderResult;
-  const dropDownDisplayValue = 'Value example';
-  const dropDownLabelText = 'Label Example';
   const onChange = jest.fn();
-  const screenName = 'LocationHookForm-label';
+  const screenName = 'LocationHookForm';
   const name = 'country';
-  const dropDownTestId = `${screenName}_${name}_Select`;
+  const label = 'Country';
+  const options = [
+    {
+      id: "1",
+      name: "Netherlands"
+    },
+    {
+      id: "2",
+      name: "Switzerland"
+    }
+  ]
   const props = {
     screenName,
     onChange,
-    label: dropDownLabelText,
-    name
+    label,
+    name,
+    options,
+    value: "Netherlands"
   };
 
   beforeEach(() => {
@@ -24,32 +34,37 @@ describe('Dropdown', () => {
 
   afterEach(() => {
     cleanup();
-    jest.resetAllMocks();
+    jest.clearAllMocks();
   });
 
   describe('#render', () => {
-    it('should render dropDownDisplayValue when value is provided', () => {
-      const { getByDisplayValue, rerender } = result;
-      rerender(<Dropdown {...props} value={dropDownDisplayValue} />);
+    it('should render label when label is provided', () => {
+      const { getByText } = result;
 
-      expect(getByDisplayValue(dropDownDisplayValue)).toBeTruthy();
+      expect(getByText('LocationHookForm-country-label')).toBeTruthy();
     });
-
-    it('should render dropDownLabelText as text and label text', () => {
-      const { getByTestId } = result;
-
-      expect(getByTestId(dropDownLabelText)).toBeTruthy();
+  
+    it('should render placeholder value', () => {
+      const { getByText } = result;
+      
+      expect(getByText('LocationHookForm-country-placeholder-text')).toBeTruthy();
     });
+  
+    it('should render options', () => {
+      const { getByText } = result;
     
-    describe('#onChange', () => {
-      it('should invoke onChange when dropDown is changed', () => {
-        const { getByTestId } = result;
-        const dropDown = getByTestId(dropDownTestId);
-
-        fireEvent.change(dropDown, { target: { value: 'Change value' } });
-
-        expect(onChange).toBeCalledWith();
-      });
+      expect(getByText('Netherlands')).toBeTruthy();
+      expect(getByText('Switzerland')).toBeTruthy();
+    });
+  });
+  
+  describe('#onChange', () => {
+    it('should call onChange with options Netherlands', () => {
+      const { getByTestId } = result;
+      
+      fireEvent.change(getByTestId(`${screenName}_LocationHookForm-country-label_Select`), 'Netherlands');
+      
+      expect(onChange).toHaveBeenCalledWith(options[0])
     });
   });
 });

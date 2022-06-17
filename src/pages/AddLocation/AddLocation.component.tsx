@@ -18,8 +18,10 @@ import {
   StyledBackPopupContentContainer,
   StyledBackPopupContentText
 } from './AddLocation.styles';
+import { TestUtils } from '../../utils';
 
 const { SCREEN_NAME, defaultOptions, defaultValues, cancelButtons } = config;
+const { testProps } = TestUtils;
 
 const AddLocation = (props: Props) => {
   const {
@@ -34,7 +36,6 @@ const AddLocation = (props: Props) => {
     control,
     handleSubmit,
     setError,
-    trigger,
     formState: { errors, isValid, isDirty }
   } = useForm({ ...defaultOptions, defaultValues });
   const [addedChargers, setAddedChargers] = React.useState([]);
@@ -78,6 +79,7 @@ const AddLocation = (props: Props) => {
       renderContent={renderCancelPopupContent}
       withCloseButton
       onClickCloseButton={() => setIsBackPopupOpen(false)}
+      {...testProps(`${SCREEN_NAME}_CancelPopup`)}
     />
   )
   
@@ -100,7 +102,6 @@ const AddLocation = (props: Props) => {
         onUpdateCharger={(payload: EditChargerPayloadType) =>
           handleUpdateCharger(payload, addedChargers, setAddedChargers
         )}
-        trigger={trigger}
         isValid={isFormValid}
         tableData={addedChargers}
         setTableData={setAddedChargers}

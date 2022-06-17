@@ -23,6 +23,7 @@ export const locationMockData = {
 export const locationData = {
   id: "1",
   attributes: {
+    name: "Blvd 2",
     locationNo: "122314",
     postalCode: "144BB",
     city: "City",

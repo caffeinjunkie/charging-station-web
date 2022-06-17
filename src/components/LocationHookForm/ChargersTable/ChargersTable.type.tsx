@@ -1,5 +1,5 @@
 export interface ChargerType {
-  id: number
+  id: string
   type: string
   serialNumber: string
   status: string
