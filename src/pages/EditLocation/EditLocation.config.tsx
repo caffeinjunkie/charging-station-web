@@ -21,8 +21,15 @@ const cancelButtons = (handleConfirmBackButton: Function, handleCancelBackButton
   }
 ];
 
+const defaultProps = {
+  mapPayload: () => ({
+    chargers: []
+  })
+}
+
 export default {
   SCREEN_NAME,
   defaultOptions,
-  cancelButtons
+  cancelButtons,
+  defaultProps
 };

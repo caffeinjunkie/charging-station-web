@@ -5,17 +5,27 @@ import Dropdown from './Dropdown.component';
 
 describe('Dropdown', () => {
   let result: RenderResult;
-  const textInputDisplayValue = 'Value example';
-  const textInputLabelText = 'Label Example';
   const onChange = jest.fn();
-  const screenName = 'Screen';
-  const name = 'Name';
-  const textInputTestId = `${screenName}_${name}_Input`;
+  const screenName = 'LocationHookForm';
+  const name = 'country';
+  const label = 'Country';
+  const options = [
+    {
+      id: "1",
+      name: "Netherlands"
+    },
+    {
+      id: "2",
+      name: "Switzerland"
+    }
+  ]
   const props = {
     screenName,
     onChange,
-    label: textInputLabelText,
-    name
+    label,
+    name,
+    options,
+    value: "Netherlands"
   };
 
   beforeEach(() => {
@@ -24,32 +34,37 @@ describe('Dropdown', () => {
 
   afterEach(() => {
     cleanup();
-    jest.resetAllMocks();
+    jest.clearAllMocks();
   });
 
   describe('#render', () => {
-    it('should render textInputDisplayValue when value is provided', () => {
-      const { getByDisplayValue, rerender } = result;
-      rerender(<Dropdown {...props} value={textInputDisplayValue} />);
-
-      expect(getByDisplayValue(textInputDisplayValue)).toBeTruthy();
-    });
-
-    it('should render textInputLabelText as text and label text', () => {
+    it('should render label when label is provided', () => {
       const { getByText } = result;
 
-      expect(getByText(textInputLabelText)).toBeTruthy();
+      expect(getByText('LocationHookForm-country-label')).toBeTruthy();
     });
+  
+    it('should render placeholder value', () => {
+      const { getByText } = result;
+      
+      expect(getByText('LocationHookForm-country-placeholder-text')).toBeTruthy();
+    });
+  
+    it('should render options', () => {
+      const { getByText } = result;
     
-    describe('#onChange', () => {
-      it('should invoke onChange when textInput is changed', () => {
-        const { getByTestId } = result;
-        const textInput = getByTestId(textInputTestId);
-
-        fireEvent.change(textInput, { target: { value: 'Change value' } });
-
-        expect(onChange).toBeCalled();
-      });
+      expect(getByText('Netherlands')).toBeTruthy();
+      expect(getByText('Switzerland')).toBeTruthy();
+    });
+  });
+  
+  describe('#onChange', () => {
+    it('should call onChange with options Netherlands', () => {
+      const { getByTestId } = result;
+      
+      fireEvent.change(getByTestId(`${screenName}_LocationHookForm-country-label_Select`), 'Netherlands');
+      
+      expect(onChange).toHaveBeenCalledWith(options[0])
     });
   });
 });

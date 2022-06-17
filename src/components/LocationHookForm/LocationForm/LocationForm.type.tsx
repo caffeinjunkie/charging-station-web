@@ -4,15 +4,6 @@ export interface CountryType {
   countryAbbreviation: string
 }
 
-interface ChargerTypeAttributesType {
-  type: string
-}
-
-export interface ChargerTypeDataType {
-  id: number
-  attributes: ChargerTypeAttributesType
-}
-
 export interface Props {
   screenName: string
   listOfCountries: Array<CountryType>

@@ -6,9 +6,12 @@ import type {
   CountryDataType,
   ChargerDataType,
   ChargerType,
-  CountryType
+  CountryType,
+  ChargerPayloadType,
+  SaveChargerPayloadType,
+  EditChargerPayloadType
 } from './EditLocation.type';
-import { post } from '../../hooks/useAxiosPost';
+import { post, remove } from '../../hooks/useAxios';
 import Paths from '../../root/RootNavigation/Paths';
 import { useSubmissionLoading } from '../../hooks/useSubmissionLoading';
 
@@ -40,14 +43,65 @@ const mapChargerTypes = (props: Props) => () => {
   }));
 };
 
-const onSubmit = (props: Props) => async (values: any, setError: Function) => {
+const onDelete = (props: Props) => async () => {
+  const { navigate } = props;
+  const { id } = mapPayload(props)();
+  const payload = {
+    path: `/locations/${id}`
+  }
+  
+  await remove(payload);
+  
+  navigate(Paths.Dashboard);
+}
+
+const onSaveCharger = () => async (
+  savePayload: SaveChargerPayloadType,
+  addedChargers: Array<ChargerPayloadType>,
+  setAddedChargers: Function
+) => {
+  const payload = {
+    path: '/chargers',
+    body: savePayload
+  }
+  
+  const response = await post(payload);
+  
+  setAddedChargers([...addedChargers, response]);
+}
+
+const onUpdateCharger = () => async (
+  updatePayload: EditChargerPayloadType,
+  addedChargers: Array<ChargerPayloadType>,
+  setAddedChargers: Function
+) => {
+  const { id } = updatePayload;
+  const payload = {
+    path: `/chargers/${id}`,
+    body: updatePayload
+  }
+  
+  const response = await post(payload);
+  
+  const updatedChargers = addedChargers.map((charger: any) => {
+    if (charger.id.toString() === id) {
+      return response
+    }
+    return charger;
+  })
+  
+  setAddedChargers(updatedChargers);
+}
+
+const onSubmit = (props: Props) => async (values: any, submitArgs: any) => {
+  const { setError, chargers } = submitArgs;
   const { navigate } = props;
   const { id } = mapPayload(props)();
   const mappedBody = {
     ...values,
     id,
     country: values.country.id,
-    chargers: []
+    chargers: chargers.map((charger: ChargerPayloadType) => charger.id.toString())
   }
   
   const payload = {
@@ -61,7 +115,7 @@ const onSubmit = (props: Props) => async (values: any, setError: Function) => {
     setError(key, { message });
     return;
   }
-  
+
   navigate(Paths.Dashboard);
 }
 
@@ -94,6 +148,7 @@ const mapPayload = (props: Props) => () => {
 
 const mapHookFormDefaultValues = (props: Props) => () => {
   const { name, locationNo, city, postalCode, country }: any = mapPayload(props)();
+  
   return {
     defaultValues: {
       name,
@@ -108,14 +163,58 @@ const mapHookFormDefaultValues = (props: Props) => () => {
   }
 }
 
-const handleSaveLocation = (props: Props) => async (values: any, setError: Function) => {
-  await useSubmissionLoading(props, () => onSubmit(props)(values, setError));
+const handleSaveLocation = (props: Props) => async (values: any, submitArgs: any) => {
+  await useSubmissionLoading(props, () => onSubmit(props)(values, submitArgs));
 };
+
+const handleRemoveLocation = (props: Props) => async () => {
+  await useSubmissionLoading(props, () => onDelete(props)());
+}
+
+const handleSaveCharger = (props: Props) => async (
+  body: SaveChargerPayloadType,
+  addedChargers: Array<ChargerPayloadType>,
+  setAddedChargers: Function) => {
+  await useSubmissionLoading(props, () => onSaveCharger()(body, addedChargers, setAddedChargers));
+};
+
+const handleUpdateCharger = (props: Props) => async (
+  body: EditChargerPayloadType,
+  addedChargers: Array<ChargerPayloadType>,
+  setAddedChargers: Function) => {
+  await useSubmissionLoading(props, () => onUpdateCharger()(body, addedChargers, setAddedChargers));
+};
+
+const onDeleteChargers = (props: Props) => async (modifiedChargers: Array<EditChargerPayloadType>) => {
+  const { navigate } = props;
+  const { chargers } = mapPayload(props)();
+  const removedChargers = modifiedChargers;
+  chargers.forEach(() => {
+    removedChargers.shift();
+  })
+  
+  const payload = {
+    path: '/delete-chargers',
+    body: { chargers: removedChargers }
+  }
+  
+  await post(payload);
+  
+  navigate(Paths.Dashboard);
+}
+
+const handleBackButtonClick = (props: Props) => async (chargers: Array<EditChargerPayloadType>) => {
+  await useSubmissionLoading(props, () => onDeleteChargers(props)(chargers))
+}
 
 export default {
   mapCountries,
   mapChargerTypes,
   handleSaveLocation,
+  handleUpdateCharger,
   mapPayload,
-  mapHookFormDefaultValues
+  handleRemoveLocation,
+  handleBackButtonClick,
+  mapHookFormDefaultValues,
+  handleSaveCharger
 };

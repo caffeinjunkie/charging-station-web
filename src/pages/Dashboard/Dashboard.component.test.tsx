@@ -2,7 +2,7 @@ import React from 'react';
 import { shallow, ShallowWrapper } from 'enzyme';
 
 import Dashboard from './Dashboard.component';
-import { locationMockData } from '../../fixtures/locationData';
+import { locationMockData } from '../../fixtures/locationData.fixture';
 
 describe('Dashboard', () => {
   let wrapper: ShallowWrapper;

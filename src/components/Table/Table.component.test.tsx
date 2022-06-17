@@ -2,7 +2,7 @@ import React from 'react';
 import { cleanup, render, RenderResult } from '@testing-library/react';
 
 import Table from './Table.component';
-import { dataMock, columnMock } from '../../fixtures/tableMockData';
+import { dataMock, columnMock } from '../../fixtures/tableMockData.fixture';
 
 describe('Table', () => {
   let result: RenderResult;
@@ -71,10 +71,10 @@ describe('Table', () => {
         ...props,
         withTableNavigation: true
       }
-      const { getByText } = render(<Table {...withNavigationProps} />);
+      const { getByTestId } = render(<Table {...withNavigationProps} />);
       
-      expect(getByText('>')).toBeTruthy();
-      expect(getByText('<')).toBeTruthy();
+      expect(getByTestId('Dashboard_Next_Button')).toBeTruthy();
+      expect(getByTestId('Dashboard_Previous_Button')).toBeTruthy();
     });
   });
 });

@@ -7,6 +7,7 @@ export const StyledDropdown = styled.select`
   ${FontStyles.Regular}
   padding: 14px 12px 12px 12px;
   width: 100%;
+  min-width: 200px;
   color: ${Colors.lightBlack};
   background-color: ${Colors.offWhite};
   border-radius: 4px;

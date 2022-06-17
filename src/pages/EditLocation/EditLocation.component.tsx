@@ -2,21 +2,32 @@ import React from 'react';
 import { FaMapMarkerAlt } from 'react-icons/fa';
 import { useForm } from 'react-hook-form';
 
-import { Props } from './EditLocation.type';
+import type {
+  EditChargerPayloadType,
+  Props,
+  SaveChargerPayloadType
+} from './EditLocation.type';
 import config from './EditLocation.config';
 import { LocationHookForm } from '../../components/LocationHookForm';
-import BackButton from '../../components/BackButton/BackButton';
+import { BackButton } from '../../components/BackButton';
 import Paths from '../../root/RootNavigation/Paths';
-import { StyledBackPopupContentContainer, StyledBackPopupContentText } from '../AddLocation/AddLocation.styles';
+import { StyledBackPopupContentContainer, StyledBackPopupContentText } from './EditLocation.styles';
 import { useTranslation as translate } from '../../hooks/useTranslation';
 import { PopupMenu } from '../../components/PopupMenu';
+import { TestUtils } from '../../utils';
 
 const { SCREEN_NAME, defaultOptions, cancelButtons } = config;
+const { testProps } = TestUtils;
 
 const EditLocation = (props: Props) => {
   const {
     navigate,
     mapHookFormDefaultValues,
+    mapPayload,
+    handleUpdateCharger,
+    handleBackButtonClick,
+    handleRemoveLocation,
+    handleSaveCharger,
     handleSaveLocation
   } = props;
   const formOptions = mapHookFormDefaultValues();
@@ -26,26 +37,40 @@ const EditLocation = (props: Props) => {
     setError,
     formState: { errors, isValid, isDirty }
   } = useForm({ ...defaultOptions, ...formOptions });
-  const [addedChargers, setAddedChargers] = React.useState([]);
+  const { chargers } = mapPayload();
+  const [addedChargers, setAddedChargers] = React.useState(chargers);
   const [isBackPopupOpen, setIsBackPopupOpen] = React.useState(false);
-  const isFormValid = isValid && isDirty;
+  const [isRemovePopupOpen, setIsRemovePopupOpen] = React.useState(false);
+  const isFormValid = isValid && (isDirty || addedChargers.length !== chargers.length);
+  const submitArgs = {
+    chargers: addedChargers,
+    setError
+  };
   
-  const handleCancelBackButton = () => setIsBackPopupOpen(!isBackPopupOpen);
+  const handleCancelButton = () => {
+    setIsBackPopupOpen(false);
+    setIsRemovePopupOpen(false);
+  }
   
-  const handleConfirmBackButton = () => navigate(Paths.Dashboard);
+  const handleConfirmBackButton = () => {
+    handleBackButtonClick(addedChargers);
+  }
   
   const onBackButtonClick = () => {
-    if (isDirty) {
+    const chargerListHasChange = addedChargers.length !== chargers.length;
+    if (isDirty || chargerListHasChange) {
       setIsBackPopupOpen(true);
       return
     }
     navigate(Paths.Dashboard);
   }
   
-  const renderCancelPopupContent = () => (
-    <StyledBackPopupContentContainer>
+  const renderCancelPopupContent = (name: string) => (
+    <StyledBackPopupContentContainer
+      {...testProps(`${SCREEN_NAME}_${name}Popup_Content`)}
+    >
       <StyledBackPopupContentText>
-        {translate('CancelPopup-cancelPopup-text')}
+        {translate(`CancelPopup-${name}Popup-text`)}
       </StyledBackPopupContentText>
     </StyledBackPopupContentContainer>
   )
@@ -54,17 +79,36 @@ const EditLocation = (props: Props) => {
     <PopupMenu
       isOpen={isBackPopupOpen}
       screenName={SCREEN_NAME}
-      name="Add"
+      name="Edit"
       withButtons
-      buttons={cancelButtons(handleConfirmBackButton, handleCancelBackButton)}
-      renderContent={renderCancelPopupContent}
+      buttons={cancelButtons(handleConfirmBackButton, handleCancelButton)}
+      renderContent={() => renderCancelPopupContent('cancel')}
       withCloseButton
       onClickCloseButton={() => setIsBackPopupOpen(false)}
+      {...testProps(`${SCREEN_NAME}_CancelPopup`)}
     />
   )
+  
+  const renderRemovePopup = () => (
+    <PopupMenu
+      isOpen={isRemovePopupOpen}
+      screenName={SCREEN_NAME}
+      name="Edit"
+      withButtons
+      buttons={cancelButtons(handleRemoveLocation, handleCancelButton)}
+      renderContent={() => renderCancelPopupContent('remove')}
+      withCloseButton
+      onClickCloseButton={() => setIsRemovePopupOpen(false)}
+      {...testProps(`${SCREEN_NAME}_RemovePopup`)}
+    />
+  )
+  
   return (
     <>
-      <BackButton onClick={onBackButtonClick} />
+      <BackButton
+        screenName={SCREEN_NAME}
+        onClick={onBackButtonClick}
+      />
       <LocationHookForm
         screenName={SCREEN_NAME}
         name="Edit"
@@ -73,14 +117,25 @@ const EditLocation = (props: Props) => {
         formOptions={formOptions}
         control={control}
         errors={errors}
+        onSaveCharger={(payload: SaveChargerPayloadType) =>
+          handleSaveCharger(payload, addedChargers, setAddedChargers)
+        }
+        onUpdateCharger={(payload: EditChargerPayloadType) =>
+          handleUpdateCharger(payload, addedChargers, setAddedChargers)
+        }
         isValid={isFormValid}
-        onSaveButtonClick={handleSubmit((values: any) => handleSaveLocation(values, setError))}
-        onRemoveButtonClick={() => {}}
+        tableData={addedChargers}
+        setTableData={setAddedChargers}
+        onSaveButtonClick={handleSubmit((values: any) => handleSaveLocation(values, submitArgs))}
+        onRemoveButtonClick={() => setIsRemovePopupOpen(true)}
         {...props}
       />
       {renderCancelPopup()}
+      {renderRemovePopup()}
     </>
   )
 }
+
+EditLocation.defaultProps = config.defaultProps;
 
 export default EditLocation;

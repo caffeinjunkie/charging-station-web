@@ -3,24 +3,33 @@ import { FaPlus } from 'react-icons/fa';
 import { isEmpty } from "lodash";
 
 import { useForm } from "react-hook-form";
-import { Props } from './AddLocation.type';
+import type {
+  Props,
+  SaveChargerPayloadType,
+  EditChargerPayloadType
+} from './AddLocation.type';
 import config from './AddLocation.config';
 import { LocationHookForm } from '../../components/LocationHookForm';
 import { useTranslation as translate } from '../../hooks/useTranslation';
-import BackButton from '../../components/BackButton/BackButton';
+import { BackButton } from '../../components/BackButton';
 import Paths from '../../root/RootNavigation/Paths';
 import { PopupMenu } from '../../components/PopupMenu';
 import {
   StyledBackPopupContentContainer,
   StyledBackPopupContentText
 } from './AddLocation.styles';
+import { TestUtils } from '../../utils';
 
 const { SCREEN_NAME, defaultOptions, defaultValues, cancelButtons } = config;
+const { testProps } = TestUtils;
 
 const AddLocation = (props: Props) => {
   const {
     navigate,
-    handleSaveLocation
+    handleSaveLocation,
+    handleSaveCharger,
+    handleUpdateCharger,
+    handleBackButtonClick
   } = props;
   
   const {
@@ -32,10 +41,16 @@ const AddLocation = (props: Props) => {
   const [addedChargers, setAddedChargers] = React.useState([]);
   const [isBackPopupOpen, setIsBackPopupOpen] = React.useState(false);
   const isFormValid = isValid && isDirty;
+  const submitArgs = {
+    chargers: addedChargers,
+    setError
+  };
   
   const handleCancelBackButton = () => setIsBackPopupOpen(!isBackPopupOpen);
   
-  const handleConfirmBackButton = () => navigate(Paths.Dashboard);
+  const handleConfirmBackButton = () => {
+    handleBackButtonClick(addedChargers)
+  }
   
   const onBackButtonClick = () => {
     const showCancelConfirmation = isDirty || !isEmpty(addedChargers);
@@ -64,12 +79,16 @@ const AddLocation = (props: Props) => {
       renderContent={renderCancelPopupContent}
       withCloseButton
       onClickCloseButton={() => setIsBackPopupOpen(false)}
+      {...testProps(`${SCREEN_NAME}_CancelPopup`)}
     />
   )
   
   return (
     <>
-      <BackButton onClick={onBackButtonClick} />
+      <BackButton
+        screenName={SCREEN_NAME}
+        onClick={onBackButtonClick}
+        />
       <LocationHookForm
         screenName={`${SCREEN_NAME}`}
         name="Add"
@@ -77,8 +96,16 @@ const AddLocation = (props: Props) => {
         locationFormIcon={FaPlus}
         control={control}
         errors={errors}
+        onSaveCharger={(payload: SaveChargerPayloadType) =>
+          handleSaveCharger(payload, addedChargers, setAddedChargers
+        )}
+        onUpdateCharger={(payload: EditChargerPayloadType) =>
+          handleUpdateCharger(payload, addedChargers, setAddedChargers
+        )}
         isValid={isFormValid}
-        onSaveButtonClick={handleSubmit((values: any) => handleSaveLocation(values, setError))}
+        tableData={addedChargers}
+        setTableData={setAddedChargers}
+        onSaveButtonClick={handleSubmit((values: any) => handleSaveLocation(values, submitArgs))}
         {...props}
       />
       {renderCancelPopup()}

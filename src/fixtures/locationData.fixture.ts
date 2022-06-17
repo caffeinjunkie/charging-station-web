@@ -20,6 +20,34 @@ export const locationMockData = {
   country
 };
 
+export const locationData = {
+  id: "1",
+  attributes: {
+    name: "Blvd 2",
+    locationNo: "122314",
+    postalCode: "144BB",
+    city: "City",
+    country: {
+      data: {
+        id: "1",
+        attributes: {
+          countryName: "Country Name"
+        }
+      }
+    },
+    chargers:{
+      data: [
+        {
+          id: "1",
+          attributes: {
+            type: "Type"
+          }
+        }
+      ]
+    }
+  }
+}
+
 export const mappedLocationData =  [{
     actions: {
       className: "align-right",
@@ -35,7 +63,7 @@ export const mappedLocationData =  [{
     },
     lastUpdated: {
       className: "align-center",
-      value: "07:00 AM"
+      value: "07.00"
     },
     locationName: {
       className: "align-left",

@@ -17,14 +17,12 @@ const withQuery = (queryProps: QueryProps): Function => (ComposedComponent: any)
     const isFetchById = queryKey === 'fetchById';
     if (isFetchById) {
       Object.assign(queryVariables, { id });
-      
     }
     const [refetchVariables, setRefetchVariables] = React.useState(queryVariables);
     const useQueryOptions =  {
       keepPreviousData: true,
       staleTime: Infinity,
-      cacheTime: 0,
-      refetchInterval: 500
+      cacheTime: 0
     }
     
     const result = useQuery([queryKey, refetchVariables], async () => request(

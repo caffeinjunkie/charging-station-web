@@ -39,12 +39,25 @@ const timeSince = (date: string) => {
     return `${Math.floor(interval)} hours ago`;
   }
   
-  return  transformedDate.toLocaleTimeString('en-US', {
+  return transformedDate.toLocaleTimeString('id-ID', {
     hour: '2-digit',
     minute: '2-digit'
   });
 };
 
+const transformDateToLocaleFormat = (date: string) => {
+  const transformedDate = new Date(date);
+  const formattedTime = transformedDate.toLocaleTimeString('en-US', {
+    hour: '2-digit',
+    minute: '2-digit',
+    second: '2-digit',
+    hour12: false
+  });
+  const formattedDate = transformedDate.toLocaleDateString('id-ID')
+  return `${formattedDate} ${formattedTime}`
+}
+
 export default {
-  timeSince
+  timeSince,
+  transformDateToLocaleFormat
 }

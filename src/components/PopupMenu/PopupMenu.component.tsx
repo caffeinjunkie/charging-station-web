@@ -40,15 +40,17 @@ const PopupMenu = (props: Props): JSX.Element => {
       text,
       onClick,
       className,
+      disabled,
       name: buttonName
     } = button;
 
     return (
-      <StyledButtonContainer>
+      <StyledButtonContainer key={index}>
         <Button
           key={index}
           text={text}
           onClick={onClick}
+          disabled={disabled}
           className={className}
           screenName={screenName}
           name={buttonName}
