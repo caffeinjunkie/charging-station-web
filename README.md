@@ -27,7 +27,7 @@ To speed up the process and avoid these errors from the get go:
 1. Remove package-lock.json
 2. Remove @types/recompose, recompose and graphql-request from package.json
 3. npm install
-4. npm install graphql-request grpahql
+4. npm install graphql-request graphql
 5. npm install @types/recompose recompose --legacy-peer-deps
 ```
 
