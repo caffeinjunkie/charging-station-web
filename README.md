@@ -22,7 +22,6 @@ npm install --legacy-peer-deps
 ```
 npm uninstall @types/recompose recompose
 and npm uninstall @types/recompose recompose --legacy-peer-deps
-
 ```
 
 After installing all the required packages, you can:
