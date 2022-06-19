@@ -10,7 +10,7 @@ npm install
 yarn install
 ```
 
-###⚠️ You might encounter these errors when installing and starting the project:
+### ⚠️ You might encounter these errors when installing and starting the project:
 
 1. ENOTFOUND on some libraries.
 2. Trouble installing recompose.
