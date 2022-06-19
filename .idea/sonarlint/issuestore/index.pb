@@ -104,8 +104,6 @@ N
 src/hooks/useQuery/useQuery.ts,e/a/eaf430f44616aa44e3013d582c4f864c2416891e
 C
 src/config/index.ts,0/3/032e57e0fe40d4bfbf61efe7d8bd9c8ac84c077b
-9
-	README.md,8/e/8ec9a00bfd09b3190ac6b22251dbb1aa95a0579d
 j
 :src/components/LoadingOverlay/LoadingOverlay.component.tsx,f/d/fde7d5c7a95a79774a27ff450995fe6d7fdcdce1
 g
@@ -130,10 +128,6 @@ Y
 )src/components/LocationHookForm/index.tsx,2/9/294324618ff6ff2db74a044c5cfc92290c3d569e
 U
 %src/components/Table/Table.config.tsx,d/d/dddd193cfe9563135968daa176225e2f9572e9a1
-<
-package.json,7/0/7030d0b2f71b999ff89a343de08c414af32fc93a
-A
-package-lock.json,f/a/fa288d1472d29beccb489a676f68739ad365fc47
 S
 #src/components/Table/Table.type.tsx,3/b/3b0b506d2157293f6e8045f930e3863683414c0b
 K
@@ -286,3 +280,13 @@ c
 3src/components/InputForm/Dropdown/Dropdown.type.tsx,3/8/384e473732a70467b0587a7c956df94ab49c8002
 h
 8src/components/InputForm/Dropdown/Dropdown.component.tsx,3/8/386b6539684dea05d39f0f970418cc0307c7b240
+n
+>src/components/LocationHookForm/LocationHookForm.component.tsx,8/7/879979adcd12ca7b671ef01f8562f44e37a60425
+o
+?src/pages/EditLocation/EditLocation.container.handlers.test.tsx,d/6/d610a552239ddfc6dc6d8017e9a2174c96aeddc2
+m
+=src/components/InputForm/Dropdown/Dropdown.component.test.tsx,8/c/8c07d7c72683f7b6100c30f8a5e05d53e6e58082
+y
+Isrc/components/LocationHookForm/ChargersTable/ChargersTable.component.tsx,1/8/186c2012ccbacb896dcd94e38c2dd5ea4b44fd59
+i
+9src/components/LocationHookForm/LocationHookForm.type.tsx,7/d/7d4e6dbdae14f88c274e2a05e59043372c1f4fda
