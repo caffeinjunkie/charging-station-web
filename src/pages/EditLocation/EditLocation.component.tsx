@@ -39,11 +39,13 @@ const EditLocation = (props: Props) => {
   } = useForm({ ...defaultOptions, ...formOptions });
   const { chargers } = mapPayload();
   const [addedChargers, setAddedChargers] = React.useState(chargers);
+  const [deletedChargers, setDeletedChargers] = React.useState([]);
   const [isBackPopupOpen, setIsBackPopupOpen] = React.useState(false);
   const [isRemovePopupOpen, setIsRemovePopupOpen] = React.useState(false);
   const isFormValid = isValid && (isDirty || addedChargers.length !== chargers.length);
   const submitArgs = {
     chargers: addedChargers,
+    deletedChargers,
     setError
   };
   
@@ -126,6 +128,7 @@ const EditLocation = (props: Props) => {
         isValid={isFormValid}
         tableData={addedChargers}
         setTableData={setAddedChargers}
+        setDeletedChargers={setDeletedChargers}
         onSaveButtonClick={handleSubmit((values: any) => handleSaveLocation(values, submitArgs))}
         onRemoveButtonClick={() => setIsRemovePopupOpen(true)}
         {...props}

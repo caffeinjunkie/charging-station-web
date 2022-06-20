@@ -40,6 +40,7 @@ export interface Props {
   name: string
   tableData: Array<ChargerType>
   setTableData: Function
+  setDeletedChargers: Function
   locationTitle: string
   formOptions: any
   isValid: boolean

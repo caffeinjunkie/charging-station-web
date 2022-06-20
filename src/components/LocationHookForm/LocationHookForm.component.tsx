@@ -40,6 +40,7 @@ const LocationHookForm = (props: Props) => {
     onSaveButtonClick,
     tableData,
     setTableData,
+    setDeletedChargers,
     onRemoveButtonClick,
     isValid,
     errors,
@@ -108,6 +109,7 @@ const LocationHookForm = (props: Props) => {
   
   const removeDeletedItemFromData = (deletedItem: ChargerType) => {
     const filteredData = tableData.filter((charger: ChargerType) => charger.id !== deletedItem.id);
+    setDeletedChargers((state: any)  => [...state, deletedItem]);
     setTableData(filteredData);
   }
   

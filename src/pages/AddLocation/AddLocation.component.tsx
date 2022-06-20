@@ -39,10 +39,12 @@ const AddLocation = (props: Props) => {
     formState: { errors, isValid, isDirty }
   } = useForm({ ...defaultOptions, defaultValues });
   const [addedChargers, setAddedChargers] = React.useState([]);
+  const [deletedChargers, setDeletedChargers] = React.useState([]);
   const [isBackPopupOpen, setIsBackPopupOpen] = React.useState(false);
   const isFormValid = isValid && isDirty;
   const submitArgs = {
     chargers: addedChargers,
+    deletedChargers,
     setError
   };
   
@@ -105,6 +107,7 @@ const AddLocation = (props: Props) => {
         isValid={isFormValid}
         tableData={addedChargers}
         setTableData={setAddedChargers}
+        setDeletedChargers={setDeletedChargers}
         onSaveButtonClick={handleSubmit((values: any) => handleSaveLocation(values, submitArgs))}
         {...props}
       />

@@ -94,14 +94,15 @@ const onUpdateCharger = () => async (
 }
 
 const onSubmit = (props: Props) => async (values: any, submitArgs: any) => {
-  const { setError, chargers } = submitArgs;
+  const { setError, chargers, deletedChargers } = submitArgs;
   const { navigate } = props;
   const { id } = mapPayload(props)();
   const mappedBody = {
     ...values,
     id,
     country: values.country.id,
-    chargers: chargers.map((charger: ChargerPayloadType) => charger.id.toString())
+    chargers: chargers.map((charger: ChargerPayloadType) => charger.id.toString()),
+    deletedChargers
   }
   
   const payload = {

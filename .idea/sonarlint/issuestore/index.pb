@@ -212,12 +212,8 @@ d
 4src/pages/Dashboard/Dashboard.container.handlers.tsx,4/7/4791094a0ca1c3a13663f04ac593a7facc49a8fc
 S
 #src/fixtures/countryData.fixture.ts,1/f/1fd8140ebcdb9e1e826e760d0fb244db6fc119a9
-^
-.src/pages/EditLocation/EditLocation.config.tsx,a/d/ad8dad907f3a5815a9b343f2fe155d48b275401f
 \
 ,src/pages/AddLocation/AddLocation.config.tsx,0/f/0f61e436c2dedeb9d2475a62ef07fb5564f38bff
-k
-;src/components/LocationHookForm/LocationHookForm.config.tsx,8/3/83e2021e930a24a0e1ad5b9ae0a2eb47b5439701
 `
 0src/components/InputForm/InputForm.component.tsx,f/0/f02e056548cc3cf1ac6e73f6ce6ef74bfb43540b
 e
@@ -232,8 +228,6 @@ N
 src/hooks/useAxios/useAxios.ts,5/6/5613458bda595ba03e42badfe59d6ec69aafdb4e
 O
 coverage/lcov-report/index.html,d/4/d41f4826c3c092a0915ae3306b427ca8e58b8795
-j
-:src/pages/EditLocation/EditLocation.container.handlers.tsx,5/b/5b6586e9de59e9ed808c1d0bc3ebaf397f2e5e8d
 `
 0src/pages/Dashboard/Dashboard.component.test.tsx,1/1/11f85f2b775fd4c89c835eae342574f43f5dcec4
 S
@@ -246,10 +240,6 @@ $src/fixtures/locationData.fixture.ts,0/5/05b59c52a0d471b76657948dea9f16a209437
 +src/pages/Dashboard/Dashboard.component.tsx,c/8/c8fc096cf1afa7d370e8b0ddf3c3f6d45d649ffa
 m
 =src/pages/AddLocation/AddLocation.container.handlers.test.tsx,e/9/e9a52f417fc36d2c3a4e55514fda0d56b161057d
-a
-1src/pages/EditLocation/EditLocation.component.tsx,0/c/0c840a565e503df6c20d7d9a1b3dd806737eac24
-_
-/src/pages/AddLocation/AddLocation.component.tsx,4/e/4e9543133130de1adf3e96caebb9755f494fe69c
 r
 Bsrc/components/LocationHookForm/ChargerForm/ChargerForm.config.tsx,2/a/2a248fd34f1ddc0df0570a151b4fe774e07cd86b
 p
@@ -274,19 +264,13 @@ Gsrc/components/LocationHookForm/LocationForm/LocationForm.component.tsx,e/0/e0
 Lsrc/components/LocationHookForm/LocationForm/LocationForm.component.test.tsx,c/3/c3f6825800ac885dc2b6c0c58071765a6221b618
 f
 6src/components/LocationHookForm/LocationForm/index.tsx,c/9/c98918e1cad4b2976c308fb28f8464cd090e1eda
-I
-src/utils/Locales/en.json,9/0/90e68446ae6a5254dfcafae5431f23c85a638214
 c
 3src/components/InputForm/Dropdown/Dropdown.type.tsx,3/8/384e473732a70467b0587a7c956df94ab49c8002
 h
 8src/components/InputForm/Dropdown/Dropdown.component.tsx,3/8/386b6539684dea05d39f0f970418cc0307c7b240
-n
->src/components/LocationHookForm/LocationHookForm.component.tsx,8/7/879979adcd12ca7b671ef01f8562f44e37a60425
 o
 ?src/pages/EditLocation/EditLocation.container.handlers.test.tsx,d/6/d610a552239ddfc6dc6d8017e9a2174c96aeddc2
 m
 =src/components/InputForm/Dropdown/Dropdown.component.test.tsx,8/c/8c07d7c72683f7b6100c30f8a5e05d53e6e58082
 y
 Isrc/components/LocationHookForm/ChargersTable/ChargersTable.component.tsx,1/8/186c2012ccbacb896dcd94e38c2dd5ea4b44fd59
-i
-9src/components/LocationHookForm/LocationHookForm.type.tsx,7/d/7d4e6dbdae14f88c274e2a05e59043372c1f4fda
