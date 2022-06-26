@@ -2,6 +2,7 @@ export interface ColumnType {
   key: string
   accessor: string
   className: string
+  sortable?: boolean
 }
 
 export interface ContentType {
@@ -24,6 +25,9 @@ export interface Props {
   data: Array<Object>
   screenName: string
   name: string
-  withTableNavigation?: boolean,
+  withTableNavigation?: boolean
+  sortProps?: any
   tableNavigationProps: TableNavigationProps
+  onClickHeaderText: (key: string) => void
+  withSorting?: boolean
 }

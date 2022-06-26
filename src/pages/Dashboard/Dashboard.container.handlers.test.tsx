@@ -23,6 +23,7 @@ describe('dashboardHandlers', () => {
     refetch: jest.fn(),
     fetchedData,
     prepareTableData: jest.fn(),
+    sortTable: jest.fn(),
     getTableNavigationProps: jest.fn()
   }
   
@@ -65,7 +66,7 @@ describe('dashboardHandlers', () => {
         }
       }
       
-      const result = getTableNavigationProps(props)();
+      const result = getTableNavigationProps(props)('name', true);
       
       expect(result).toEqual(tableNavigationProps);
     });
@@ -78,7 +79,7 @@ describe('dashboardHandlers', () => {
         },
         sort: ['name:ASC']
       }
-      const { next: { onClick } }: any = getTableNavigationProps(props)();
+      const { next: { onClick } }: any = getTableNavigationProps(props)('name', true);
       
       onClick();
     
@@ -93,7 +94,7 @@ describe('dashboardHandlers', () => {
         },
         sort: ['name:ASC']
       }
-      const { previous: { onClick } }: any = getTableNavigationProps(props)();
+      const { previous: { onClick } }: any = getTableNavigationProps(props)('name', true);
     
       onClick();
     
@@ -106,7 +107,7 @@ describe('dashboardHandlers', () => {
         fetchedData: []
       }
       
-      const result = getTableNavigationProps(emptyDataProps)();
+      const result = getTableNavigationProps(emptyDataProps)('name', true);
     
       expect(result).toEqual({});
     });

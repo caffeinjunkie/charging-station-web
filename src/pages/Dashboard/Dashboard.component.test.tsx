@@ -23,6 +23,7 @@ describe('Dashboard', () => {
   const prepareTableData = jest.fn()
   const refetch = jest.fn()
   const getTableNavigationProps = jest.fn()
+  const sortTable = jest.fn()
   const onClick = jest.fn()
   const defaultTableNavigationProps = {
     next: {
@@ -38,6 +39,7 @@ describe('Dashboard', () => {
   const props = {
     navigate: jest.fn(),
     refetch,
+    sortTable,
     fetchedData,
     prepareTableData,
     getTableNavigationProps

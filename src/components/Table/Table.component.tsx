@@ -1,5 +1,6 @@
 import React from 'react';
 import { isEmpty } from 'lodash';
+import { TbSortAscending2, TbSortDescending2 } from 'react-icons/tb'
 
 import {
   StyledTable,
@@ -10,7 +11,9 @@ import {
   StyledTableBody,
   StyledTableHead,
   StyledInlineText,
-  StyledTableContainer
+  StyledTableContainer,
+  StyledHeaderSortIconContainer,
+  StyledHeaderContainer
 } from './Table.styles';
 import type { Props, ColumnType, ContentType } from './Table.type';
 import { useTranslation as translate } from '../../hooks/useTranslation';
@@ -27,19 +30,37 @@ const Table = (props: Props): JSX.Element => {
     data,
     screenName,
     name,
+    sortProps,
+    withSorting,
+    onClickHeaderText,
     withTableNavigation,
     tableNavigationProps
   } = props;
   
-  const renderHeaderText = ({ key, className }: ColumnType) => (
-    <StyledHeaderText
-      key={key}
-      className={className}
-      {...testProps(`${screenName}_${name}_${key}Header_Text`)}
-    >
-      {translate(`${screenName}-${name}-${key}-label`)}
-    </StyledHeaderText>
-  );
+  const renderHeaderText = ({ key, className, sortable }: ColumnType) => {
+    const isSortable = withSorting && sortable;
+    const additionalClassname = isSortable ? 'sortable' : '';
+    const onClick = isSortable ? () => onClickHeaderText(key) : () => {};
+    const { sortBy, isAsc } = sortProps;
+    const order = isAsc ? <TbSortDescending2 /> : <TbSortAscending2 />;
+    const orderBy = key === sortBy ? order : '';
+    
+    return (
+      <StyledHeaderText
+        key={key}
+        className={`${className} ${additionalClassname}`}
+        onClick={onClick}
+        {...testProps(`${screenName}_${name}_${key}Header_Text`)}
+      >
+        <StyledHeaderContainer>
+          {translate(`${screenName}-${name}-${key}-label`)}
+          {isSortable && <StyledHeaderSortIconContainer>
+            {orderBy}
+          </StyledHeaderSortIconContainer>}
+        </StyledHeaderContainer>
+      </StyledHeaderText>
+    );
+  }
   
   const renderRowText = (key: string, content: ContentType, index: number) => {
     const { className, value } = content;

@@ -1,7 +1,8 @@
 interface ColumnType {
   key: string
-  accessor: string,
+  accessor: string
   className: string
+  sortable: boolean
 }
 
 const TextAlign = {
@@ -12,34 +13,40 @@ const TextAlign = {
 
 const COLUMNS:Array<ColumnType> = [
   {
-    key: 'Location',
+    key: 'name',
     accessor: 'name',
-    className: TextAlign.LEFT
+    className: TextAlign.LEFT,
+    sortable: true
   },
   {
-    key: 'LocationNo',
+    key: 'locationNo',
     accessor: 'location',
-    className: TextAlign.LEFT
+    className: TextAlign.LEFT,
+    sortable: true
   },
   {
-    key: 'Chargers',
+    key: 'chargers',
     accessor: 'chargers',
-    className: TextAlign.CENTER
+    className: TextAlign.CENTER,
+    sortable: false
   },
   {
-    key: 'Country',
+    key: 'country',
     accessor: 'country',
-    className: TextAlign.CENTER
+    className: TextAlign.CENTER,
+    sortable: false
   },
   {
-    key: 'LastUpdated',
+    key: 'updatedAt',
     accessor: 'lastUpdated',
-    className: TextAlign.CENTER
+    className: TextAlign.CENTER,
+    sortable: true
   },
   {
-    key: 'Actions',
+    key: 'actions',
     accessor: '',
-    className: TextAlign.RIGHT
+    className: TextAlign.RIGHT,
+    sortable: false
   }
 ];
 

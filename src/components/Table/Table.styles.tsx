@@ -95,21 +95,40 @@ export const StyledRow = styled.tr`
   }
 `;
 
+
+export const StyledHeaderContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+`;
+
+export const StyledHeaderSortIconContainer = styled.div`
+  margin-left: 4px;
+  display: flex;
+  align-items: center;
+`;
+
 export const StyledHeaderText = styled.th`
   padding: 14px 12px;
   ${FontStyles.Bold};
   ${FontSize.Medium};
-
-  &.align-center {
+  
+  &.align-center div {
     text-align: center;
+    justify-content: center;
   }
   
-  &.align-right {
+  &.align-right div {
     text-align: right;
+    justify-content: flex-end;
   }
 
   &.align-left {
     text-align: left;
+  }
+  
+  &.sortable {
+    cursor: pointer;
   }
 `;
 

@@ -27,6 +27,7 @@ const LocationForm = (props: Props) => {
     return (
       <StyledInputContainer key={inputProps.name}>
         <InputForm
+          key={inputProps.name}
           control={control}
           screenName={screenName}
           errors={errors}

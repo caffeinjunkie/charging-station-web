@@ -1,6 +1,12 @@
 const defaultProps = {
   data: [],
   withTableNavigation: false,
+  withSorting: false,
+  sortProps: {
+    sortBy: '',
+    isAsc: true
+  },
+  onClickHeaderText: () => {},
   tableNavigationProps: {
     next: {
       disabled: false,

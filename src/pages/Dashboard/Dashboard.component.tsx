@@ -25,13 +25,27 @@ const Dashboard = (props: Props): JSX.Element => {
     navigate,
     prepareTableData,
     fetchedData,
-    getTableNavigationProps
+    getTableNavigationProps,
+    sortTable
   } = props;
-  const tableNavigationProps = getTableNavigationProps();
+  const [sortBy, setSortBy] = React.useState('name');
+  const [isAsc, setIsAsc] = React.useState(true);
+  const tableNavigationProps = getTableNavigationProps(sortBy, isAsc);
   
   const onClickAddLocationButton = () => {
     navigate(Paths.AddLocation)
   };
+  
+  const handleSorting = (key: string) => {
+    if (key === sortBy) {
+      sortTable(key, !isAsc)
+      setIsAsc(!isAsc)
+      return;
+    }
+    setSortBy(key);
+    setIsAsc(true)
+    sortTable(key, true)
+  }
   
   const renderEditButton = (id: string) => (
     <Button
@@ -43,16 +57,25 @@ const Dashboard = (props: Props): JSX.Element => {
     />
   );
   
-  const renderTable = () => (
-    <Table
-      screenName={SCREEN_NAME}
-      name="LocationList"
-      columns={COLUMNS}
-      data={prepareTableData(renderEditButton)}
-      withTableNavigation={!isEmpty(fetchedData)}
-      tableNavigationProps={tableNavigationProps}
-    />
-  );
+  const renderTable = () => {
+    const sortProps = {
+      sortBy,
+      isAsc
+    }
+    return (
+      <Table
+        screenName={SCREEN_NAME}
+        name="LocationList"
+        columns={COLUMNS}
+        withSorting
+        sortProps={sortProps}
+        onClickHeaderText={handleSorting}
+        data={prepareTableData(renderEditButton)}
+        withTableNavigation={!isEmpty(fetchedData)}
+        tableNavigationProps={tableNavigationProps}
+      />
+    );
+  }
   
   const renderAddLocationButton = () => (
     <Button

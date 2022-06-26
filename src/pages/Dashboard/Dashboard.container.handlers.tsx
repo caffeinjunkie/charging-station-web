@@ -52,13 +52,24 @@ const refetchLocations = (props: Props) => (queryVariables: any) => {
   refetch(refetchVariables)
 };
 
-const getTableNavigationProps = (props: Props) => () => {
+const getPaginationAndSortVariables = (data: any, sortBy: string, isAsc: boolean) => {
+  const { locations: { meta: { pagination } } } = data;
+  const orderBy = isAsc ? 'ASC' : 'DESC';
+  const sortVariable = `${sortBy}:${orderBy}`
+  
+  return {
+    pagination,
+    sortVariable
+  }
+};
+
+const getTableNavigationProps = (props: Props) => (sortBy: string, isAsc: boolean) => {
   const { fetchedData } = props;
   if(isEmpty(fetchedData)) {
     return {};
   }
   
-  const { locations: { meta: { pagination } } } = fetchedData;
+  const { pagination, sortVariable } = getPaginationAndSortVariables(fetchedData, sortBy, isAsc);
   const { page, pageCount } = pagination;
   const isFirstPage = page === 1;
   const isLastPage = page === pageCount;
@@ -71,7 +82,8 @@ const getTableNavigationProps = (props: Props) => () => {
           pagination: {
             page: page + 1,
             pageSize: DefaultLimit
-          }
+          },
+          sort: [sortVariable]
         };
         refetchLocations(props)(queryVariables)
       }
@@ -83,13 +95,35 @@ const getTableNavigationProps = (props: Props) => () => {
           pagination: {
             page: page - 1,
             pageSize: DefaultLimit
-          }
+          },
+          sort: [sortVariable]
         };
         refetchLocations(props)(queryVariables)
       }
     }
   }
 };
+
+const sortTable = (props: Props) => (sortBy: string, isAsc: boolean) => {
+  const { fetchedData } = props;
+  if(isEmpty(fetchedData)) {
+    return {};
+  }
+  
+  const { pagination, sortVariable } = getPaginationAndSortVariables(fetchedData, sortBy, isAsc);
+  const { page } = pagination;
+  
+  const queryVariables = {
+    pagination: {
+      page,
+      pageSize: DefaultLimit
+    },
+    sort: [sortVariable]
+  };
+  
+  return refetchLocations(props)(queryVariables)
+};
+
 
 const prepareTableData = (props: Props) => (renderEditButton: Function) => {
   const { fetchedData } = props;
@@ -103,5 +137,6 @@ const prepareTableData = (props: Props) => (renderEditButton: Function) => {
 
 export default {
   prepareTableData,
-  getTableNavigationProps
+  getTableNavigationProps,
+  sortTable
 };
