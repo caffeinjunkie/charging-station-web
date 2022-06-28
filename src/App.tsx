@@ -8,12 +8,33 @@ import { i18n } from './utils';
 
 const queryClient = new QueryClient();
 
-function App() {
-  i18n.changeLanguage('en-US');
+interface LanguageOption {
+  name: string
+  locale: string
+}
+
+const App = () => {
+  const defaultLocale = {
+    name: 'EN',
+    locale: 'en-US'
+  };
+  const [selectedLanguage, setSelectedLanguage] = React.useState(defaultLocale);
+  
+  React.useEffect(() => {
+    i18n.changeLanguage(selectedLanguage.locale)
+  }, [])
+  
+  const handleSelectLanguage = (language: LanguageOption) => {
+    setSelectedLanguage(language);
+    i18n.changeLanguage(language.locale)
+  }
   
   return (
     <BrowserRouter>
-      <Header />
+      <Header
+        selectedLanguage={selectedLanguage}
+        onSelectLanguage={handleSelectLanguage}
+      />
       <QueryClientProvider client={queryClient}>
         <RootNavigation />
       </QueryClientProvider>

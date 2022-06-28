@@ -28,8 +28,8 @@ const timeSince = (date: string) => {
     return `${Math.floor(interval)} days ago`;
   }
   
-  const isYesteday = seconds / 86400 > 1;
-  if (isYesteday) {
+  const isYesterday = seconds / 86400 > 1;
+  if (isYesterday) {
     return 'Yesterday';
   }
   

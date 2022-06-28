@@ -50,8 +50,7 @@ export const StyledFooterContainer = styled.div`
   border-top: 1px solid ${Colors.lightGrey};
   align-items: center;
   justify-content: center;
-  padding-top: 12px;
-  padding-bottom: 12px;
+  padding: 12px 32px;
 `;
 
 export const StyledTitle = styled.div`

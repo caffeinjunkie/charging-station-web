@@ -7,9 +7,17 @@ import FastnedLogo from "../../assets/images/FastnedLogo";
 describe('Header', () => {
   let wrapper: ShallowWrapper;
   const headerContainerTestId = 'Header_Container';
+  const selectedLanguage = {
+    name: 'EN',
+    locale: 'en-US'
+  };
+  const props = {
+    selectedLanguage,
+    onSelectLanguage: jest.fn()
+  }
 
   beforeEach(() => {
-    wrapper = shallow(<Header />)
+    wrapper = shallow(<Header {...props} />)
   });
 
   describe('#render', () => {
